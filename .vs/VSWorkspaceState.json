@@ -5,6 +5,6 @@
     "\\my-app\\server",
     "\\my-app\\src"
   ],
-  "SelectedNode": "\\my-app\\src\\App.js",
+  "SelectedNode": "\\my-app\\server\\server.js",
   "PreviewInSolutionExplorer": false
 }
