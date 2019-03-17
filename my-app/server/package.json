@@ -1,11 +1,11 @@
 {
     "dependencies": {
-        "express": "4.16.4",
-        "pg": "7.6.0",
-        "redis": "2.8.0",
-        "cors": "2.8.4",
+        "body-parser": "^1.18.3",
+        "cors": "^2.8.5",
+        "express": "^4.16.4",
         "nodemon": "1.18.5",
-        "body-parser": "*"
+        "pg": "7.6.0",
+        "redis": "^2.8.0"
     },
     "scripts": {
         "start": "node index.js",

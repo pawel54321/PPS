@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-//import axios from 'axios';
+import axios from 'axios';
 
 class App extends Component {
 
-    /*
+    
     constructor(props) {
         super(props);
         this.state = {
@@ -16,17 +16,17 @@ class App extends Component {
 
     getValues = async (event) => {
         event.preventDefault();
-        const valueee = await axios.post('/api/value', {
+        const valueee = await axios.post('localhost:5000/api/value', {
             value: this.state.value,
         });
         console.log(valueee);
         this.setState({
             value: '',
         });
-    */
-
+    
        
-    }
+}
+
     render() {
     return (
       <div className="App">
@@ -45,11 +45,11 @@ class App extends Component {
           </a>
             </header>
 
-            {/*
+            
                 <form onSubmit={this.getValues}>
                     <button>Click getValues()</button>
                 </form>
-            */}
+            
       </div>
     );
   }
