@@ -2,9 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\my-app",
-    "\\my-app\\server",
-    "\\my-app\\src"
+    "\\my-app\\backend",
+    "\\my-app\\frontend",
+    "\\my-app\\frontend\\public",
+    "\\my-app\\frontend\\src"
   ],
-  "SelectedNode": "\\my-app\\server\\server.js",
+  "SelectedNode": "\\my-app\\backend\\server.js",
   "PreviewInSolutionExplorer": false
 }

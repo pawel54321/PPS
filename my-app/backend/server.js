@@ -17,17 +17,19 @@ app.listen(5000, error => {
     console.log('Listening on port 5000');
 });
 
+//test
+/*
 app.get('/api/hello', (req, res) => {
   res.send({ express: 'Hello From Express' });
 });
-
-//-----------------------------
 
 app.post('/api/value', async (req, res) => {
     res.send({
         value: 'Testowanie',
     });
 });
+*/
+//test
 
 // postgres client setup
 const { Pool } = require('pg');

@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import './App.css';
 class App extends Component {
 
+/*
+//test
   constructor(props) {
     super(props);
     this.state = {
@@ -27,22 +29,29 @@ class App extends Component {
       });
     }
   }
-
-  render() {
-    const { value, counter } = this.state;
+//test
+*/
+    render() {
+    //test
+    //const { value, counter } = this.state;
+    //test
     return (
       <div className="App">
-
+        {/*
+         * test
         <form onSubmit={this.getValues}>
           <button type="submit">Click getValues()</button>
         </form>
 
         {value ?
           (<div>
-            <p>Wartość testowa: {value} po raz: {counter}</p>
+            <p>Wartość testowa: {value}, po raz: {counter}</p>
           </div>) :
           null
         }
+        * test
+        */}
+
 
       </div>
     );
