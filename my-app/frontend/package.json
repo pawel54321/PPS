@@ -5,8 +5,12 @@
   "dependencies": {
     "axios": "^0.18.0",
     "react": "^16.8.4",
+    "react-admin": "^2.8.5",
     "react-dom": "^16.8.4",
-    "react-scripts": "2.1.8"
+    "react-router-dom": "^5.0.0",
+    "react-s-alert": "1.4.1",
+    "react-scripts": "2.1.8",
+    "reactstrap": "^8.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
