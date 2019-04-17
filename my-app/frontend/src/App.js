@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+﻿import React, { Component } from 'react';
 import './App.css';
 import { Router, Route } from 'react-router-dom';
 import history from './history';
@@ -9,7 +9,7 @@ import Register from './Components/Register';
 
 class App extends Component {
 
-/*
+    /*
 //test
   constructor(props) {
     super(props);
