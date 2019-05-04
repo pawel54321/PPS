@@ -165,8 +165,6 @@ app.post('/Uzytkownik/Logowanie', async (req, res) => {
     });
 });
 
-
-
 //generowanie tokenu
 function generateToken(user) {
     let u = {
@@ -178,3 +176,71 @@ function generateToken(user) {
         expiresIn: 60 * 60 * 24 // token wygaśnie po 24 godzinach
     });
 }
+
+
+
+// NIE PRZETESTOWANE:
+app.post('/Grupa/Stworz', async (req, res) => {
+    const nazwa = req.body.nazwa;
+    const opis = req.body.opis;
+
+    const id = req.body.id; // TOKEN/ID???
+
+    const czyJestJuzNazwa = await pgClient.query("SELECT COUNT(nazwa) FROM Grupa_Pokoj");
+    const tablicaCzyJestJuzNazwa = czyJestJuzNazwa.rows;
+
+    console.log(tablicaCzyJestJuzNazwa[0].count);
+
+    let czyStworzono = false;
+
+    if (tablicaCzyJestJuzNazwa[0].count == 0)
+    {
+        pgClient.query('INSERT INTO Grupa_Pokoj(nazwa, opis) VALUES($1,$2)', [nazwa, opis])
+            .catch((error) => {
+                console.log(error);
+            });
+
+        const grupa = await pgClient.query("SELECT id FROM Grupa_Pokoj WHERE nazwa='" + nazwa + "'");
+
+        console.log(grupa);
+
+        pgClient.query('INSERT INTO Tabela_Posrednia(id_grupa, id_uzytkownik, moderator_grupy) VALUES($1,$2,$3)', [grupa, id, TRUE])
+            .catch((error) => {
+                console.log(error);
+            });
+
+        czyStworzono = true;
+    }
+    else
+    {
+        czyStworzono = false; // istnieje juz taka nazwa
+    }
+
+    res.send({
+        nazwa: req.body.nazwa,
+        opis: req.body.opis,
+        id: req.body.id,
+
+        zwracam_czy_stworzono: czyStworzono
+    });
+});
+
+
+app.get('/Grupa/Wyswietl', (req, res) => {
+
+    const zapytanie = await pgClient.query("SELECT * FROM Grupa_Pokoj");
+
+    res.send({
+        wyswietl: zapytanie
+    });
+});
+
+app.get('/Uzytkownik/Wyswietl', (req, res) => {
+
+    const zapytanie = await pgClient.query("SELECT * FROM Uzytkownik");
+
+    res.send({
+        wyswietl: zapytanie
+    });
+});
+
