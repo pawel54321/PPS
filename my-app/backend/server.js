@@ -194,7 +194,7 @@ app.post('/ReadToken', function (req, res, next) {
     });
 });
 
-/*
+
 // NIE PRZETESTOWANE:
 app.post('/Grupa/Stworz', async (req, res) => {
     const nazwa = req.body.nazwa;
@@ -242,7 +242,7 @@ app.post('/Grupa/Stworz', async (req, res) => {
 });
 
 
-app.get('/Grupa/Wyswietl', (req, res) => {
+app.post('/Grupa/Wyswietl', async (req, res) => {
 
     const zapytanie = await pgClient.query("SELECT * FROM Grupa_Pokoj");
 
@@ -251,7 +251,8 @@ app.get('/Grupa/Wyswietl', (req, res) => {
     });
 });
 
-app.get('/Uzytkownik/Wyswietl', (req, res) => {
+
+app.post('/Uzytkownik/Wyswietl', async (req, res) => {
 
     const zapytanie = await pgClient.query("SELECT * FROM Uzytkownik");
 
@@ -260,4 +261,4 @@ app.get('/Uzytkownik/Wyswietl', (req, res) => {
     });
 });
 
-*/
+
