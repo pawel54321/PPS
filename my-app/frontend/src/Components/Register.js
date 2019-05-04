@@ -77,7 +77,7 @@ class Register extends Component {
                                 <input type="password" name="haslo" value={this.state.haslo} required onChange={this.ZmianaWCzasieRzeczywistynInput} /><br /><br />
                                 <Button color="primary">Zarejestruj się!</Button>
                                 <br /><br />
-                                <p>Masz konto? </p><Link to="/logowanie">Zaloguj się!</Link>
+                                <p>Masz konto? </p><Link to="/login">Zaloguj się!</Link>
                             </center>
                         </form>
                     </Col>
