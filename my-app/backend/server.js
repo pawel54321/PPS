@@ -259,4 +259,5 @@ app.get('/Uzytkownik/Wyswietl', (req, res) => {
         wyswietl: zapytanie
     });
 });
+
 */
