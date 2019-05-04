@@ -176,9 +176,25 @@ function generateToken(user) {
         expiresIn: 60 * 60 * 24 // token wygaśnie po 24 godzinach
     });
 }
+//odczytanie tokenu
+app.post('/ReadToken', function (req, res, next) {
+    let token = req.body.token;
+    console.log(token);
+    if (!token) {
+      return res.status(401).json({message: 'Must pass token'});
+    }
 
+    jwt.verify(token, 'we5667cv8i099h9hGU^&rttf', function(err, user) {
+        if (err) throw err;
 
+        res.json({
+            user: user,
+            token: token
+        });
+    });
+});
 
+/*
 // NIE PRZETESTOWANE:
 app.post('/Grupa/Stworz', async (req, res) => {
     const nazwa = req.body.nazwa;
@@ -243,4 +259,4 @@ app.get('/Uzytkownik/Wyswietl', (req, res) => {
         wyswietl: zapytanie
     });
 });
-
+*/
