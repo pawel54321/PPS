@@ -46,11 +46,49 @@ pgClient.on('error', () => {
     console.log('Lost PG connection');
 });
 
+//tabele
+
 pgClient
     .query('CREATE TABLE IF NOT EXISTS Uzytkownik (id SERIAL PRIMARY KEY, imie VARCHAR(255), nazwisko VARCHAR(255), login VARCHAR(255), haslo VARCHAR(255), prawa VARCHAR(255))')
     .catch((error) => {
         console.log(error);
     });
+
+pgClient
+    .query('CREATE TABLE IF NOT EXISTS Zaproszenia (id SERIAL PRIMARY KEY, id_grupa INT, id_uzytkownik INT, stan VARCHAR(255))')
+    .catch((error) => {
+        console.log(error);
+    });
+
+
+pgClient
+    .query('CREATE TABLE IF NOT EXISTS Polubienia (id SERIAL PRIMARY KEY, liczba_polubien INT)')
+    .catch((error) => {
+        console.log(error);
+    });
+
+
+pgClient
+    .query('CREATE TABLE IF NOT EXISTS Tabela_Posrednia (id SERIAL PRIMARY KEY, id_grupa INT, id_uzytkownik INT, moderator_grupy BOOLEAN)')
+    .catch((error) => {
+        console.log(error);
+    });
+
+
+pgClient
+    .query('CREATE TABLE IF NOT EXISTS Post_Komentarz (id SERIAL PRIMARY KEY, id_grupa INT, id_uzytkownik INT, zawartosc VARCHAR(255), id_polubienia INT)')
+    .catch((error) => {
+        console.log(error);
+    });
+
+pgClient
+    .query('CREATE TABLE IF NOT EXISTS Grupa_Pokoj (id SERIAL PRIMARY KEY, nazwa VARCHAR(255), opis VARCHAR(255))')
+    .catch((error) => {
+        console.log(error);
+    });
+
+//tabele
+
 
 
 app.post('/Uzytkownik/Rejestracja', async (req, res) => {
@@ -58,7 +96,7 @@ app.post('/Uzytkownik/Rejestracja', async (req, res) => {
     const nazwisko = req.body.nazwisko;
     const login = req.body.login;
     const haslo = req.body.haslo;
-    var prawa = 'Admin'; //'User' 'Admin'
+    let prawa = 'Admin'; //'User' 'Admin'
 
     const czyjestjuzadmin = await pgClient.query("SELECT COUNT(login) FROM Uzytkownik")
     const tablicaczyjestjuzadmin = czyjestjuzadmin.rows;
@@ -71,7 +109,7 @@ app.post('/Uzytkownik/Rejestracja', async (req, res) => {
 
     const zapytanie = await pgClient.query("SELECT COUNT(login) FROM Uzytkownik WHERE login='" + login + "'")
     const tablica = zapytanie.rows;
-    var czy_stworzono = false;
+    let czy_stworzono = false;
 
     if (tablica[0].count == 0) {
         pgClient.query('INSERT INTO Uzytkownik(imie, nazwisko, login, haslo, prawa) VALUES($1,$2,$3,$4,$5)', [imie, nazwisko, login, haslo, prawa])
@@ -97,8 +135,8 @@ app.post('/Uzytkownik/Logowanie', async (req, res) => {
     const login = req.body.login;
     const haslo = req.body.haslo;
 
-    var czy_poprawne = false;
-    var prawaprawa = '';
+    let czy_poprawne = false;
+    let prawaprawa = '';
 
     const zapytanie2 = await pgClient.query("SELECT COUNT(*) FROM Uzytkownik WHERE login='" + login + "' AND haslo='" + haslo + "'")
         .catch((error) => {
@@ -131,7 +169,7 @@ app.post('/Uzytkownik/Logowanie', async (req, res) => {
 
 //generowanie tokenu
 function generateToken(user) {
-    var u = {
+    let u = {
         login: user.login,
         jaki_user: user.jaki_user
     };
