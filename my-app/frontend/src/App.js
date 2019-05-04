@@ -7,6 +7,8 @@ import HomePage from './Components/HomePage';
 import Login from './Components/Login';
 import Register from './Components/Register';
 
+import Alert from 'react-s-alert';
+import 'react-s-alert/dist/s-alert-default.css';
 class App extends Component {
 
     /*
@@ -59,6 +61,7 @@ class App extends Component {
           }
           * test
           */}
+          <center><Alert stack={{ limit: 1 }} html={false} timeout={2000} effect='bouncyflip' offset={65} /></center>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
