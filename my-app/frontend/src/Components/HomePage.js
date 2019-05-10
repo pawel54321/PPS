@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import axios from 'axios';
-import TestingBackend from './TestingBackend';
+import TestingBackend from './TestingBackendInReact/TestingBackend';
 
 class HomePage extends Component {
 

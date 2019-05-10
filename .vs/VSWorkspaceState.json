@@ -8,6 +8,6 @@
     "\\my-app\\frontend\\src",
     "\\my-app\\frontend\\src\\Components"
   ],
-  "SelectedNode": "\\my-app\\backend\\server.js",
+  "SelectedNode": "\\my-app\\frontend\\src\\Components\\HomePage.js",
   "PreviewInSolutionExplorer": false
 }
