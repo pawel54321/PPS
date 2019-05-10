@@ -101,7 +101,7 @@ app.post('/Uzytkownik/Rejestracja', async (req, res) => {
     const czyjestjuzadmin = await pgClient.query("SELECT COUNT(login) FROM Uzytkownik")
     const tablicaczyjestjuzadmin = czyjestjuzadmin.rows;
 
-    console.log(tablicaczyjestjuzadmin[0].count);
+   // console.log(tablicaczyjestjuzadmin[0].count);
 
     if (tablicaczyjestjuzadmin[0].count > 0) {
         prawa = 'User';
@@ -179,7 +179,7 @@ function generateToken(user) {
 //odczytanie tokenu
 app.post('/ReadToken', function (req, res, next) {
     let token = req.body.token;
-    console.log(token);
+  //  console.log(token);
     if (!token) {
       return res.status(401).json({message: 'Must pass token'});
     }
@@ -194,18 +194,20 @@ app.post('/ReadToken', function (req, res, next) {
     });
 });
 
+//----------------
+// FUNKCJONALNOSCI:
+//----------------
 
-// NIE PRZETESTOWANE
 app.post('/Grupa/Stworz', async (req, res) => {
     const nazwa = req.body.nazwa;
     const opis = req.body.opis;
 
-    const id = req.body.id; // TOKEN/ID???
+    const id_uzytkownik = 1; // TOKEN/(ID)???
 
-    const czyJestJuzNazwa = await pgClient.query("SELECT COUNT(nazwa) FROM Grupa_Pokoj");
+    const czyJestJuzNazwa = await pgClient.query("SELECT COUNT(nazwa) FROM Grupa_Pokoj WHERE nazwa='"+nazwa+"'");
     const tablicaCzyJestJuzNazwa = czyJestJuzNazwa.rows;
 
-    console.log(tablicaCzyJestJuzNazwa[0].count);
+    //console.log(tablicaCzyJestJuzNazwa[0].count);
 
     let czyStworzono = false;
 
@@ -216,16 +218,22 @@ app.post('/Grupa/Stworz', async (req, res) => {
                 console.log(error);
             });
 
-        const grupa = await pgClient.query("SELECT id FROM Grupa_Pokoj WHERE nazwa='" + nazwa + "'");
+        //NAPRAWIC SELECT BO NIE DZIALA ODCZYT GRUPY
+           // const grupa = await pgClient.query("SELECT id FROM Grupa_Pokoj WHERE nazwa='" + nazwa + "'");
+           // const tablicaGrupa = grupa.rows;
 
-        console.log(grupa);
+           // if (tablicaGrupa[0].count == 1) {
+             //   const id_grupy = tablicaGrupa[0].id;
+             //   console.log("id_grupa" + id_grupy);
 
-        pgClient.query('INSERT INTO Tabela_Posrednia(id_grupa, id_uzytkownik, moderator_grupy) VALUES($1,$2,$3)', [grupa, id, TRUE])
-            .catch((error) => {
-                console.log(error);
-            });
+           // pgClient.query('INSERT INTO Tabela_Posrednia(id_grupa, id_uzytkownik, moderator_grupy) VALUES($1,$2,$3)', [id_grupy, id_uzytkownik, true])
+        pgClient.query('INSERT INTO Tabela_Posrednia(id_grupa, id_uzytkownik, moderator_grupy) VALUES($1,$2,$3)', [1, id_uzytkownik, true])
+                .catch((error) => {
+                    console.log(error);
+                });
 
-        czyStworzono = true;
+            czyStworzono = true;
+      //  }
     }
     else
     {
@@ -235,12 +243,11 @@ app.post('/Grupa/Stworz', async (req, res) => {
     res.send({
         nazwa: req.body.nazwa,
         opis: req.body.opis,
-        id: req.body.id,
+      //  id_uzytkownik: req.body.id_uzytkownik,
 
         zwracam_czy_stworzono: czyStworzono
     });
 });
-// NIE PRZETESTOWANE
 
 
 app.post('/Grupa/Wyswietl', async (req, res) => {
@@ -264,4 +271,14 @@ app.post('/Uzytkownik/Wyswietl', async (req, res) => {
     });
 });
 
+app.post('/Uzytkownik/Wyswietl/DanyLogin', async (req, res) => {
 
+    const login = 'admin' // TOKEN/ID/(NAZWA)???
+
+    const zapytanie = await pgClient.query("SELECT * FROM Uzytkownik WHERE login='"+login+"'");
+    // console.log(zapytanie.rows);
+
+    res.send({
+        wyswietl: zapytanie.rows //zapytanie.rows[0].id , zapytanie.rows[1].id
+    });
+});

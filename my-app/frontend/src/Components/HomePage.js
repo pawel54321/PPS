@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import axios from 'axios';
+import TestingBackend from './TestingBackend';
 
 class HomePage extends Component {
 
@@ -22,6 +23,12 @@ class HomePage extends Component {
                 <form onSubmit={this.tokenTest}>
                   <Button color='primary'>TokenTest</Button>
                 </form>
+
+                <br/>
+                <p>TestingBackend</p>
+                <TestingBackend/>
+
+
             </div>
         );
     }
