@@ -194,6 +194,7 @@ app.post('/ReadToken', function (req, res, next) {
 //----------------
 // FUNKCJONALNOSCI:
 //----------------
+// WALIDACJA BACKEND ...
 
 //GOTOWE [/Grupa/Stworz + /Grupa/Stworz_Admina = RAZEM]
 app.post('/Grupa/Stworz', async (req, res) => {
@@ -320,7 +321,32 @@ app.post('/Uzytkownik/Wyswietl/DanyLogin', async (req, res) => {
 });
 //DODAC login - DOPISAC domyslnie dalem 'admin'
 
+//DODAC login - DOPISAC domyslnie dalem 'admin' + ZROBIC FRONT
+app.post('/Uzytkownik/Zaaktulizuj/DanyLogin', async (req, res) => {
 
+    const login = 'admin' // TOKEN/ID/(NAZWA)???
+
+    const imie = req.body.imie;
+    const nazwisko = req.body.nazwisko;
+    const haslo = req.body.haslo;
+    let czyZaktualizowano = true;
+
+    pgClient
+        .query("UPDATE Uzytkownik SET imie='"+imie+"', nazwisko='"+nazwisko+"', haslo='"+haslo+"' WHERE login='" + login + "'")
+        .catch((error) => {
+            console.log(error);
+            czyZaktualizowano = false;
+        });
+
+    res.send({
+        imie: req.body.imie,
+        nazwisko: req.body.nazwisko,
+        haslo: req.body.haslo,
+
+        zwracam_czy_zaktualizowano: czyZaktualizowano
+    });
+});
+//DODAC login - DOPISAC domyslnie dalem 'admin' + ZROBIC FRONT
 
 
 
