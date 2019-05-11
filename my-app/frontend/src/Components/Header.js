@@ -12,7 +12,7 @@ const ROLES = {
 
 function Wylogowanie() {
     // this.preventDefault(); //Potrzebne-?? Odswieza-?? - nie powinno odswiezac, ale odswieza
-    sessionStorage.removeItem('token');
+    localStorage.removeItem('token');
     this.props.onLoggedUserChange2('');
     //????
     Alert.success('Pomyślnie wylogowano!', { position: 'top' });
@@ -20,8 +20,8 @@ function Wylogowanie() {
 }
 
 function Visible(props) {
-
-    if (props.loggedAs === ROLES.USER) {
+  
+    if (props.rola === ROLES.USER) {
 
         //<Link to="/uzytkownik"><img src={PanelUzytkownika} alt="" /></Link>
 
@@ -50,7 +50,7 @@ function Visible(props) {
                 </header>
             </nav>);
     }
-    else if (props.loggedAs === ROLES.ADMIN) {
+    else if (props.rola === ROLES.ADMIN) {
         return (
             <nav>
                 <header className="App-header">

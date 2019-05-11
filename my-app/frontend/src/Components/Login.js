@@ -26,7 +26,6 @@ class Login extends Component {
             login: this.state.login,
             haslo: this.state.haslo
         });
-        console.log(OdpowiedzSerwera2);
 
         this.setState({
             login: '',
