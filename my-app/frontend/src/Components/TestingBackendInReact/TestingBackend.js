@@ -102,7 +102,7 @@ class TestingBackend extends Component {
             opis: this.state.opis
         });
 
-        const OdpowiedzSerwera2 = await axios.post('http://localhost:5000/Grupa/Stworz_Admina', {
+        const OdpowiedzSerwera2 = await axios.post('http://localhost:5000/Grupa/Stworz_Moderatora', {
             nazwa: this.state.nazwa,
         });
 

@@ -196,7 +196,7 @@ app.post('/ReadToken', function (req, res, next) {
 //----------------
 // WALIDACJA BACKEND ...
 
-//GOTOWE [/Grupa/Stworz + /Grupa/Stworz_Admina = RAZEM]
+//GOTOWE [/Grupa/Stworz + /Grupa/Stworz_Moderatora = RAZEM] [(user/admin/moderator)]
 app.post('/Grupa/Stworz', async (req, res) => {
     const nazwa = req.body.nazwa;
     const opis = req.body.opis;
@@ -230,10 +230,10 @@ app.post('/Grupa/Stworz', async (req, res) => {
         zwracam_czy_stworzono: czyStworzono
     });
 });
-//GOTOWE [/Grupa/Stworz + /Grupa/Stworz_Admina = RAZEM]
+//GOTOWE [/Grupa/Stworz + /Grupa/Stworz_Moderatora = RAZEM] [(user/admin/moderator)]
 
-//DODAC id_uzytkownik - DOPISAC domyslnie dalem 1 [/Grupa/Stworz + /Grupa/Stworz_Admina = RAZEM]
-app.post('/Grupa/Stworz_Admina', async (req, res) => {
+//DODAC id_uzytkownik - DOPISAC domyslnie dalem 1 [/Grupa/Stworz + /Grupa/Stworz_Moderatora = RAZEM] [(user/admin/moderator)]
+app.post('/Grupa/Stworz_Moderatora', async (req, res) => {
 
     const nazwa = req.body.nazwa;
     const id_uzytkownik = 1; // TOKEN/(ID)???
@@ -281,9 +281,9 @@ app.post('/Grupa/Stworz_Admina', async (req, res) => {
         zwracam_czy_stworzono: czyStworzono
     });
 });
-//DODAC id_uzytkownik - DOPISAC domyslnie dalem 1
+//DODAC id_uzytkownik - DOPISAC domyslnie dalem 1 [/Grupa/Stworz + /Grupa/Stworz_Moderatora = RAZEM] [(user/admin/moderator)]
 
-//DODAC id_uzytkownik - DOPISAC domyslnie dalem 1 + DODAC id_grupa - DOPISAC domyslnie dalem 1 + POPRAWIC KOMUNIKAT BO DLA KLKNIECIA MODERATORA WYSWIETLI SIE OK A NIE USUNIE
+//DODAC id_uzytkownik - DOPISAC domyslnie dalem 1 + DODAC id_grupa - DOPISAC domyslnie dalem 1 + POPRAWIC KOMUNIKAT BO DLA KLKNIECIA MODERATORA WYSWIETLI SIE OK A NIE USUNIE [(moderator)]
 app.post('/Grupa/Usun_Uzytkownika_Z_Grupy', async (req, res) => {
 
     // (+) DODANE ZABEZPIECZENIE PRZED USUNIECIEM MODERATORA GRUPY (SIEBIE) - NIE MOZA GO USUNAC
@@ -306,9 +306,9 @@ app.post('/Grupa/Usun_Uzytkownika_Z_Grupy', async (req, res) => {
         zwracam_czy_usunieto: czyUsunieto
     });
 });
-//DODAC id_uzytkownik - DOPISAC domyslnie dalem 1 + DODAC id_grupa - DOPISAC domyslnie dalem 1 + POPRAWIC KOMUNIKAT BO DLA KLKNIECIA MODERATORA WYSWIETLI SIE OK A NIE USUNIE
+//DODAC id_uzytkownik - DOPISAC domyslnie dalem 1 + DODAC id_grupa - DOPISAC domyslnie dalem 1 + POPRAWIC KOMUNIKAT BO DLA KLKNIECIA MODERATORA WYSWIETLI SIE OK A NIE USUNIE [(moderator)]
 
-//GOTOWE
+//GOTOWE [(user/admin/moderator)]
 app.post('/Grupa/Wyswietl', async (req, res) => {
 
     const zapytanie = await pgClient.query("SELECT * FROM Grupa_Pokoj");
@@ -318,10 +318,11 @@ app.post('/Grupa/Wyswietl', async (req, res) => {
         wyswietl: zapytanie.rows
     });
 });
-//GOTOWE
+//GOTOWE [(user/admin/moderator)]
 
 
-//DODAC ZEBY SIEBIE NIE WYSWIETLAL ADMIN
+
+//GOTOWE [(admin)]
 app.post('/Uzytkownik/Wyswietl', async (req, res) => {
 
     const zapytanie = await pgClient.query("SELECT * FROM Uzytkownik");
@@ -331,9 +332,9 @@ app.post('/Uzytkownik/Wyswietl', async (req, res) => {
         wyswietl: zapytanie.rows //zapytanie.rows[0].id , zapytanie.rows[1].id
     });
 });
-//DODAC ZEBY SIEBIE NIE WYSWIETLAL ADMIN
+//GOTOWE [(admin)]
 
-//DODAC login - DOPISAC domyslnie dalem 'admin'
+//DODAC login - DOPISAC domyslnie dalem 'admin' [(user/admin/moderator)]
 app.post('/Uzytkownik/Wyswietl/DanyLogin', async (req, res) => {
 
     const login = 'admin' // TOKEN/ID/(NAZWA)???
@@ -345,9 +346,9 @@ app.post('/Uzytkownik/Wyswietl/DanyLogin', async (req, res) => {
         wyswietl: zapytanie.rows //zapytanie.rows[0].id , zapytanie.rows[1].id
     });
 });
-//DODAC login - DOPISAC domyslnie dalem 'admin'
+//DODAC login - DOPISAC domyslnie dalem 'admin' [(user/admin/moderator)]
 
-//DODAC login - DOPISAC domyslnie dalem 'admin' + ZROBIC FRONT
+//DODAC login - DOPISAC domyslnie dalem 'admin' + ZROBIC FRONT [(user/admin/moderator)]
 app.post('/Uzytkownik/Zaaktulizuj/DanyLogin', async (req, res) => {
 
     const login = 'admin' // TOKEN/ID/(NAZWA)???
@@ -372,7 +373,7 @@ app.post('/Uzytkownik/Zaaktulizuj/DanyLogin', async (req, res) => {
         zwracam_czy_zaktualizowano: czyZaktualizowano
     });
 });
-//DODAC login - DOPISAC domyslnie dalem 'admin' + ZROBIC FRONT
+//DODAC login - DOPISAC domyslnie dalem 'admin' + ZROBIC FRONT [(user/admin/moderator)]
 
 
 
