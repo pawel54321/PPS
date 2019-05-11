@@ -102,16 +102,25 @@ class TestingBackend extends Component {
             opis: this.state.opis
         });
 
+        const OdpowiedzSerwera2 = await axios.post('http://localhost:5000/Grupa/Stworz_Admina', {
+            nazwa: this.state.nazwa,
+        });
+
         this.setState({
             nazwa: '',
             opis: '',
         });
 
-        if (OdpowiedzSerwera.data.zwracam_czy_stworzono === true) {
+
+
+        if (OdpowiedzSerwera.data.zwracam_czy_stworzono === true && OdpowiedzSerwera2.data.zwracam_czy_stworzono === true) {
             Alert.success('Poprawnie utworzono grupę!', { position: 'top' });
         }
-        else if (OdpowiedzSerwera.data.zwracam_czy_stworzono === false) {
+        else if (OdpowiedzSerwera.data.zwracam_czy_stworzono === false && OdpowiedzSerwera2.data.zwracam_czy_stworzono === false) {
             Alert.error('Podana nazwa grupy istnieje!', { position: 'bottom' });
+        }
+        else {
+            Alert.warning('Coś poszło nie tak!', { position: 'bottom' });
         }
     }
 

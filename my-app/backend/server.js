@@ -46,8 +46,7 @@ pgClient.on('error', () => {
     console.log('Lost PG connection');
 });
 
-//tabele
-
+//TABELE
 pgClient
     .query('CREATE TABLE IF NOT EXISTS Uzytkownik (id SERIAL PRIMARY KEY, imie VARCHAR(255), nazwisko VARCHAR(255), login VARCHAR(255), haslo VARCHAR(255), prawa VARCHAR(255))')
     .catch((error) => {
@@ -87,9 +86,7 @@ pgClient
         console.log(error);
     });
 
-//tabele
-
-
+//TABELE
 
 app.post('/Uzytkownik/Rejestracja', async (req, res) => {
     const imie = req.body.imie;
@@ -198,11 +195,10 @@ app.post('/ReadToken', function (req, res, next) {
 // FUNKCJONALNOSCI:
 //----------------
 
+//GOTOWE [/Grupa/Stworz + /Grupa/Stworz_Admina = RAZEM]
 app.post('/Grupa/Stworz', async (req, res) => {
     const nazwa = req.body.nazwa;
     const opis = req.body.opis;
-
-    const id_uzytkownik = 1; // TOKEN/(ID)???
 
     const czyJestJuzNazwa = await pgClient.query("SELECT COUNT(nazwa) FROM Grupa_Pokoj WHERE nazwa='"+nazwa+"'");
     const tablicaCzyJestJuzNazwa = czyJestJuzNazwa.rows;
@@ -218,20 +214,6 @@ app.post('/Grupa/Stworz', async (req, res) => {
                 console.log(error);
             });
 
-        //NAPRAWIC SELECT BO NIE DZIALA ODCZYT GRUPY
-           // const grupa = await pgClient.query("SELECT id FROM Grupa_Pokoj WHERE nazwa='" + nazwa + "'");
-           // const tablicaGrupa = grupa.rows;
-
-           // if (tablicaGrupa[0].count == 1) {
-             //   const id_grupy = tablicaGrupa[0].id;
-             //   console.log("id_grupa" + id_grupy);
-
-           // pgClient.query('INSERT INTO Tabela_Posrednia(id_grupa, id_uzytkownik, moderator_grupy) VALUES($1,$2,$3)', [id_grupy, id_uzytkownik, true])
-        pgClient.query('INSERT INTO Tabela_Posrednia(id_grupa, id_uzytkownik, moderator_grupy) VALUES($1,$2,$3)', [1, id_uzytkownik, true])
-                .catch((error) => {
-                    console.log(error);
-                });
-
             czyStworzono = true;
       //  }
     }
@@ -243,13 +225,64 @@ app.post('/Grupa/Stworz', async (req, res) => {
     res.send({
         nazwa: req.body.nazwa,
         opis: req.body.opis,
-      //  id_uzytkownik: req.body.id_uzytkownik,
 
         zwracam_czy_stworzono: czyStworzono
     });
 });
+//GOTOWE
+
+//DODAC id_uzytkownik - DOPISAC domyslnie dalem 1 [/Grupa/Stworz + /Grupa/Stworz_Admina = RAZEM]
+app.post('/Grupa/Stworz_Admina', async (req, res) => {
+
+    const nazwa = req.body.nazwa;
+    const id_uzytkownik = 1; // TOKEN/(ID)???
+
+    let czyStworzono = false;
+    const czyJestJuzNazwa = await pgClient.query("SELECT COUNT(nazwa) FROM Grupa_Pokoj WHERE nazwa='" + nazwa + "'");
+    const tablicaCzyJestJuzNazwa = czyJestJuzNazwa.rows;
+    if (tablicaCzyJestJuzNazwa[0].count == 1) {
 
 
+        const grupa = await pgClient.query("SELECT id FROM Grupa_Pokoj WHERE nazwa='" + nazwa + "'");
+        const tablicaGrupa = grupa.rows;
+      
+        //let id_grupy;
+
+        //  if (Object.keys(tablicaGrupa).length != 0) {
+
+        console.log("tab" + tablicaGrupa[0].id);
+        const id_grupy = tablicaGrupa[0].id;
+        console.log("id_grupa" + id_grupy);
+        // }
+        // else {
+        // id_grupy = 1;
+        //  }
+        const czyJestJuzTaki = await pgClient.query("SELECT COUNT(moderator_grupy) FROM Tabela_Posrednia WHERE id_grupa='" + id_grupy + "' AND id_uzytkownik='" + id_uzytkownik +"' AND moderator_grupy='"+true+"'");
+        const tablicaczyJestJuzTaki = czyJestJuzTaki.rows;
+
+        if (tablicaczyJestJuzTaki[0].count == 0) {
+            pgClient.query('INSERT INTO Tabela_Posrednia(id_grupa, id_uzytkownik, moderator_grupy) VALUES($1,$2,$3)', [id_grupy, id_uzytkownik, true])
+                .catch((error) => {
+                    console.log(error);
+                    czyStworzono = false;
+                });
+
+            czyStworzono = true;
+        }
+    }
+    else {
+        czyStworzono = false;
+    }
+    res.send({
+        nazwa: req.body.nazwa,
+        //  id_uzytkownik: req.body.id_uzytkownik,
+
+        zwracam_czy_stworzono: czyStworzono
+    });
+});
+//DODAC id_uzytkownik - DOPISAC domyslnie dalem 1
+
+//GOTOWE
 app.post('/Grupa/Wyswietl', async (req, res) => {
 
     const zapytanie = await pgClient.query("SELECT * FROM Grupa_Pokoj");
@@ -259,8 +292,9 @@ app.post('/Grupa/Wyswietl', async (req, res) => {
         wyswietl: zapytanie.rows
     });
 });
+//GOTOWE
 
-
+//GOTOWE
 app.post('/Uzytkownik/Wyswietl', async (req, res) => {
 
     const zapytanie = await pgClient.query("SELECT * FROM Uzytkownik");
@@ -270,7 +304,9 @@ app.post('/Uzytkownik/Wyswietl', async (req, res) => {
         wyswietl: zapytanie.rows //zapytanie.rows[0].id , zapytanie.rows[1].id
     });
 });
+//GOTOWE
 
+//DODAC login - DOPISAC domyslnie dalem 'admin'
 app.post('/Uzytkownik/Wyswietl/DanyLogin', async (req, res) => {
 
     const login = 'admin' // TOKEN/ID/(NAZWA)???
@@ -282,3 +318,16 @@ app.post('/Uzytkownik/Wyswietl/DanyLogin', async (req, res) => {
         wyswietl: zapytanie.rows //zapytanie.rows[0].id , zapytanie.rows[1].id
     });
 });
+//DODAC login - DOPISAC domyslnie dalem 'admin'
+
+
+
+
+
+
+
+
+
+
+
+

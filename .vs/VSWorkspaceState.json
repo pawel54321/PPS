@@ -6,8 +6,9 @@
     "\\my-app\\frontend",
     "\\my-app\\frontend\\public",
     "\\my-app\\frontend\\src",
-    "\\my-app\\frontend\\src\\Components"
+    "\\my-app\\frontend\\src\\Components",
+    "\\my-app\\frontend\\src\\Components\\TestingBackendInReact"
   ],
-  "SelectedNode": "\\my-app\\frontend\\src\\Components\\HomePage.js",
+  "SelectedNode": "\\my-app\\frontend\\src\\Components\\TestingBackendInReact\\TestingBackend.js",
   "PreviewInSolutionExplorer": false
 }
