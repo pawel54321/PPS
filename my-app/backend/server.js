@@ -230,7 +230,7 @@ app.post('/Grupa/Stworz', async (req, res) => {
         zwracam_czy_stworzono: czyStworzono
     });
 });
-//GOTOWE
+//GOTOWE [/Grupa/Stworz + /Grupa/Stworz_Admina = RAZEM]
 
 //DODAC id_uzytkownik - DOPISAC domyslnie dalem 1 [/Grupa/Stworz + /Grupa/Stworz_Admina = RAZEM]
 app.post('/Grupa/Stworz_Admina', async (req, res) => {
@@ -283,6 +283,31 @@ app.post('/Grupa/Stworz_Admina', async (req, res) => {
 });
 //DODAC id_uzytkownik - DOPISAC domyslnie dalem 1
 
+//DODAC id_uzytkownik - DOPISAC domyslnie dalem 1 + DODAC id_grupa - DOPISAC domyslnie dalem 1 + POPRAWIC KOMUNIKAT BO DLA KLKNIECIA MODERATORA WYSWIETLI SIE OK A NIE USUNIE
+app.post('/Grupa/Usun_Uzytkownika_Z_Grupy', async (req, res) => {
+
+    // (+) DODANE ZABEZPIECZENIE PRZED USUNIECIEM MODERATORA GRUPY (SIEBIE) - NIE MOZA GO USUNAC
+
+    const id_uzytkownik = 1; // TOKEN/(ID)???
+    const id_grupa = 1; // TOKEN/(ID)???
+
+    let czyUsunieto = true;
+    
+    pgClient.query("DELETE FROM Tabela_Posrednia WHERE id_uzytkownik='" + id_uzytkownik + "' AND id_grupa='" + id_grupa + "' AND moderator_grupy="+false)
+        .catch((error) => {
+            console.log(error);
+            czyUsunieto = false;
+        });
+          
+  
+    res.send({
+        //  id_uzytkownik: req.body.id_uzytkownik,
+
+        zwracam_czy_usunieto: czyUsunieto
+    });
+});
+//DODAC id_uzytkownik - DOPISAC domyslnie dalem 1 + DODAC id_grupa - DOPISAC domyslnie dalem 1 + POPRAWIC KOMUNIKAT BO DLA KLKNIECIA MODERATORA WYSWIETLI SIE OK A NIE USUNIE
+
 //GOTOWE
 app.post('/Grupa/Wyswietl', async (req, res) => {
 
@@ -295,7 +320,8 @@ app.post('/Grupa/Wyswietl', async (req, res) => {
 });
 //GOTOWE
 
-//GOTOWE
+
+//DODAC ZEBY SIEBIE NIE WYSWIETLAL ADMIN
 app.post('/Uzytkownik/Wyswietl', async (req, res) => {
 
     const zapytanie = await pgClient.query("SELECT * FROM Uzytkownik");
@@ -305,7 +331,7 @@ app.post('/Uzytkownik/Wyswietl', async (req, res) => {
         wyswietl: zapytanie.rows //zapytanie.rows[0].id , zapytanie.rows[1].id
     });
 });
-//GOTOWE
+//DODAC ZEBY SIEBIE NIE WYSWIETLAL ADMIN
 
 //DODAC login - DOPISAC domyslnie dalem 'admin'
 app.post('/Uzytkownik/Wyswietl/DanyLogin', async (req, res) => {
