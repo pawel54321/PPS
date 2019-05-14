@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+ï»¿import React, { Component } from 'react';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 import axios from 'axios';
@@ -37,7 +37,12 @@ class User extends Component {
     }
 
     zwrocenieSiebie = async () => {
-        const users = await axios.post('http://localhost:5000/Uzytkownik/Wyswietl/DanyLogin');
+        const login = await axios.post('http://localhost:5000/ReadToken', {
+            token: localStorage.getItem('token')
+        });
+        const users = await axios.post('http://localhost:5000/Uzytkownik/Wyswietl/DanyLogin', {
+            login: login.data.user.login
+        });
         this.setState({
             users: users.data.wyswietl
         });
@@ -59,7 +64,7 @@ class User extends Component {
                             className={classnames({ active: this.state.activeTab === '1' })}
                             onClick={() => { this.toggle('1'); }}
                         >
-                            U¿ytkownicy
+                            UÅ¼ytkownicy
                         </NavLink>
                     </NavItem>
                     <NavItem>
@@ -79,7 +84,7 @@ class User extends Component {
                             </Col>
                             <Col xs={6} md={6} >
                                 <br /><br /><br /><br /><br /><br /><br /><br />
-                                <center><h5><h1>Znajdujesz siê w Panelu U¿ytkownika!</h1><br />W tym miejscu mo¿esz zarz¹dzaæ systemem.<br />Wybierz odpowiedni¹ zak³adkê u góry strony, aby dokonaæ zmian w systemie.</h5></center>
+                                <center><h5><h1>Znajdujesz siÄ™ w Panelu UÅ¼ytkownika!</h1><br />W tym miejscu moÅ¼esz zarzÄ…dzaÄ‡ systemem.<br />Wybierz odpowiedniÄ… zakÅ‚adkÄ™ u gÃ³ry strony, aby dokonaÄ‡ zmian w systemie.</h5></center>
                             </Col>
                             <Col xs={6} md={3} >
                             </Col>
