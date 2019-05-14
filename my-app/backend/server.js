@@ -337,12 +337,14 @@ app.post('/Uzytkownik/Wyswietl', async (req, res) => {
 //DODAC login - DOPISAC domyslnie dalem 'admin' [(user/admin/moderator)]
 app.post('/Uzytkownik/Wyswietl/DanyLogin', async (req, res) => {
 
-    const login = 'admin' // TOKEN/ID/(NAZWA)???
+    const login = req.body.login;
+ //   const login = 'admin' // TOKEN/ID/(NAZWA)???
 
     const zapytanie = await pgClient.query("SELECT * FROM Uzytkownik WHERE login='"+login+"'");
     // console.log(zapytanie.rows);
 
     res.send({
+        login: req.body.login,
         wyswietl: zapytanie.rows //zapytanie.rows[0].id , zapytanie.rows[1].id
     });
 });
