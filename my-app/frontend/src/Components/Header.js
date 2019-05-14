@@ -4,6 +4,7 @@ import { Navbar, NavbarBrand, //NavbarToggler,
     Collapse, Nav, NavItem, NavLink } from 'reactstrap';
 
 import Alert from 'react-s-alert';
+import history from '../history';
 
 const ROLES = {
     ADMIN: 'Admin',
@@ -13,10 +14,13 @@ const ROLES = {
 function Wylogowanie() {
     // this.preventDefault(); //Potrzebne-?? Odswieza-?? - nie powinno odswiezac, ale odswieza
     localStorage.removeItem('token');
-    this.props.onLoggedUserChange2('');
+   //  this.props.onLoggedUserChange2('');
     //????
-    Alert.success('Pomyślnie wylogowano!', { position: 'top' });
+    //Alert.success('Pomyślnie wylogowano!', { position: 'top' });
     //????
+    history.push('/');
+    window.location.reload();
+    //this.ROLES.reload();
 }
 
 function Visible(props) {

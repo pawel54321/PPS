@@ -11,9 +11,9 @@ const Footer = () => (
 );
 
 const SprawdzFooter = () => {
-
-    var a = window.location.pathname;
-
+    /*
+    let a = window.location.pathname;
+    console.log(a);
     if (a !== "/") {
         // <Link to="/"><img src={WrocdoStronyGlownej} alt="" /></Link>
         return (
@@ -25,17 +25,18 @@ const SprawdzFooter = () => {
             </div>
         );
     }
-    else {
+  
+    else {  */
         // <img src={StronaGlowna} alt="" />
         return (
             <div>
                 <Navbar color="light" light expand="md" className="Stopka">
-                <NavbarBrand>Znajdujesz się na Stronie Głównej</NavbarBrand>
+                    <NavbarBrand>Wszelkie prawa zastrzeżone, Copyright ©2019</NavbarBrand>
 
                 </Navbar>
             </div>
         );
-    }
+   // }
 }
 
 

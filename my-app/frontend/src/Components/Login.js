@@ -35,9 +35,10 @@ class Login extends Component {
         if (OdpowiedzSerwera2.data.zwracam_czy_poprawne === true) {
             localStorage.setItem('token', OdpowiedzSerwera2.data.token);
             //this.props.onLoggedUserChange(OdpowiedzSerwera2.data.jaki_user);
-            Alert.success('Logowanie przebiegło pomyślnie!', { position: 'top' });
+            //Alert.success('Logowanie przebiegło pomyślnie!', { position: 'top' });
             history.push('/');
             window.location.reload();
+           //this.state.reload();
         }
         else if (OdpowiedzSerwera2.data.zwracam_czy_poprawne === false) {
             Alert.error('Niepoprawne dane!', { position: 'bottom' });
