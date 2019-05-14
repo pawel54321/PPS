@@ -334,7 +334,7 @@ app.post('/Uzytkownik/Wyswietl', async (req, res) => {
 });
 //GOTOWE [(admin)]
 
-//DODAC login - DOPISAC domyslnie dalem 'admin' [(user/admin/moderator)]
+//DODAC [(user/admin/moderator)]
 app.post('/Uzytkownik/Wyswietl/DanyLogin', async (req, res) => {
 
     const login = req.body.login;
@@ -348,7 +348,7 @@ app.post('/Uzytkownik/Wyswietl/DanyLogin', async (req, res) => {
         wyswietl: zapytanie.rows //zapytanie.rows[0].id , zapytanie.rows[1].id
     });
 });
-//DODAC login - DOPISAC domyslnie dalem 'admin' [(user/admin/moderator)]
+//DODAC [(user/admin/moderator)]
 
 //DODAC login - DOPISAC domyslnie dalem 'admin' + ZROBIC FRONT [(user/admin/moderator)]
 app.post('/Uzytkownik/Zaaktulizuj/DanyLogin', async (req, res) => {
