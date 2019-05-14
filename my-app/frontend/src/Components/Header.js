@@ -20,7 +20,7 @@ function Wylogowanie() {
 }
 
 function Visible(props) {
-  
+
     if (props.rola === ROLES.USER) {
 
         //<Link to="/uzytkownik"><img src={PanelUzytkownika} alt="" /></Link>
@@ -38,7 +38,7 @@ function Visible(props) {
                         <Collapse Collapse isOpen={true} navbar>
                             <Nav className="ml-auto" navbar>
                                 <NavItem>
-                                    <NavLink><Link to="/uzytkownik">Panel Użytkownika</Link></NavLink>
+                                    <NavLink><Link to="/user">Panel Użytkownika</Link></NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink> <Link to="/" onClick={Wylogowanie}>Wyloguj</Link></NavLink>
