@@ -5,9 +5,8 @@ class HomePage extends Component {
 
     render() {
         return (
-            <div>
-                <p>TestingBackend</p>
-                <TestingBackend/>
+            <div>           
+                {/*<TestingBackend />*/}
             </div>
         );
     }

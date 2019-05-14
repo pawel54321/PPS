@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Button, CardText, CardBody, CardHeader, CardTitle} from 'reactstrap';
+import { Card, /*Button, CardText,*/ CardBody, CardHeader /*, CardTitle*/} from 'reactstrap';
 //import axios from 'axios';
 //import history from '../history';
 

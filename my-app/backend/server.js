@@ -325,7 +325,7 @@ app.post('/Grupa/Wyswietl', async (req, res) => {
 //GOTOWE [(admin)]
 app.post('/Uzytkownik/Wyswietl', async (req, res) => {
 
-    const zapytanie = await pgClient.query("SELECT * FROM Uzytkownik");
+    const zapytanie = await pgClient.query("SELECT * FROM Uzytkownik WHERE prawa<>'Admin' ");
    // console.log(zapytanie.rows);
 
     res.send({
