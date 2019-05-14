@@ -314,7 +314,7 @@ app.post('/Grupa/Usun_Uzytkownika_Z_Grupy', async (req, res) => {
 });
 //DODAC id_uzytkownik - DOPISAC domyslnie dalem 1 + DODAC id_grupa - DOPISAC domyslnie dalem 1 + POPRAWIC KOMUNIKAT BO DLA KLKNIECIA MODERATORA WYSWIETLI SIE OK A NIE USUNIE [(moderator)]
 
-//GOTOWE [(user/admin/moderator)]
+//GOTOWE [(admin)]
 app.post('/Grupa/Wyswietl', async (req, res) => {
 
     const zapytanie = await pgClient.query("SELECT * FROM Grupa_Pokoj");
@@ -324,9 +324,23 @@ app.post('/Grupa/Wyswietl', async (req, res) => {
         wyswietl: zapytanie.rows
     });
 });
-//GOTOWE [(user/admin/moderator)]
+//GOTOWE [(admin)]
 
+//GOTOWE [(user/moderator)]
+app.post('/Grupa/Wyswietl/DanyLogin', async (req, res) => {
 
+    const id = req.body.id;
+
+    const zapytanie = await pgClient.query("SELECT g.id, g.nazwa, g.opis FROM Grupa_Pokoj as g, tabela_posrednia t, uzytkownik u WHERE u.id=t.id_uzytkownik AND t.id_grupa=g.id AND u.id='"+id+"'");
+    //console.log(zapytanie.rows);
+
+    res.send({
+        id: req.body.id,
+
+        wyswietl: zapytanie.rows
+    });
+});
+//GOTOWE [(user/moderator)]
 
 //GOTOWE [(admin)]
 app.post('/Uzytkownik/Wyswietl', async (req, res) => {
