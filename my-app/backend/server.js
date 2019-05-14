@@ -232,11 +232,12 @@ app.post('/Grupa/Stworz', async (req, res) => {
 });
 //GOTOWE [/Grupa/Stworz + /Grupa/Stworz_Moderatora = RAZEM] [(user/admin/moderator)]
 
-//DODAC id_uzytkownik - DOPISAC domyslnie dalem 1 [/Grupa/Stworz + /Grupa/Stworz_Moderatora = RAZEM] [(user/admin/moderator)]
+//GOTOWE [/Grupa/Stworz + /Grupa/Stworz_Moderatora = RAZEM] [(user/admin/moderator)]
 app.post('/Grupa/Stworz_Moderatora', async (req, res) => {
 
     const nazwa = req.body.nazwa;
-    const id_uzytkownik = 1; // TOKEN/(ID)???
+    const id_uzytkownik = req.body.id; // TOKEN/(ID)???
+   // const id_uzytkownik = 1; // TOKEN/(ID)???
 
     let czyStworzono = false;
     const czyJestJuzNazwa = await pgClient.query("SELECT COUNT(nazwa) FROM Grupa_Pokoj WHERE nazwa='" + nazwa + "'");
@@ -276,12 +277,13 @@ app.post('/Grupa/Stworz_Moderatora', async (req, res) => {
     }
     res.send({
         nazwa: req.body.nazwa,
+        id_uzytkownik: req.body.id,
         //  id_uzytkownik: req.body.id_uzytkownik,
 
         zwracam_czy_stworzono: czyStworzono
     });
 });
-//DODAC id_uzytkownik - DOPISAC domyslnie dalem 1 [/Grupa/Stworz + /Grupa/Stworz_Moderatora = RAZEM] [(user/admin/moderator)]
+//GOTOWE [/Grupa/Stworz + /Grupa/Stworz_Moderatora = RAZEM] [(user/admin/moderator)]
 
 //DODAC id_uzytkownik - DOPISAC domyslnie dalem 1 + DODAC id_grupa - DOPISAC domyslnie dalem 1 + POPRAWIC KOMUNIKAT BO DLA KLKNIECIA MODERATORA WYSWIETLI SIE OK A NIE USUNIE [(moderator)]
 app.post('/Grupa/Usun_Uzytkownika_Z_Grupy', async (req, res) => {
@@ -334,7 +336,7 @@ app.post('/Uzytkownik/Wyswietl', async (req, res) => {
 });
 //GOTOWE [(admin)]
 
-//DODAC [(user/admin/moderator)]
+//GOTOWE [(user/admin/moderator)]
 app.post('/Uzytkownik/Wyswietl/DanyLogin', async (req, res) => {
 
     const login = req.body.login;
@@ -348,12 +350,13 @@ app.post('/Uzytkownik/Wyswietl/DanyLogin', async (req, res) => {
         wyswietl: zapytanie.rows //zapytanie.rows[0].id , zapytanie.rows[1].id
     });
 });
-//DODAC [(user/admin/moderator)]
+//GOTOWE [(user/admin/moderator)]
 
-//DODAC login - DOPISAC domyslnie dalem 'admin' + ZROBIC FRONT [(user/admin/moderator)]
+//DODAC - ZROBIC FRONT [(user/admin/moderator)]
 app.post('/Uzytkownik/Zaaktulizuj/DanyLogin', async (req, res) => {
 
-    const login = 'admin' // TOKEN/ID/(NAZWA)???
+    const login = req.body.login;
+    //const login = 'admin' // TOKEN/ID/(NAZWA)???
 
     const imie = req.body.imie;
     const nazwisko = req.body.nazwisko;
@@ -368,6 +371,7 @@ app.post('/Uzytkownik/Zaaktulizuj/DanyLogin', async (req, res) => {
         });
 
     res.send({
+        login: req.body.login,
         imie: req.body.imie,
         nazwisko: req.body.nazwisko,
         haslo: req.body.haslo,
@@ -375,7 +379,7 @@ app.post('/Uzytkownik/Zaaktulizuj/DanyLogin', async (req, res) => {
         zwracam_czy_zaktualizowano: czyZaktualizowano
     });
 });
-//DODAC login - DOPISAC domyslnie dalem 'admin' + ZROBIC FRONT [(user/admin/moderator)]
+//DODAC - ZROBIC FRONT [(user/admin/moderator)]
 
 
 
