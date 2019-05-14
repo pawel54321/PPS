@@ -134,6 +134,7 @@ app.post('/Uzytkownik/Logowanie', async (req, res) => {
 
     let czy_poprawne = false;
     let prawaprawa = '';
+    let id = '';
 
     const zapytanie2 = await pgClient.query("SELECT COUNT(*) FROM Uzytkownik WHERE login='" + login + "' AND haslo='" + haslo + "'")
         .catch((error) => {
@@ -141,16 +142,18 @@ app.post('/Uzytkownik/Logowanie', async (req, res) => {
         });
 
     const tablica = zapytanie2.rows;
-    const prawa = await pgClient.query("SELECT prawa FROM Uzytkownik WHERE login='" + login + "'")
+    const prawa = await pgClient.query("SELECT id, prawa FROM Uzytkownik WHERE login='" + login + "'")
     const tablica2 = prawa.rows;
 
     if (tablica[0].count == 1) {
         czy_poprawne = true;
         prawaprawa = tablica2[0].prawa;
+        id = tablica2[0].id;
     } else
         czy_poprawne = false;
 
     const user = {
+        id: id,
         login: login,
         jaki_user: prawaprawa
     };
@@ -165,6 +168,7 @@ app.post('/Uzytkownik/Logowanie', async (req, res) => {
 //generowanie tokenu
 function generateToken(user) {
     let u = {
+        id: user.id,
         login: user.login,
         jaki_user: user.jaki_user
     };
@@ -247,7 +251,7 @@ app.post('/Grupa/Stworz_Moderatora', async (req, res) => {
 
         const grupa = await pgClient.query("SELECT id FROM Grupa_Pokoj WHERE nazwa='" + nazwa + "'");
         const tablicaGrupa = grupa.rows;
-      
+
         //let id_grupy;
 
         //  if (Object.keys(tablicaGrupa).length != 0) {
@@ -294,14 +298,14 @@ app.post('/Grupa/Usun_Uzytkownika_Z_Grupy', async (req, res) => {
     const id_grupa = 1; // TOKEN/(ID)???
 
     let czyUsunieto = true;
-    
+
     pgClient.query("DELETE FROM Tabela_Posrednia WHERE id_uzytkownik='" + id_uzytkownik + "' AND id_grupa='" + id_grupa + "' AND moderator_grupy="+false)
         .catch((error) => {
             console.log(error);
             czyUsunieto = false;
         });
-          
-  
+
+
     res.send({
         //  id_uzytkownik: req.body.id_uzytkownik,
 
@@ -380,13 +384,3 @@ app.post('/Uzytkownik/Zaaktulizuj/DanyLogin', async (req, res) => {
     });
 });
 //DODAC - [(user/admin/moderator)]
-
-
-
-
-
-
-
-
-
-
