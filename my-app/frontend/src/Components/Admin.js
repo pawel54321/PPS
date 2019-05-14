@@ -4,6 +4,9 @@ import classnames from 'classnames';
 import axios from 'axios';
 import UsersTable from './UsersTable';
 import GroupsTable from './GroupsTable';
+import UserTable from './UserTable';
+
+import CreateGroup from './CreateGroup';
 
 class Admin extends Component {
 
@@ -13,17 +16,20 @@ class Admin extends Component {
             activeTab: '0',
             raz: true,
             users: [],
-            groups: []
+            groups: [],
+            user: []
         };
         this.toggle = this.toggle.bind(this);
         this.zwrocenieUzytkownikow();
         this.zwrocenieGrup();
+        this.zwrocenieSiebie();
     }
 
     toggle(tab) {
         if(this.state.raz === true) {
             document.getElementsByClassName('crud-table__header-cell')[0].click();
             document.getElementsByClassName('crud-table__header-cell')[5].click();
+            document.getElementsByClassName('crud-table__header-cell')[10].click();
         }
 
         if (this.state.activeTab !== tab) {
@@ -48,6 +54,19 @@ class Admin extends Component {
         });
     }
 
+    zwrocenieSiebie = async () => {
+        const login = await axios.post('http://localhost:5000/ReadToken', {
+            token: localStorage.getItem('token')
+        });
+        const user = await axios.post('http://localhost:5000/Uzytkownik/Wyswietl/DanyLogin', {
+            login: login.data.user.login
+        });
+        this.setState({
+            user: user.data.wyswietl
+        });
+    }
+
+
     render() {
         return (
             <div>
@@ -57,7 +76,7 @@ class Admin extends Component {
                             className={classnames({ active: this.state.activeTab === '1' })}
                             onClick={() => { this.toggle('1'); }}
                         >
-                            Użytkownicy
+                            Profil
                         </NavLink>
                     </NavItem>
                     <NavItem>
@@ -65,7 +84,23 @@ class Admin extends Component {
                             className={classnames({ active: this.state.activeTab === '2' })}
                             onClick={() => { this.toggle('2'); }}
                         >
+                            Użytkownicy
+                        </NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink
+                            className={classnames({ active: this.state.activeTab === '3' })}
+                            onClick={() => { this.toggle('3'); }}
+                        >
                             Grupy
+                        </NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink
+                            className={classnames({ active: this.state.activeTab === '4' })}
+                            onClick={() => { this.toggle('4'); }}
+                        >
+                            Dodaj grupę!
                         </NavLink>
                     </NavItem>
                 </Nav>
@@ -89,7 +124,7 @@ class Admin extends Component {
                             </Col>
                             <Col xs={10} md={6} >
                                 <br />
-                                <UsersTable users={this.state.users} />
+                                <UserTable users={this.state.user} />
                                 <br /><br /><br /><br /><br />
                             </Col>
                             <Col xs={1} md={3} >
@@ -102,7 +137,33 @@ class Admin extends Component {
                             </Col>
                             <Col xs={10} md={6} >
                                 <br />
+                                <UsersTable users={this.state.users} />
+                                <br /><br /><br /><br /><br />
+                            </Col>
+                            <Col xs={1} md={3} >
+                            </Col>
+                        </Row>
+                    </TabPane>
+                    <TabPane tabId="3">
+                        <Row className="show-grid">
+                            <Col xs={1} md={3} >
+                            </Col>
+                            <Col xs={10} md={6} >
+                                <br />
                                 <GroupsTable groups={this.state.groups} />
+                                <br /><br /><br /><br /><br />
+                            </Col>
+                            <Col xs={1} md={3} >
+                            </Col>
+                        </Row>
+                    </TabPane>
+                    <TabPane tabId="4">
+                        <Row className="show-grid">
+                            <Col xs={1} md={3} >
+                            </Col>
+                            <Col xs={10} md={6} >
+                                <br />
+                                <CreateGroup />
                                 <br /><br /><br /><br /><br />
                             </Col>
                             <Col xs={1} md={3} >

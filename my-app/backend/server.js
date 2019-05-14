@@ -356,7 +356,7 @@ app.post('/Uzytkownik/Wyswietl/DanyLogin', async (req, res) => {
 });
 //GOTOWE [(user/admin/moderator)]
 
-//DODAC - [(user/admin/moderator)]
+//GOTOWE - [(user/admin/moderator)]
 app.post('/Uzytkownik/Zaaktulizuj/DanyLogin', async (req, res) => {
 
     const id = req.body.id;
@@ -383,4 +383,4 @@ app.post('/Uzytkownik/Zaaktulizuj/DanyLogin', async (req, res) => {
         zwracam_czy_zaktualizowano: czyZaktualizowano
     });
 });
-//DODAC - [(user/admin/moderator)]
+//GOTOWE - [(user/admin/moderator)]
