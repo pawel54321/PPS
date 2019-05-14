@@ -5,6 +5,6 @@ export async function token() {
     const response = await axios.post('http://localhost:5000/ReadToken', {
         token: token
     });
-    
+
     return response;
 }
