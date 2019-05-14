@@ -37,6 +37,7 @@ class Login extends Component {
             //this.props.onLoggedUserChange(OdpowiedzSerwera2.data.jaki_user);
             Alert.success('Logowanie przebiegło pomyślnie!', { position: 'top' });
             history.push('/');
+            window.location.reload();
         }
         else if (OdpowiedzSerwera2.data.zwracam_czy_poprawne === false) {
             Alert.error('Niepoprawne dane!', { position: 'bottom' });
