@@ -89,11 +89,11 @@ const GroupsTable = (props) => (
             </Fields>
 
             <DeleteForm
-                title="Usunięcie grupy"
-                message="Jesteś pewien, że chcesz usunąć wybraną grupę?"
-                trigger="Usun"
+                title="Zablokuj grupę"
+                message="Jesteś pewien, że chcesz zablokować wybraną grupę?"
+                trigger="Zablokuj"
                 onSubmit={task => service.delete(task)}
-                submitText="Usuwaj, po co to ma istnieć i ludzi drażnić"
+                submitText="Zablokuj i nie wyświetlaj"
                 validate={(values) => {
                     const errors = {};
                     if (!values.id) {

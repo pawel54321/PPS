@@ -93,11 +93,11 @@ const UsersTable = (props) => (
             </Fields>
 
             <DeleteForm
-                title="Usunięcie użyszkodnika"
-                message="Jesteś pewien, że chcesz usunąć wybranego użytkownika?"
-                trigger="Usun"
+                title="Zablokuj użytkownika"
+                message="Jesteś pewien, że chcesz zablokować wybranego użytkownika?"
+                trigger="Zablokuj"
                 onSubmit={task => service.delete(task)}
-                submitText="Wywal dziada. I tak wróci"
+                submitText="Zablokuj i nie wyświetlaj"
                 validate={(values) => {
                     const errors = {};
                     if (!values.id) {
