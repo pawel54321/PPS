@@ -107,14 +107,15 @@ class TestingBackend extends Component {
         });
 
         this.setState({
-            nazwa: '',
-            opis: '',
+            nazwa: "",
+            opis: "",
         });
 
 
 
         if (OdpowiedzSerwera.data.zwracam_czy_stworzono === true && OdpowiedzSerwera2.data.zwracam_czy_stworzono === true) {
             Alert.success('Poprawnie utworzono grupę!', { position: 'top' });
+
         }
         else if (OdpowiedzSerwera.data.zwracam_czy_stworzono === false && OdpowiedzSerwera2.data.zwracam_czy_stworzono === false) {
             Alert.error('Podana nazwa grupy istnieje!', { position: 'bottom' });
