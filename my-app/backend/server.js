@@ -352,34 +352,34 @@ app.post('/Uzytkownik/Wyswietl/DanyLogin', async (req, res) => {
 });
 //GOTOWE [(user/admin/moderator)]
 
-//DODAC - ZROBIC FRONT [(user/admin/moderator)]
+//DODAC - [(user/admin/moderator)]
 app.post('/Uzytkownik/Zaaktulizuj/DanyLogin', async (req, res) => {
 
-    const login = req.body.login;
+    const id = req.body.id;
     //const login = 'admin' // TOKEN/ID/(NAZWA)???
 
     const imie = req.body.imie;
     const nazwisko = req.body.nazwisko;
-    const haslo = req.body.haslo;
+   // const haslo = req.body.haslo;
     let czyZaktualizowano = true;
 
     pgClient
-        .query("UPDATE Uzytkownik SET imie='"+imie+"', nazwisko='"+nazwisko+"', haslo='"+haslo+"' WHERE login='" + login + "'")
+        .query("UPDATE Uzytkownik SET imie='"+imie+"', nazwisko='"+nazwisko+"' WHERE id='" + id + "'")
         .catch((error) => {
             console.log(error);
             czyZaktualizowano = false;
         });
-
+     // .query("UPDATE Uzytkownik SET imie='"+imie+"', nazwisko='"+nazwisko+"', haslo='"+haslo+"' WHERE id='" + id + "'")
     res.send({
-        login: req.body.login,
+        id: req.body.id,
         imie: req.body.imie,
         nazwisko: req.body.nazwisko,
-        haslo: req.body.haslo,
+      //  haslo: req.body.haslo,
 
         zwracam_czy_zaktualizowano: czyZaktualizowano
     });
 });
-//DODAC - ZROBIC FRONT [(user/admin/moderator)]
+//DODAC - [(user/admin/moderator)]
 
 
 

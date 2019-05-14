@@ -2,7 +2,7 @@
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 import axios from 'axios';
-import UsersTable from './UsersTable';
+import UserTable from './UserTable';
 import GroupsTable from './GroupsTable';
 
 import CreateGroup from './CreateGroup';
@@ -64,7 +64,7 @@ class User extends Component {
                             className={classnames({ active: this.state.activeTab === '1' })}
                             onClick={() => { this.toggle('1'); }}
                         >
-                            Użytkownicy
+                            Profil
                         </NavLink>
                     </NavItem>
                     <NavItem>
@@ -96,7 +96,7 @@ class User extends Component {
                             </Col>
                             <Col xs={10} md={6} >
                                 <br />
-                                <UsersTable users={this.state.users} />
+                                <UserTable users={this.state.users} />
                                 <br /><br /><br /><br /><br />
                             </Col>
                             <Col xs={1} md={3} >
