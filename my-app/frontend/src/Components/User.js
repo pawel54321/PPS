@@ -5,7 +5,7 @@ import axios from 'axios';
 import UserTable from './UserTable';
 import MyGroupsTable from './MyGroupsTable';
 
-import CreateGroup from './CreateGroup';
+//import CreateGroup from './CreateGroup';
 
 class User extends Component {
 
@@ -70,7 +70,7 @@ class User extends Component {
                             className={classnames({ active: this.state.activeTab === '1' })}
                             onClick={() => { this.toggle('1'); }}
                         >
-                            Użytkownicy
+                            Profil
                         </NavLink>
                     </NavItem>
                     <NavItem>
@@ -78,7 +78,7 @@ class User extends Component {
                             className={classnames({ active: this.state.activeTab === '2' })}
                             onClick={() => { this.toggle('2'); }}
                         >
-                            Grupy
+                            Moje grupy (Moderator)
                         </NavLink>
                     </NavItem>
                 </Nav>
@@ -90,7 +90,7 @@ class User extends Component {
                             </Col>
                             <Col xs={6} md={6} >
                                 <br /><br /><br /><br /><br /><br /><br /><br />
-                                <center><h5><h1>Znajdujesz się w Panelu Użytkownika!</h1><br />W tym miejscu możesz zarządzać systemem.<br />Wybierz odpowiednią zakładkę u góry strony, aby dokonać zmian w systemie.</h5></center>
+                                <center><h5><h1>Znajdujesz się w Panelu Użytkownika!</h1><br />W tym miejscu możesz zarządzać swoimi grupami.<br />Wybierz odpowiednią zakładkę u góry strony, aby dokonać zmian.</h5></center>
                             </Col>
                             <Col xs={6} md={3} >
                             </Col>

@@ -6,8 +6,6 @@ import UsersTable from './UsersTable';
 import GroupsTable from './GroupsTable';
 import UserTable from './UserTable';
 
-import CreateGroup from './CreateGroup';
-
 class Admin extends Component {
 
     constructor(props) {
@@ -84,7 +82,7 @@ class Admin extends Component {
                             className={classnames({ active: this.state.activeTab === '2' })}
                             onClick={() => { this.toggle('2'); }}
                         >
-                            Użytkownicy
+                            Wszyscy użytkownicy
                         </NavLink>
                     </NavItem>
                     <NavItem>
@@ -92,15 +90,7 @@ class Admin extends Component {
                             className={classnames({ active: this.state.activeTab === '3' })}
                             onClick={() => { this.toggle('3'); }}
                         >
-                            Grupy
-                        </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink
-                            className={classnames({ active: this.state.activeTab === '4' })}
-                            onClick={() => { this.toggle('4'); }}
-                        >
-                            Dodaj grupę!
+                            Wszystkie grupy
                         </NavLink>
                     </NavItem>
                 </Nav>
@@ -151,19 +141,6 @@ class Admin extends Component {
                             <Col xs={10} md={6} >
                                 <br />
                                 <GroupsTable groups={this.state.groups} />
-                                <br /><br /><br /><br /><br />
-                            </Col>
-                            <Col xs={1} md={3} >
-                            </Col>
-                        </Row>
-                    </TabPane>
-                    <TabPane tabId="4">
-                        <Row className="show-grid">
-                            <Col xs={1} md={3} >
-                            </Col>
-                            <Col xs={10} md={6} >
-                                <br />
-                                <CreateGroup />
                                 <br /><br /><br /><br /><br />
                             </Col>
                             <Col xs={1} md={3} >
