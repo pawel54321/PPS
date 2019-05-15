@@ -43,14 +43,19 @@ class User extends Component {
         const users = await axios.post('http://localhost:5000/Uzytkownik/Wyswietl/DanyLogin', {
             login: login.data.user.login
         });
-        console.log(users);
         this.setState({
             users: users.data.wyswietl
         });
     }
 
     zwrocenieGrup = async () => {
-        const groups = await axios.post('http://localhost:5000/Grupa/Wyswietl');
+        const id = await axios.post('http://localhost:5000/ReadToken', {
+            token: localStorage.getItem('token')
+        });
+        const groups = await axios.post('http://localhost:5000/Grupa/Wyswietl/DanyLogin', {
+            id: id.data.user.id
+        });
+        console.log(groups);
         this.setState({
             groups: groups.data.wyswietl
         });
