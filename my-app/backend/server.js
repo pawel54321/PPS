@@ -75,7 +75,7 @@ pgClient
 
 
 pgClient
-    .query('CREATE TABLE IF NOT EXISTS Post_Komentarz (id SERIAL PRIMARY KEY, id_grupa INT, id_uzytkownik INT, zawartosc VARCHAR(255), id_polubienia INT REFERENCES Polubienia (id))')
+    .query('CREATE TABLE IF NOT EXISTS Post_Komentarz (id SERIAL PRIMARY KEY, id_grupa INT REFERENCES Grupa_Pokoj (id), id_uzytkownik INT REFERENCES Uzytkownik (id), zawartosc VARCHAR(255), id_polubienia INT REFERENCES Polubienia (id))')
     .catch((error) => {
         console.log(error);
     });
