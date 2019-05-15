@@ -41,7 +41,7 @@ class User extends Component {
             token: localStorage.getItem('token')
         });
         const users = await axios.post('http://localhost:5000/Uzytkownik/Wyswietl/DanyLogin', {
-            is: login.data.user.id
+            login: login.data.user.login
         });
         console.log(users);
         this.setState({

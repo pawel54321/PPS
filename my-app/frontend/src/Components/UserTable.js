@@ -54,14 +54,14 @@ const service = {
         });
 
        axios.post('http://localhost:5000/Uzytkownik/Zaaktulizuj/DanyLogin', {
-            id: login.data.user.id,
+            id: task.id,
             imie: task.imie,
             nazwisko: task.nazwisko,
             /*haslo: task.haslo*/
         });
 
-        
-       
+
+
 
 
         return Promise.resolve(task);
@@ -88,7 +88,7 @@ const UsersTable = (props) => (
             fetchItems={payload => service.fetchItems(payload)}
         >
             <Fields>
-                <Field hideInUpdateForm 
+                <Field hideInUpdateForm
                     name="id"
                     label="Id"
                 />
@@ -96,7 +96,7 @@ const UsersTable = (props) => (
                     name="login"
                     label="Login"
                 />
-                <Field 
+                <Field
                     name="imie"
                     label="Imię"
                 />
