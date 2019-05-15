@@ -54,7 +54,7 @@ pgClient
     });
 
 pgClient
-    .query('CREATE TABLE IF NOT EXISTS Zaproszenia (id SERIAL PRIMARY KEY, id_grupa INT, id_uzytkownik INT, stan VARCHAR(255))')
+    .query('CREATE TABLE IF NOT EXISTS Zaproszenia (id SERIAL PRIMARY KEY, id_grupa INT REFERENCES Grupa_Pokoj (id), id_uzytkownik INT REFERENCES Uzytkownik (id), stan VARCHAR(255))')
     .catch((error) => {
         console.log(error);
     });
@@ -68,14 +68,14 @@ pgClient
 
 
 pgClient
-    .query('CREATE TABLE IF NOT EXISTS Tabela_Posrednia (id SERIAL PRIMARY KEY, id_grupa INT, id_uzytkownik INT, moderator_grupy BOOLEAN)')
+    .query('CREATE TABLE IF NOT EXISTS Tabela_Posrednia (id SERIAL PRIMARY KEY, id_grupa INT REFERENCES Grupa_Pokoj (id), id_uzytkownik INT REFERENCES Uzytkownik (id), moderator_grupy BOOLEAN)')
     .catch((error) => {
         console.log(error);
     });
 
 
 pgClient
-    .query('CREATE TABLE IF NOT EXISTS Post_Komentarz (id SERIAL PRIMARY KEY, id_grupa INT, id_uzytkownik INT, zawartosc VARCHAR(255), id_polubienia INT)')
+    .query('CREATE TABLE IF NOT EXISTS Post_Komentarz (id SERIAL PRIMARY KEY, id_grupa INT, id_uzytkownik INT, zawartosc VARCHAR(255), id_polubienia INT REFERENCES Polubienia (id))')
     .catch((error) => {
         console.log(error);
     });
