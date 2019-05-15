@@ -2,7 +2,7 @@
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 import axios from 'axios';
-import UsersTable from './UsersTable';
+import UserTable from './UserTable';
 import MyGroupsTable from './MyGroupsTable';
 
 import CreateGroup from './CreateGroup';
@@ -97,7 +97,7 @@ class User extends Component {
                             </Col>
                             <Col xs={10} md={6} >
                                 <br />
-                                <UsersTable users={this.state.users} />
+                                <UserTable users={this.state.users} />
                                 <br /><br /><br /><br /><br />
                             </Col>
                             <Col xs={1} md={3} >
