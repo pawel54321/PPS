@@ -1,12 +1,23 @@
 import React, { Component } from 'react';
+import { ListGroup, ListGroupItem } from 'reactstrap';
 
 class GroupList extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state ={
+            groups: [],
+            user: null
+        }
+    }
+
+
+
     render() {
         return (
-            <div>
-                <p>Lista grup (admin - wszystkie, użytkownik - te, do których należy)</p>
-            </div>
+            <ListGroup>
+                <ListGroupItem></ListGroupItem>
+            </ListGroup>
         );
     }
 }

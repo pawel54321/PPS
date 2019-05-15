@@ -12,7 +12,6 @@ import Header from './Components/Header';
 import Footer from './Components/Footer';
 //import CreateGroup from './Components/CreateGroup';
 import Group from './Components/Group';
-import GroupList from './Components/GroupList';
 import User from './Components/User';
 import Admin from './Components/Admin';
 
@@ -49,19 +48,16 @@ class App extends Component {
 
     render() {
        // let createGroup;
-        let groups;
         let group;
         let admin;
         let user;
         if(this.state.rola !== null) {
          //   createGroup = <PrivateRoute rola={this.state.rola} roles={['User']} path='/create' component={CreateGroup} />
-            groups = <PrivateRoute rola={this.state.rola} roles={['User','Admin']} path='/groups' component={GroupList} />
             group = <PrivateRoute rola={this.state.rola} roles={['User','Admin']} path='/group' component={Group} />
             admin = <PrivateRoute rola={this.state.rola} roles={['Admin']} path='/admin' component={Admin} />
             user = <PrivateRoute rola={this.state.rola} roles={['User']} path='/user' component={User} />
         } else {
          //   createGroup = null;
-            groups = null;
             group = null;
             user = null;
             admin = null;
@@ -78,7 +74,6 @@ class App extends Component {
                         <Route path='/login' component={Login} />
                         <Route path='/register' component={Register} />
                         {/*createGroup*/}
-                        {groups}
                         {group}
                         {admin}
                         {user}
