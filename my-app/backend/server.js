@@ -331,7 +331,7 @@ app.post('/Grupa/Wyswietl/DanyLogin', async (req, res) => {
 
     const id = req.body.id;
 
-    const zapytanie = await pgClient.query("SELECT g.id, g.nazwa, g.opis FROM Grupa_Pokoj as g, tabela_posrednia t, uzytkownik u WHERE u.id=t.id_uzytkownik AND t.id_grupa=g.id AND u.id='"+id+"'");
+    const zapytanie = await pgClient.query("SELECT gr.id, gr.nazwa, gr.opis FROM Grupa_Pokoj as gr, tabela_posrednia as ta, uzytkownik as uz WHERE uz.id = ta.id_uzytkownik AND ta.id_grupa = gr.id AND uz.id ="+id+"'");
     //console.log(zapytanie.rows);
 
     res.send({
