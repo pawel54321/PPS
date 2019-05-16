@@ -8,6 +8,8 @@ import CRUDTable, {
 } from 'react-crud-table';
 import axios from 'axios';
 import './style.css';
+import { fail } from 'assert';
+import Alert from 'react-s-alert';
 
 let tasks = [];
 
@@ -48,30 +50,42 @@ const service = {
     },
     create: async (task) => { // PRZY DODAWANIU NIE SPRAWDZA CZY NAZWA SIE NIE POWTARZA W BACKEND
         //console.log(task.nazwa);
-        
+
+
+        const zapytanie = await axios.post('http://localhost:5000/Grupa/Czy_Nazwa_Jest_W_Bazie_Danych', {
+            nazwa: task.nazwa,
+        });
+
        // this.getToken();
-        const token = await axios.post('http://localhost:5000/ReadToken', {
-            token: localStorage.getItem('token')
-        });
 
-        await axios.post('http://localhost:5000/Grupa/Stworz', {
-            nazwa: task.nazwa,
-            opis: task.opis,
-        });
+        if (zapytanie.data.zwracam_czy_jest == false) {
 
-        await axios.post('http://localhost:5000/Grupa/Stworz_Moderatora_Z_Dolaczeniem_Do_Grupy_Lub_Uzytkownika_Z_Dolaczeniem_Do_Grupy', {
-            nazwa: task.nazwa,
-            id: token.data.user.id,
-            coZrobic : true
-        });
+            const token = await axios.post('http://localhost:5000/ReadToken', {
+                token: localStorage.getItem('token')
+            });
 
-        let count = tasks.length + 1;
-        tasks.push({
-            ...task,
-            id: count,
-        });
+            await axios.post('http://localhost:5000/Grupa/Stworz', {
+                nazwa: task.nazwa,
+                opis: task.opis,
+            });
 
-        console.log(token.data.user.id);
+            await axios.post('http://localhost:5000/Grupa/Stworz_Moderatora_Z_Dolaczeniem_Do_Grupy_Lub_Uzytkownika_Z_Dolaczeniem_Do_Grupy', {
+                nazwa: task.nazwa,
+                id: token.data.user.id,
+                coZrobic: true
+            });
+
+            let count = tasks.length + 1;
+            tasks.push({
+                ...task,
+                id: count,
+            });
+            Alert.success('Poprawnie utworzono grupę!', { position: 'top' });
+        }
+        else {
+        Alert.error('Podana nazwa grupy istnieje!', { position: 'bottom' });
+    }
+        //console.log(token.data.user.id);
 
         return Promise.resolve(task);
 
@@ -79,11 +93,13 @@ const service = {
     delete: (data) => {
         const task = tasks.find(t => t.id === data.id);
        axios.post('http://localhost:5000/Grupa/Zablokuj_Grupe', { // DODAĆ USUWANIE, KIEDY BĘDZIE W BACKENDZIE
-            id: data.id
+           nazwa: task.nazwa
         });
 
         tasks = tasks.filter(t => t.id !== task.id);
-       
+
+        Alert.success('Poprawnie zablokowano grupę!', { position: 'top' });
+
         return Promise.resolve(task);
     },
 

@@ -301,11 +301,11 @@ app.post('/Grupa/Stworz_Moderatora_Z_Dolaczeniem_Do_Grupy_Lub_Uzytkownika_Z_Dola
 app.post('/Grupa/Zablokuj_Grupe', async (req, res) => {
 
     //const id_uzytkownik = 1; // TOKEN/(ID)???
-    const id_grupa = req.body.id; 
+    const nazwa = req.body.nazwa; 
 
     let czyZablokowano = true;
 
-    pgClient.query("UPDATE Grupa_Pokoj SET flaga=false WHERE id='" + id_grupa+"'")
+    pgClient.query("UPDATE Grupa_Pokoj SET flaga=false WHERE nazwa='" + nazwa+"'")
         .catch((error) => {
             console.log(error);
             czyZablokowano = false;
@@ -313,7 +313,7 @@ app.post('/Grupa/Zablokuj_Grupe', async (req, res) => {
 
 
     res.send({
-        id: req.body.id,
+        nazwa: req.body.nazwa,
 
         zwracam_czy_zablokowano: czyZablokowano
     });
@@ -350,6 +350,32 @@ app.post('/Grupa/Zablokuj_Uzytkownika_Z_Mojej_Grupy', async (req, res) => {
 
 
 
+
+//GOTOWE[(user/admin/moderator)]
+app.post('/Grupa/Czy_Nazwa_Jest_W_Bazie_Danych', async (req, res) => {
+
+    const nazwa = req.body.nazwa;
+
+    let czyJest = false;
+
+    const czyJestJuzNazwa = await pgClient.query("SELECT COUNT(nazwa) FROM Grupa_Pokoj WHERE nazwa='" + nazwa + "'");
+
+    const tablicaCzyJestJuzNazwa = czyJestJuzNazwa.rows;
+
+    if (tablicaCzyJestJuzNazwa[0].count == 1) {
+        czyJest = true;   
+    }
+    else {
+        czyJest = false;
+    }
+
+    res.send({
+        nazwa: req.body.nazwa,
+
+        zwracam_czy_jest: czyJest
+    });
+});
+//GOTOWE [(user/admin/moderator)]
 
 
 //GOTOWE [(admin)]

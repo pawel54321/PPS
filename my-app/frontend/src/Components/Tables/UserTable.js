@@ -6,6 +6,7 @@ import CRUDTable, {
 } from 'react-crud-table';
 import axios from 'axios';
 import './style.css';
+import Alert from 'react-s-alert';
 
 let tasks = [];
 
@@ -49,7 +50,7 @@ const service = {
         //console.log(task.kraj);
 
 
-        const login = axios.post('http://localhost:5000/ReadToken', {
+        axios.post('http://localhost:5000/ReadToken', {
             token: localStorage.getItem('token')
         });
 
@@ -61,7 +62,7 @@ const service = {
         });
 
 
-
+        Alert.success('Poprawnie zaktualizowano profil!', { position: 'top' });
 
 
         return Promise.resolve(task);
