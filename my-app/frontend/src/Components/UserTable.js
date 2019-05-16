@@ -7,7 +7,7 @@ import CRUDTable, {
 import axios from 'axios';
 import '../index.css';
 
-var tasks = [];
+let tasks = [];
 
 const SORTERS = {
     NUMBER_ASCENDING: mapper => (a, b) => mapper(a) - mapper(b),

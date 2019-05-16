@@ -8,7 +8,7 @@ import CRUDTable, {
 import axios from 'axios';
 import '../index.css';
 
-var tasks = [];
+let tasks = [];
 
 const SORTERS = {
     NUMBER_ASCENDING: mapper => (a, b) => mapper(a) - mapper(b),
@@ -50,6 +50,7 @@ const service = {
         axios.post('http://localhost:5000/Uzytkownik/Zablokuj_Uzytkownika', { // DODAĆ USUWANIE, KIEDY BĘDZIE W BACKENDZIE
             id: data.id
         });
+        
         return Promise.resolve(task);
       },
 

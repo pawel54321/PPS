@@ -9,7 +9,7 @@ import CRUDTable, {
 import axios from 'axios';
 import '../index.css';
 
-var tasks = [];
+let tasks = [];
 
 const SORTERS = {
     NUMBER_ASCENDING: mapper => (a, b) => mapper(a) - mapper(b),
@@ -82,11 +82,15 @@ const service = {
         return Promise.resolve(task);
 
     },
-    delete: (data) => {
+    delete: async (data) => {
         const task = tasks.find(t => t.id === data.id);
-        axios.post('http://localhost:5000/Grupa/Zablokuj_Grupe', { // DODAĆ USUWANIE, KIEDY BĘDZIE W BACKENDZIE
+        const a = await axios.post('http://localhost:5000/Grupa/Zablokuj_Grupe', { // DODAĆ USUWANIE, KIEDY BĘDZIE W BACKENDZIE
             id: data.id
         });
+
+       
+
+       
         return Promise.resolve(task);
     },
 
@@ -166,6 +170,10 @@ const GroupsTable = (props) => (
                     }
                     if (!values.opis) {
                         errors.opis = 'Proszę wypełnić podane pole!';
+                    }
+
+                    if (tasks.find((element) => { return element.nazwa === values.nazwa })) {
+                        errors.nazwa = 'Grupa o takiej nazwie istnieje!';
                     }
 
                     return errors;

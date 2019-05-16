@@ -432,7 +432,8 @@ app.post('/Uzytkownik/Zaaktulizuj/DanyLogin', async (req, res) => {
 });
 //GOTOWE - [(user/admin/moderator)]
 
-//GOTOWE [(admin)]
+
+//GOTOWE [(admin)] + DODAC ASPEKTY JESLI ZABLOKUJE MODERATORA GRUPY MOZLIWOSC PRZEKAZANIA PRAW INNEMU UZYTKOWNIKOWI LUB ADMINOWI SYSTEMU
 app.post('/Uzytkownik/Zablokuj_Uzytkownika', async (req, res) => {
 
     //const id_uzytkownik = 1; // TOKEN/(ID)???
@@ -453,5 +454,5 @@ app.post('/Uzytkownik/Zablokuj_Uzytkownika', async (req, res) => {
         zwracam_czy_zablokowano: czyZablokowano
     });
 });
-//GOTOWE [(admin)]
+//GOTOWE [(admin)] + DODAC ASPEKTY JESLI ZABLOKUJE MODERATORA GRUPY MOZLIWOSC PRZEKAZANIA PRAW INNEMU UZYTKOWNIKOWI LUB ADMINOWI SYSTEMU
 
