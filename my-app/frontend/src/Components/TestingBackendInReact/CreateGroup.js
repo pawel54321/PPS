@@ -28,9 +28,10 @@ class CreateGroup extends Component {
             opis: this.state.opis
         });
 
-        const OdpowiedzSerwera2 = await axios.post('http://localhost:5000/Grupa/Stworz_Moderatora', {
+        const OdpowiedzSerwera2 = await axios.post('http://localhost:5000/Grupa/Stworz_Moderatora_Z_Dolaczeniem_Do_Grupy_Lub_Uzytkownika_Z_Dolaczeniem_Do_Grupy', {
             id:  token.data.user.id,
             nazwa: this.state.nazwa,
+            coZrobic : true
         });
 
         this.setState({

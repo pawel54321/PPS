@@ -239,7 +239,9 @@ app.post('/Grupa/Stworz', async (req, res) => {
 //GOTOWE [/Grupa/Stworz + /Grupa/Stworz_Moderatora = RAZEM] [(user/admin/moderator)]
 
 //GOTOWE [/Grupa/Stworz + /Grupa/Stworz_Moderatora = RAZEM] [(user/admin/moderator)]
-app.post('/Grupa/Stworz_Moderatora', async (req, res) => {
+app.post('/Grupa/Stworz_Moderatora_Z_Dolaczeniem_Do_Grupy_Lub_Uzytkownika_Z_Dolaczeniem_Do_Grupy', async (req, res) => {
+
+    const coZrobic = req.body.coZrobic; // TRUE - MODERATOR / FALSE - UŻYTKOWNIK
 
     const nazwa = req.body.nazwa;
     const id_uzytkownik = req.body.id; // TOKEN/(ID)???
@@ -272,7 +274,7 @@ app.post('/Grupa/Stworz_Moderatora', async (req, res) => {
         const tablicaczyJestJuzTaki = czyJestJuzTaki.rows;
 
         if (tablicaczyJestJuzTaki[0].count == 0) {
-            pgClient.query('INSERT INTO Tabela_Posrednia(id_grupa, id_uzytkownik, moderator_grupy) VALUES($1,$2,$3)', [id_grupy, id_uzytkownik, true])
+            pgClient.query('INSERT INTO Tabela_Posrednia(id_grupa, id_uzytkownik, moderator_grupy) VALUES($1,$2,$3)', [id_grupy, id_uzytkownik, coZrobic])
                 .catch((error) => {
                     console.log(error);
                     czyStworzono = false;
@@ -287,6 +289,7 @@ app.post('/Grupa/Stworz_Moderatora', async (req, res) => {
     res.send({
         nazwa: req.body.nazwa,
         id_uzytkownik: req.body.id,
+        coZrobic: req.body.coZrobic,
         //  id_uzytkownik: req.body.id_uzytkownik,
 
         zwracam_czy_stworzono: czyStworzono
@@ -320,8 +323,9 @@ app.post('/Grupa/Zablokuj_Grupe', async (req, res) => {
 
 
 
+
 //DODAC id_uzytkownik - DOPISAC domyslnie dalem 1 + DODAC id_grupa - DOPISAC domyslnie dalem 1 + POPRAWIC KOMUNIKAT BO DLA KLKNIECIA MODERATORA WYSWIETLI SIE OK A NIE USUNIE [(moderator)]
-app.post('/Grupa/Zablokuj_Uzytkownika_Z_Grupy', async (req, res) => {
+app.post('/Grupa/Zablokuj_Uzytkownika_Z_Mojej_Grupy', async (req, res) => {
 
     //const id_uzytkownik = 1; // TOKEN/(ID)???
     //const id_grupa = 1; // TOKEN/(ID)???

@@ -59,9 +59,10 @@ const service = {
             opis: task.opis,
         });
 
-        await axios.post('http://localhost:5000/Grupa/Stworz_Moderatora', {
+        await axios.post('http://localhost:5000/Grupa/Stworz_Moderatora_Z_Dolaczeniem_Do_Grupy_Lub_Uzytkownika_Z_Dolaczeniem_Do_Grupy', {
             nazwa: task.nazwa,
             id: token.data.user.id,
+            coZrobic : true
         });
 
         let count = tasks.length + 1;
