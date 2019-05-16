@@ -6,8 +6,9 @@
     "\\my-app\\frontend",
     "\\my-app\\frontend\\public",
     "\\my-app\\frontend\\src",
-    "\\my-app\\frontend\\src\\Components"
+    "\\my-app\\frontend\\src\\Components",
+    "\\my-app\\frontend\\src\\Components\\Tables"
   ],
-  "SelectedNode": "\\my-app\\frontend\\src\\Components\\Login.js",
+  "SelectedNode": "\\my-app\\frontend\\src\\Components\\Tables\\MyGroupsTable.js",
   "PreviewInSolutionExplorer": false
 }

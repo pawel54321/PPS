@@ -55,7 +55,7 @@ const service = {
 
         // this.getToken();
 
-        if (zapytanie.data.zwracam_czy_jest == false) {
+        if (zapytanie.data.zwracam_czy_jest === false) {
 
             const token = await axios.post('http://localhost:5000/ReadToken', {
                 token: localStorage.getItem('token')

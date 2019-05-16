@@ -8,7 +8,7 @@ import CRUDTable, {
 } from 'react-crud-table';
 import axios from 'axios';
 import './style.css';
-import { fail } from 'assert';
+//import { fail } from 'assert';
 import Alert from 'react-s-alert';
 
 let tasks = [];
@@ -58,7 +58,7 @@ const service = {
 
        // this.getToken();
 
-        if (zapytanie.data.zwracam_czy_jest == false) {
+        if (zapytanie.data.zwracam_czy_jest === false) {
 
             const token = await axios.post('http://localhost:5000/ReadToken', {
                 token: localStorage.getItem('token')
