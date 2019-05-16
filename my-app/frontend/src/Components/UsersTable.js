@@ -50,7 +50,9 @@ const service = {
         axios.post('http://localhost:5000/Uzytkownik/Zablokuj_Uzytkownika', { // DODAĆ USUWANIE, KIEDY BĘDZIE W BACKENDZIE
             id: data.id
         });
-        
+
+        tasks = tasks.filter(t => t.id !== task.id);
+
         return Promise.resolve(task);
       },
 

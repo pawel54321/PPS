@@ -46,14 +46,7 @@ const service = {
     fetchTotal: payload => {
         return Promise.resolve(tasks.length);
     },
-    delete: (data) => {
-        const task = tasks.find(t => t.id === data.id);
-        axios.post('', { // DODAĆ USUWANIE, KIEDY BĘDZIE W BACKENDZIE
-            idGroup: data.id
-        });
-        return Promise.resolve(task);
-    },
-    create: async (task) => {
+    create: async (task) => { // PRZY DODAWANIU NIE SPRAWDZA CZY NAZWA SIE NIE POWTARZA W BACKEND
         //console.log(task.nazwa);
         
        // this.getToken();
@@ -82,14 +75,13 @@ const service = {
         return Promise.resolve(task);
 
     },
-    delete: async (data) => {
+    delete: (data) => {
         const task = tasks.find(t => t.id === data.id);
-        const a = await axios.post('http://localhost:5000/Grupa/Zablokuj_Grupe', { // DODAĆ USUWANIE, KIEDY BĘDZIE W BACKENDZIE
+       axios.post('http://localhost:5000/Grupa/Zablokuj_Grupe', { // DODAĆ USUWANIE, KIEDY BĘDZIE W BACKENDZIE
             id: data.id
         });
 
-       
-
+        tasks = tasks.filter(t => t.id !== task.id);
        
         return Promise.resolve(task);
     },
