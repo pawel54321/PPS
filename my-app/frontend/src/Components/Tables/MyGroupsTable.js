@@ -6,7 +6,7 @@ import CRUDTable, {
     Pagination
 } from 'react-crud-table';
 import axios from 'axios';
-import '../index.css';
+import './style.css';
 
 let tasks = [];
 

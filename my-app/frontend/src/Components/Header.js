@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Navbar, NavbarBrand, //NavbarToggler,
     Collapse, Nav, NavItem, NavLink } from 'reactstrap';
 
-import Alert from 'react-s-alert';
+
 import history from '../history';
 
 const ROLES = {

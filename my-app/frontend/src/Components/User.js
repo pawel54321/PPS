@@ -2,8 +2,8 @@
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 import axios from 'axios';
-import UserTable from './UserTable';
-import MyGroupsTable from './MyGroupsTable';
+import UserTable from './Tables/UserTable';
+import MyGroupsTable from './Tables/MyGroupsTable';
 
 import DropdownGroup from './Dropdown/DropdownGroup';
 

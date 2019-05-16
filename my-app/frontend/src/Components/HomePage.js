@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import TestingBackend from './TestingBackendInReact/TestingBackend';
 import { Col, Row } from 'reactstrap';
 import GroupList from './GroupList';
 

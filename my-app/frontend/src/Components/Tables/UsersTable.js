@@ -3,11 +3,10 @@ import CRUDTable, {
     Fields,
     Field,
     DeleteForm,
-    Pagination,
-    CreateForm
+    Pagination
 } from 'react-crud-table';
 import axios from 'axios';
-import '../index.css';
+import './style.css';
 
 let tasks = [];
 
@@ -46,96 +45,59 @@ const service = {
     fetchTotal: payload => {
         return Promise.resolve(tasks.length);
     },
-    create: async (task) => { // PRZY DODAWANIU NIE SPRAWDZA CZY NAZWA SIE NIE POWTARZA W BACKEND
-        //console.log(task.nazwa);
-        
-       // this.getToken();
-        const token = await axios.post('http://localhost:5000/ReadToken', {
-            token: localStorage.getItem('token')
-        });
-
-        await axios.post('http://localhost:5000/Grupa/Stworz', {
-            nazwa: task.nazwa,
-            opis: task.opis,
-        });
-
-        await axios.post('http://localhost:5000/Grupa/Stworz_Moderatora', {
-            nazwa: task.nazwa,
-            id: token.data.user.id,
-        });
-
-        let count = tasks.length + 1;
-        tasks.push({
-            ...task,
-            id: count,
-        });
-
-        console.log(token.data.user.id);
-
-        return Promise.resolve(task);
-
-    },
     delete: (data) => {
         const task = tasks.find(t => t.id === data.id);
-       axios.post('http://localhost:5000/Grupa/Zablokuj_Grupe', { // DODAĆ USUWANIE, KIEDY BĘDZIE W BACKENDZIE
+        axios.post('http://localhost:5000/Uzytkownik/Zablokuj_Uzytkownika', { // DODAĆ USUWANIE, KIEDY BĘDZIE W BACKENDZIE
             id: data.id
         });
 
         tasks = tasks.filter(t => t.id !== task.id);
-       
+
         return Promise.resolve(task);
-    },
+      },
 
 };
-
-//this.state = {
- //   token: []
-//};
-
-//getToken = async () => {
-   // const token = await axios.post('http://localhost:5000/ReadToken', {
-   //     token: localStorage.getItem('token')
-  //  });
- //   this.setState({ token: token });
-//};
 
 const styles = {
     container: {},
 };
 
-
 function Ustaw(props) {
-    tasks = props.groups;
+    tasks = props.users;
 }
 
-const GroupsTable = (props) => (
+const UsersTable = (props) => (
 
     <div style={styles.container}>
         {Ustaw(props)}
 
         <CRUDTable style={{ width: '100%' }}
-            caption="Grupy"
+            caption="Użytkownicy"
             actionsLabel="Akcje"
             fetchItems={payload => service.fetchItems(payload)}
         >
             <Fields>
-                <Field hideInCreateForm
+                <Field
                     name="id"
                     label="Id"
                 />
                 <Field
-                    name="nazwa"
-                    label="Nawa grupy"
+                    name="login"
+                    label="Login"
                 />
                 <Field
-                    name="opis"
-                    label="Opis"
+                    name="imie"
+                    label="Imię"
+                />
+                <Field
+                    name="nazwisko"
+                    label="Nazwisko"
                 />
             </Fields>
 
             <DeleteForm
-                title="Zablokuj grupę"
-                message="Jesteś pewien, że chcesz zablokować wybraną grupę?"
+                title="Zablokuj użytkownika"
+                message="Jesteś pewien, że chcesz zablokować wybranego użytkownika?"
                 trigger="Zablokuj"
                 onSubmit={task => service.delete(task)}
                 submitText="Zablokuj i nie wyświetlaj"
@@ -144,30 +106,6 @@ const GroupsTable = (props) => (
                     if (!values.id) {
                         errors.id = 'Brak id';
                     }
-                    return errors;
-                }}
-            />
-
-            <CreateForm
-                title="Tworzenie grupy"
-                message="Tworzenie nowej grupy"
-                trigger="Stwórz nową grupę!"
-                onSubmit={task => service.create(task)}
-                submitText="Stwórz"
-                validate={(values) => {
-                    const errors = {};
-
-                    if (!values.nazwa) {
-                        errors.nazwa = 'Proszę wypełnić podane pole!';
-                    }
-                    if (!values.opis) {
-                        errors.opis = 'Proszę wypełnić podane pole!';
-                    }
-
-                    if (tasks.find((element) => { return element.nazwa === values.nazwa })) {
-                        errors.nazwa = 'Grupa o takiej nazwie istnieje!';
-                    }
-
                     return errors;
                 }}
             />
@@ -181,6 +119,6 @@ const GroupsTable = (props) => (
     </div>
 );
 
-GroupsTable.propTypes = {};
+UsersTable.propTypes = {};
 
-export default GroupsTable;
+export default UsersTable;

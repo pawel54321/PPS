@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 import axios from 'axios';
-import UsersTable from './UsersTable';
-import GroupsTable from './GroupsTable';
-import UserTable from './UserTable';
+import UsersTable from './Tables/UsersTable';
+import GroupsTable from './Tables/GroupsTable';
+import UserTable from './Tables/UserTable';
 
 class Admin extends Component {
 

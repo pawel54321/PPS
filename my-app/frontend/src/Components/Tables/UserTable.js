@@ -2,11 +2,10 @@ import React from 'react';
 import CRUDTable, {
     Fields,
     Field,
-    DeleteForm,
-    Pagination
+    UpdateForm
 } from 'react-crud-table';
 import axios from 'axios';
-import '../index.css';
+import './style.css';
 
 let tasks = [];
 
@@ -35,26 +34,38 @@ const getSorter = (data) => {
 
 const service = {
     fetchItems: (payload) => {
-        const { activePage, itemsPerPage } = payload.pagination;
-        const start = (activePage - 1) * itemsPerPage;
-        const end = start + itemsPerPage;
         let result = Array.from(tasks);
         result = result.sort(getSorter(payload.sort));
-        return Promise.resolve(result.slice(start, end));
+        return Promise.resolve(result);
     },
-    fetchTotal: payload => {
-        return Promise.resolve(tasks.length);
-    },
-    delete: (data) => {
+
+    update: (data) => {
         const task = tasks.find(t => t.id === data.id);
-        axios.post('http://localhost:5000/Uzytkownik/Zablokuj_Uzytkownika', { // DODAĆ USUWANIE, KIEDY BĘDZIE W BACKENDZIE
-            id: data.id
+
+        task.imie = data.imie;
+        task.nazwisko = data.nazwisko;
+        task.haslo = data.haslo;
+
+        //console.log(task.kraj);
+
+
+        const login = axios.post('http://localhost:5000/ReadToken', {
+            token: localStorage.getItem('token')
         });
 
-        tasks = tasks.filter(t => t.id !== task.id);
+       axios.post('http://localhost:5000/Uzytkownik/Zaaktulizuj/DanyLogin', {
+            id: task.id,
+            imie: task.imie,
+            nazwisko: task.nazwisko,
+            /*haslo: task.haslo*/
+        });
+
+
+
+
 
         return Promise.resolve(task);
-      },
+    },
 
 };
 
@@ -72,16 +83,16 @@ const UsersTable = (props) => (
         {Ustaw(props)}
 
         <CRUDTable style={{ width: '100%' }}
-            caption="Użytkownicy"
+            caption="Dane profilu"
             actionsLabel="Akcje"
             fetchItems={payload => service.fetchItems(payload)}
         >
             <Fields>
-                <Field
+                <Field hideInUpdateForm
                     name="id"
                     label="Id"
                 />
-                <Field
+                <Field hideInUpdateForm
                     name="login"
                     label="Login"
                 />
@@ -95,26 +106,27 @@ const UsersTable = (props) => (
                 />
             </Fields>
 
-            <DeleteForm
-                title="Zablokuj użytkownika"
-                message="Jesteś pewien, że chcesz zablokować wybranego użytkownika?"
-                trigger="Zablokuj"
-                onSubmit={task => service.delete(task)}
-                submitText="Zablokuj i nie wyświetlaj"
+            <UpdateForm
+                title="Zaktualizuj dane profilu"
+                message="Aktualizacja profilu"
+                trigger="Zaktualizuj"
+                onSubmit={task => service.update(task)}
+                submitText="Zaktualizuj"
                 validate={(values) => {
                     const errors = {};
-                    if (!values.id) {
-                        errors.id = 'Brak id';
+
+                    if (!values.imie) {
+                        errors.imie = 'Proszę wypełnić podane pole!';
                     }
+
+                    if (!values.nazwisko) {
+                        errors.nazwisko = 'Proszę wypełnić podane pole!';
+                    }
+
                     return errors;
                 }}
             />
 
-            <Pagination
-                itemsPerPage={5}
-                fetchTotalOfItems={payload => service.fetchTotal(payload)}
-                activePage={1}
-            />
         </CRUDTable>
     </div>
 );
