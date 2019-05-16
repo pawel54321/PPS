@@ -200,7 +200,6 @@ app.post('/ReadToken', function (req, res, next) {
 //----------------
 // FUNKCJONALNOSCI:
 //----------------
-// WALIDACJA BACKEND ...
 
 //GOTOWE [/Grupa/Stworz + /Grupa/Stworz_Moderatora = RAZEM] [(user/admin/moderator)]
 app.post('/Grupa/Stworz', async (req, res) => {
@@ -320,37 +319,6 @@ app.post('/Grupa/Zablokuj_Grupe', async (req, res) => {
 });
 //GOTOWE [(admin)]
 
-
-
-
-
-//DODAC id_uzytkownik - DOPISAC domyslnie dalem 1 + DODAC id_grupa - DOPISAC domyslnie dalem 1 + POPRAWIC KOMUNIKAT BO DLA KLKNIECIA MODERATORA WYSWIETLI SIE OK A NIE USUNIE [(moderator)]
-app.post('/Grupa/Zablokuj_Uzytkownika_Z_Mojej_Grupy', async (req, res) => {
-
-    //const id_uzytkownik = 1; // TOKEN/(ID)???
-    //const id_grupa = 1; // TOKEN/(ID)???
-
-    //let czyZablokowano = true;
-
-  //  pgClient.query("UPDATE Grupa_Pokoj SET flaga='false' WHERE id='" + id_grupa)
-   //     .catch((error) => {
-    //        console.log(error);
-    //        czyZablokowano = false;
-    //    });
-
-
-   // res.send({
-        //  id_uzytkownik: req.body.id_uzytkownik,
-
-   //     zwracam_czy_zablokowano: czyZablokowano
-  //  });
-});
-//DODAC id_uzytkownik - DOPISAC domyslnie dalem 1 + DODAC id_grupa - DOPISAC domyslnie dalem 1 + POPRAWIC KOMUNIKAT BO DLA KLKNIECIA MODERATORA WYSWIETLI SIE OK A NIE USUNIE [(moderator)]
-
-
-
-
-
 //GOTOWE[(user/admin/moderator)]
 app.post('/Grupa/Czy_Nazwa_Jest_W_Bazie_Danych', async (req, res) => {
 
@@ -377,7 +345,6 @@ app.post('/Grupa/Czy_Nazwa_Jest_W_Bazie_Danych', async (req, res) => {
 });
 //GOTOWE [(user/admin/moderator)]
 
-
 //GOTOWE [(admin)]
 app.post('/Grupa/Wyswietl', async (req, res) => {
 
@@ -390,7 +357,7 @@ app.post('/Grupa/Wyswietl', async (req, res) => {
 });
 //GOTOWE [(admin)]
 
-//GOTOWE [(user/moderator)] grupa gdzie jest modem
+//GOTOWE [(user/moderator)] wyswietla grupy gdzie jestem modem powinno byc DanyLogin/Grupy
 app.post('/Grupa/Wyswietl/DanyLogin', async (req, res) => {
 
     const id = req.body.id;
@@ -403,7 +370,54 @@ app.post('/Grupa/Wyswietl/DanyLogin', async (req, res) => {
         wyswietl: zapytanie.rows
     });
 });
-//GOTOWE [(user/moderator)] grupa gdzie jest modem
+//GOTOWE [(user/moderator)] wyswietla grupy gdzie jestem modem powinno byc DanyLogin/Grupy
+
+//...
+
+//GOTOWE [(user/moderator)] wyswietla uzytkownikow z grupy gdzie jestem modem
+app.post('/Grupa/Wyswietl/DanyLogin/Uzytkownicy', async (req, res) => {
+
+    const id = req.body.id;
+    const zapytanie = await pgClient.query("SELECT uz.id, uz.login, uz.imie, uz.nazwisko FROM Grupa_Pokoj as gr, tabela_posrednia as ta, uzytkownik as uz WHERE uz.id = ta.id_uzytkownik AND ta.id_grupa = gr.id AND ta.moderator_grupy=true AND uz.id ='" + id + "' AND gr.flaga=true");
+    //console.log(zapytanie.rows);
+
+    res.send({
+        id: req.body.id,
+
+        wyswietl: zapytanie.rows
+    });
+});
+//GOTOWE [(user/moderator)] wyswietla uzytkownikow z grupy gdzie jestem modem
+
+//...
+
+//DODAC id_uzytkownik - DOPISAC domyslnie dalem 1 + DODAC id_grupa - DOPISAC domyslnie dalem 1 + POPRAWIC KOMUNIKAT BO DLA KLKNIECIA MODERATORA WYSWIETLI SIE OK A NIE USUNIE [(moderator)]
+app.post('/Grupa/Zablokuj_Uzytkownika_Z_Mojej_Grupy', async (req, res) => {
+
+    //const id_uzytkownik = 1; // TOKEN/(ID)???
+    //const id_grupa = 1; // TOKEN/(ID)???
+
+    //let czyZablokowano = true;
+
+    //  pgClient.query("UPDATE Grupa_Pokoj SET flaga='false' WHERE id='" + id_grupa)
+    //     .catch((error) => {
+    //        console.log(error);
+    //        czyZablokowano = false;
+    //    });
+
+
+    // res.send({
+    //  id_uzytkownik: req.body.id_uzytkownik,
+
+    //     zwracam_czy_zablokowano: czyZablokowano
+    //  });
+});
+//DODAC id_uzytkownik - DOPISAC domyslnie dalem 1 + DODAC id_grupa - DOPISAC domyslnie dalem 1 + POPRAWIC KOMUNIKAT BO DLA KLKNIECIA MODERATORA WYSWIETLI SIE OK A NIE USUNIE [(moderator)]
+
+//...
+
+
+// ------------------------------------------------------
 
 //GOTOWE [(admin)]
 app.post('/Uzytkownik/Wyswietl', async (req, res) => {
@@ -486,3 +500,4 @@ app.post('/Uzytkownik/Zablokuj_Uzytkownika', async (req, res) => {
 });
 //GOTOWE [(admin)] + DODAC ASPEKTY JESLI ZABLOKUJE MODERATORA GRUPY MOZLIWOSC PRZEKAZANIA PRAW INNEMU UZYTKOWNIKOWI LUB ADMINOWI SYSTEMU
 
+// --------------------------------------------------------------

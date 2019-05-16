@@ -151,7 +151,7 @@ class User extends Component {
                                 <center>
                                     <h4>Wybierz nazwę swojej grupy:</h4>
                                     <DropdownGroup grupa={this.zwrocenieNazwyGrupy} /><br /><br />
-                                    ... lista userow z danej grupy gdzie jestem modem (mozliwosc blokowania userow) ...
+                                    ... refreshujaca/zmieniająca się tabela userow z danej grupy gdzie jestem modem (mozliwosc blokowania userow) ...
                                 </center>
                                 <br /><br /><br /><br /><br />
                                 </Col>
