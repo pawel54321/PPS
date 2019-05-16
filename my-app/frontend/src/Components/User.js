@@ -5,7 +5,10 @@ import axios from 'axios';
 import UserTable from './UserTable';
 import MyGroupsTable from './MyGroupsTable';
 
+import DropdownGroup from './Dropdown/DropdownGroup';
+
 //import CreateGroup from './CreateGroup';
+
 
 class User extends Component {
 
@@ -15,7 +18,8 @@ class User extends Component {
             activeTab: '0',
             raz: true,
             users: [],
-            groups: []
+            groups: [],
+            nazwaGrupy: ''
         };
         this.toggle = this.toggle.bind(this);
         this.zwrocenieSiebie();
@@ -61,6 +65,14 @@ class User extends Component {
         });
     }
 
+    zwrocenieNazwyGrupy = (Grupa) => {
+        this.setState({
+            nazwaGrupy: Grupa
+        }, () => {
+            this.zwrocenieGrup();
+        });
+    }
+
     render() {
         return (
             <div>
@@ -78,7 +90,15 @@ class User extends Component {
                             className={classnames({ active: this.state.activeTab === '2' })}
                             onClick={() => { this.toggle('2'); }}
                         >
-                            Moje grupy (Moderator)
+                            Szczegóły moich grup (Moderator)
+                        </NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink
+                            className={classnames({ active: this.state.activeTab === '3' })}
+                            onClick={() => { this.toggle('3'); }}
+                        >
+                            Użytkownicy w moich grupach (Moderator)
                         </NavLink>
                     </NavItem>
                 </Nav>
@@ -116,6 +136,19 @@ class User extends Component {
                             <Col xs={10} md={6} >
                                 <br />
                                 <MyGroupsTable groups={this.state.groups} />
+                                <br /><br /><br /><br /><br />
+                            </Col>
+                            <Col xs={1} md={3} >
+                            </Col>
+                        </Row>
+                    </TabPane>
+                    <TabPane tabId="3">
+                        <Row className="show-grid">
+                            <Col xs={1} md={3} >
+                            </Col>
+                            <Col xs={10} md={6} >
+                                <br />
+                                <DropdownGroup grupa={this.zwrocenieNazwyGrupy} />
                                 <br /><br /><br /><br /><br />
                             </Col>
                             <Col xs={1} md={3} >
