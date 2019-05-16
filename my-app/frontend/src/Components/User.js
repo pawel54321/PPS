@@ -6,7 +6,7 @@ import UserTable from './Tables/UserTable';
 import MyGroupsTable from './Tables/MyGroupsTable';
 
 import DropdownGroup from './Dropdown/DropdownGroup';
-
+import UinGTable from './Tables/UinGTable';
 //import CreateGroup from './CreateGroup';
 
 
@@ -19,7 +19,8 @@ class User extends Component {
             raz: true,
             users: [],
             groups: [],
-            nazwaGrupy: ''
+            nazwaGrupy: '',
+            groupUsers: []
         };
         this.toggle = this.toggle.bind(this);
         this.zwrocenieSiebie();
@@ -65,11 +66,23 @@ class User extends Component {
         });
     }
 
+    zwrocenieUzytkownikow = async () => {
+        const gUsers = await axios.post('http://localhost:5000/Grupa/Wyswietl/DanyLogin/Uzytkownicy', {
+            nazwaGrupy: this.state.nazwaGrupy
+        });
+        this.setState({
+            groupUsers: gUsers.data.wyswietl
+        }, () => {
+            document.getElementsByClassName('crud-table__header-cell')[8].click();
+        });
+    }
+
     zwrocenieNazwyGrupy = (Grupa) => {
         this.setState({
             nazwaGrupy: Grupa
         }, () => {
             this.zwrocenieGrup();
+            this.zwrocenieUzytkownikow();
         });
     }
 
@@ -147,11 +160,11 @@ class User extends Component {
                             <Col xs={1} md={3} >
                             </Col>
                             <Col xs={10} md={6} >
-                                <br />                                
+                                <br />
                                 <center>
                                     <h4>Wybierz nazwę swojej grupy:</h4>
                                     <DropdownGroup grupa={this.zwrocenieNazwyGrupy} /><br /><br />
-                                    ... refreshujaca/zmieniająca się tabela userow z danej grupy gdzie jestem modem (mozliwosc blokowania userow) ...
+                                    <UinGTable groupUsers={this.state.groupUsers} groupName={this.state.nazwaGrupy}/>
                                 </center>
                                 <br /><br /><br /><br /><br />
                                 </Col>

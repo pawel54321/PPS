@@ -300,7 +300,7 @@ app.post('/Grupa/Stworz_Moderatora_Z_Dolaczeniem_Do_Grupy_Lub_Uzytkownika_Z_Dola
 app.post('/Grupa/Zablokuj_Grupe', async (req, res) => {
 
     //const id_uzytkownik = 1; // TOKEN/(ID)???
-    const nazwa = req.body.nazwa; 
+    const nazwa = req.body.nazwa;
 
     let czyZablokowano = true;
 
@@ -331,7 +331,7 @@ app.post('/Grupa/Czy_Nazwa_Jest_W_Bazie_Danych', async (req, res) => {
     const tablicaCzyJestJuzNazwa = czyJestJuzNazwa.rows;
 
     if (tablicaCzyJestJuzNazwa[0].count == 1) {
-        czyJest = true;   
+        czyJest = true;
     }
     else {
         czyJest = false;
@@ -377,8 +377,8 @@ app.post('/Grupa/Wyswietl/DanyLogin', async (req, res) => {
 //GOTOWE [(user/moderator)] wyswietla uzytkownikow z grupy gdzie jestem modem
 app.post('/Grupa/Wyswietl/DanyLogin/Uzytkownicy', async (req, res) => {
 
-    const id = req.body.id;
-    const zapytanie = await pgClient.query("SELECT uz.id, uz.login, uz.imie, uz.nazwisko FROM Grupa_Pokoj as gr, tabela_posrednia as ta, uzytkownik as uz WHERE uz.id = ta.id_uzytkownik AND ta.id_grupa = gr.id AND ta.moderator_grupy=true AND uz.id ='" + id + "' AND gr.flaga=true");
+    const nazwaGrupy = req.body.nazwaGrupy;
+    const zapytanie = await pgClient.query("SELECT uz.id, uz.login, uz.imie, uz.nazwisko FROM Grupa_Pokoj as gr, tabela_posrednia as ta, uzytkownik as uz WHERE uz.id = ta.id_uzytkownik AND ta.id_grupa = gr.id AND ta.moderator_grupy=false AND gr.nazwa='" + nazwaGrupy + "' AND gr.flaga=true");
     //console.log(zapytanie.rows);
 
     res.send({
@@ -394,10 +394,18 @@ app.post('/Grupa/Wyswietl/DanyLogin/Uzytkownicy', async (req, res) => {
 //DODAC id_uzytkownik - DOPISAC domyslnie dalem 1 + DODAC id_grupa - DOPISAC domyslnie dalem 1 + POPRAWIC KOMUNIKAT BO DLA KLKNIECIA MODERATORA WYSWIETLI SIE OK A NIE USUNIE [(moderator)]
 app.post('/Grupa/Zablokuj_Uzytkownika_Z_Mojej_Grupy', async (req, res) => {
 
-    //const id_uzytkownik = 1; // TOKEN/(ID)???
-    //const id_grupa = 1; // TOKEN/(ID)???
+    const id_uzytkownik = req.body.id;
+    const nazwaGrupy = req.body.nazwaGrupy;
 
-    //let czyZablokowano = true;
+    let czyZablokowano = true;
+
+    const zapytanie = await pgClient.query("SELECT id FROM grupa_pokoj WHERE nazwa='" + nazwaGrupy + "'")
+        .catch((error) => {
+            console.log(error);
+        });
+        console.log(zapytanie.rows);
+
+    const idGrupy = zapytanie.rows[0].id;
 
     //  pgClient.query("UPDATE Grupa_Pokoj SET flaga='false' WHERE id='" + id_grupa)
     //     .catch((error) => {
@@ -405,12 +413,16 @@ app.post('/Grupa/Zablokuj_Uzytkownika_Z_Mojej_Grupy', async (req, res) => {
     //        czyZablokowano = false;
     //    });
 
+    pgClient.query("DELETE FROM tabela_posrednia WHERE id_uzytkownik='" + id_uzytkownik + "' AND id_grupa='" + idGrupy + "'")
+        .catch((error) => {
+            console.log(error);
+            czyZablokowano = false;
+        });
 
-    // res.send({
-    //  id_uzytkownik: req.body.id_uzytkownik,
-
-    //     zwracam_czy_zablokowano: czyZablokowano
-    //  });
+     res.send({
+        id_uzytkownik: req.body.id_uzytkownik,
+        zwracam_czy_zablokowano: czyZablokowano
+     });
 });
 //DODAC id_uzytkownik - DOPISAC domyslnie dalem 1 + DODAC id_grupa - DOPISAC domyslnie dalem 1 + POPRAWIC KOMUNIKAT BO DLA KLKNIECIA MODERATORA WYSWIETLI SIE OK A NIE USUNIE [(moderator)]
 
