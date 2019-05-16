@@ -47,8 +47,8 @@ const service = {
     },
     delete: (data) => {
         const task = tasks.find(t => t.id === data.id);
-        axios.post('', { // DODAĆ USUWANIE, KIEDY BĘDZIE W BACKENDZIE
-            idUser: data.id
+        axios.post('http://localhost:5000/Uzytkownik/Zablokuj_Uzytkownika', { // DODAĆ USUWANIE, KIEDY BĘDZIE W BACKENDZIE
+            id: data.id
         });
         return Promise.resolve(task);
       },

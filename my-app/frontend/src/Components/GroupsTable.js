@@ -82,6 +82,13 @@ const service = {
         return Promise.resolve(task);
 
     },
+    delete: (data) => {
+        const task = tasks.find(t => t.id === data.id);
+        axios.post('http://localhost:5000/Grupa/Zablokuj_Grupe', { // DODAĆ USUWANIE, KIEDY BĘDZIE W BACKENDZIE
+            id: data.id
+        });
+        return Promise.resolve(task);
+    },
 
 };
 
