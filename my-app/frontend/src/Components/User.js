@@ -147,10 +147,14 @@ class User extends Component {
                             <Col xs={1} md={3} >
                             </Col>
                             <Col xs={10} md={6} >
-                                <br />
-                                <center><DropdownGroup grupa={this.zwrocenieNazwyGrupy} /></center>
+                                <br />                                
+                                <center>
+                                    <h4>Wybierz nazwę swojej grupy:</h4>
+                                    <DropdownGroup grupa={this.zwrocenieNazwyGrupy} /><br /><br />
+                                    ... lista userow z danej grupy gdzie jestem modem (mozliwosc blokowania userow) ...
+                                </center>
                                 <br /><br /><br /><br /><br />
-                            </Col>
+                                </Col>
                             <Col xs={1} md={3} >
                             </Col>
                         </Row>
