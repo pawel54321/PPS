@@ -16,11 +16,16 @@ export default class DropdownGroup extends Component {
     }
 
     ZwrocenieTabeliGrupa = async () => {
-        const OdpowiedzSerwera = await axios.post('http://localhost:5000/Grupa/Wyswietl');
 
-        //prompt(JSON.stringify(OdpowiedzSerwera5.data.daneMiejscowosc));
+        const id = await axios.post('http://localhost:5000/ReadToken', {
+            token: localStorage.getItem('token')
+        });
+        const groups = await axios.post('http://localhost:5000/Grupa/Wyswietl/DanyLogin', {
+            id: id.data.user.id
+        });
+        console.log(groups);
         this.setState({
-            daneGrupy: OdpowiedzSerwera.data.wyswietl,
+            daneGrupy: groups.data.wyswietl
         });
     }
 

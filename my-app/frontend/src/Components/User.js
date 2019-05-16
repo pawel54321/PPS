@@ -148,7 +148,7 @@ class User extends Component {
                             </Col>
                             <Col xs={10} md={6} >
                                 <br />
-                                <DropdownGroup grupa={this.zwrocenieNazwyGrupy} />
+                                <center><DropdownGroup grupa={this.zwrocenieNazwyGrupy} /></center>
                                 <br /><br /><br /><br /><br />
                             </Col>
                             <Col xs={1} md={3} >
