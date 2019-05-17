@@ -67,6 +67,8 @@ pgClient
         console.log("Uzytkownik" + error);
     });
 
+//----------------- CREATE WAIT-------------------
+
 //REFERENCES
 pgClient
     .query('CREATE TABLE IF NOT EXISTS Post_Komentarz (id SERIAL PRIMARY KEY, id_grupa INT REFERENCES Grupa_Pokoj (id), id_uzytkownik INT REFERENCES Uzytkownik (id), zawartosc VARCHAR(255), id_polubienia INT REFERENCES Polubienia (id), data DATE)')
@@ -88,7 +90,10 @@ pgClient
     });
 //REFERENCES
 
+//----------------- CREATE WAIT-------------------
+
 //TABELE
+
 
 app.post('/Uzytkownik/Rejestracja', async (req, res) => {
     const imie = req.body.imie;
@@ -374,11 +379,11 @@ app.post('/Grupa/Wyswietl/DanyLogin', async (req, res) => {
 
 //...
 
-//GOTOWE [(user/moderator)] wyswietla uzytkownikow z grupy gdzie jestem modem
+//GOTOWE  (nie wyswietla zablokowanych userow w mojej grupie -> AND flaga=true) [(user/moderator)] wyswietla uzytkownikow z grupy gdzie jestem modem
 app.post('/Grupa/Wyswietl/DanyLogin/Uzytkownicy', async (req, res) => {
 
     const nazwaGrupy = req.body.nazwaGrupy;
-    const zapytanie = await pgClient.query("SELECT uz.id, uz.login, uz.imie, uz.nazwisko FROM Grupa_Pokoj as gr, tabela_posrednia as ta, uzytkownik as uz WHERE uz.id = ta.id_uzytkownik AND ta.id_grupa = gr.id AND ta.moderator_grupy=false AND gr.nazwa='" + nazwaGrupy + "' AND gr.flaga=true");
+    const zapytanie = await pgClient.query("SELECT uz.id, uz.login, uz.imie, uz.nazwisko FROM Grupa_Pokoj as gr, tabela_posrednia as ta, uzytkownik as uz WHERE uz.id = ta.id_uzytkownik AND ta.id_grupa = gr.id AND ta.moderator_grupy=false AND gr.nazwa='" + nazwaGrupy + "' AND gr.flaga=true AND uz.flaga='true'");
     //console.log(zapytanie.rows);
 
     res.send({
@@ -391,7 +396,7 @@ app.post('/Grupa/Wyswietl/DanyLogin/Uzytkownicy', async (req, res) => {
 
 //...
 
-//DODAC id_uzytkownik - DOPISAC domyslnie dalem 1 + DODAC id_grupa - DOPISAC domyslnie dalem 1 + POPRAWIC KOMUNIKAT BO DLA KLKNIECIA MODERATORA WYSWIETLI SIE OK A NIE USUNIE [(moderator)]
+//GOTOWE [(moderator)]
 app.post('/Grupa/Zablokuj_Uzytkownika_Z_Mojej_Grupy', async (req, res) => {
 
     const id_uzytkownik = req.body.id;
@@ -424,7 +429,7 @@ app.post('/Grupa/Zablokuj_Uzytkownika_Z_Mojej_Grupy', async (req, res) => {
         zwracam_czy_zablokowano: czyZablokowano
      });
 });
-//DODAC id_uzytkownik - DOPISAC domyslnie dalem 1 + DODAC id_grupa - DOPISAC domyslnie dalem 1 + POPRAWIC KOMUNIKAT BO DLA KLKNIECIA MODERATORA WYSWIETLI SIE OK A NIE USUNIE [(moderator)]
+//GOTOWE [(moderator)]
 
 //...
 
