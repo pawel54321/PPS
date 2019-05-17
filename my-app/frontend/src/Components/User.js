@@ -7,7 +7,7 @@ import MyGroupsTable from './Tables/MyGroupsTable';
 
 import DropdownGroup from './Dropdown/DropdownGroup';
 import UinGTable from './Tables/UinGTable';
-//import CreateGroup from './CreateGroup';
+import ModinGTable from './Tables/ModinGTable';
 
 
 class User extends Component {
@@ -20,7 +20,8 @@ class User extends Component {
             users: [],
             groups: [],
             nazwaGrupy: '',
-            groupUsers: []
+            groupUsers: [],
+            groupUsersMod: []
         };
         this.toggle = this.toggle.bind(this);
         this.zwrocenieSiebie();
@@ -83,6 +84,17 @@ class User extends Component {
         }, () => {
             this.zwrocenieGrup();
             this.zwrocenieUzytkownikow();
+            this.zwrocenieUzytkownikowMod();
+        });
+    }
+    zwrocenieUzytkownikowMod = async () => {
+        const gUsersMod = await axios.post('http://localhost:5000/Grupa/Wyswietl/DanyLogin/Uzytkownicy/Mod', {
+            nazwaGrupy: this.state.nazwaGrupy
+        });
+        this.setState({
+            groupUsersMod: gUsersMod.data.wyswietl
+        }, () => {
+            document.getElementsByClassName('crud-table__header-cell')[13].click();
         });
     }
 
@@ -111,7 +123,7 @@ class User extends Component {
                             className={classnames({ active: this.state.activeTab === '3' })}
                             onClick={() => { this.toggle('3'); }}
                         >
-                            Użytkownicy w moich grupach (Moderator)
+                            Użytkownicy/Moderatorzy w moich grupach (Moderator)
                         </NavLink>
                     </NavItem>
                 </Nav>
@@ -157,19 +169,22 @@ class User extends Component {
                     </TabPane>
                     <TabPane tabId="3">
                         <Row className="show-grid">
-                            <Col xs={1} md={3} >
-                            </Col>
-                            <Col xs={10} md={6} >
+                            <Col xs={12} md={12} >
                                 <br />
                                 <center>
                                     <h4>Wybierz nazwę swojej grupy:</h4>
                                     <DropdownGroup grupa={this.zwrocenieNazwyGrupy} /><br /><br />
-                                    <UinGTable groupUsers={this.state.groupUsers} groupName={this.state.nazwaGrupy}/>
+
+                                    <div style={{ float: 'left', paddingLeft: '16%' }}>
+                                        <UinGTable groupUsers={this.state.groupUsers} groupName={this.state.nazwaGrupy} />
+                                    </div>
+                                    <div style={{ float: 'left', paddingLeft: '15%' }}>
+                                <ModinGTable groupUsers={this.state.groupUsersMod} groupName={this.state.nazwaGrupy} />
+                                </div>
+                                     
                                 </center>
                                 <br /><br /><br /><br /><br />
                                 </Col>
-                            <Col xs={1} md={3} >
-                            </Col>
                         </Row>
                     </TabPane>
                 </TabContent>

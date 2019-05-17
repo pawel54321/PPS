@@ -7,8 +7,9 @@
     "\\my-app\\frontend\\public",
     "\\my-app\\frontend\\src",
     "\\my-app\\frontend\\src\\Components",
+    "\\my-app\\frontend\\src\\Components\\Dropdown",
     "\\my-app\\frontend\\src\\Components\\Tables"
   ],
-  "SelectedNode": "\\my-app\\frontend\\src\\Components\\Tables\\MyGroupsTable.js",
+  "SelectedNode": "\\my-app\\frontend\\src\\Components\\Dropdown\\DropdownGroup.js",
   "PreviewInSolutionExplorer": false
 }

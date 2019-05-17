@@ -3,8 +3,8 @@ import CRUDTable, {
     Fields,
     Field,
     DeleteForm,
-    Pagination,
-    CreateForm
+    Pagination//,
+  //  CreateForm
 } from 'react-crud-table';
 import axios from 'axios';
 import './style.css';
@@ -47,7 +47,7 @@ const service = {
     },
     fetchTotal: payload => {
         return Promise.resolve(tasks.length);
-    },
+    }, /*
     create: async (task) => { // PRZY DODAWANIU NIE SPRAWDZA CZY NAZWA SIE NIE POWTARZA W BACKEND
         //console.log(task.nazwa);
 
@@ -88,8 +88,8 @@ const service = {
         //console.log(token.data.user.id);
 
         return Promise.resolve(task);
-
-    },
+       
+}, */
     delete: (data) => {
         const task = tasks.find(t => t.id === data.id);
        axios.post('http://localhost:5000/Grupa/Zablokuj_Grupe', { // DODAĆ USUWANIE, KIEDY BĘDZIE W BACKENDZIE
@@ -164,7 +164,7 @@ const GroupsTable = (props) => (
                     return errors;
                 }}
             />
-
+            {/*}
             <CreateForm
                 title="Tworzenie grupy"
                 message="Tworzenie nowej grupy"
@@ -187,7 +187,7 @@ const GroupsTable = (props) => (
 
                     return errors;
                 }}
-            />
+            />*/}
 
             <Pagination
                 itemsPerPage={5}

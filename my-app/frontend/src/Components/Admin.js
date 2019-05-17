@@ -15,7 +15,9 @@ class Admin extends Component {
             raz: true,
             users: [],
             groups: [],
-            user: []
+            user: []//,
+           // nazwaGrupy: '',
+            //groupUsers: []
         };
         this.toggle = this.toggle.bind(this);
         this.zwrocenieUzytkownikow();
@@ -52,6 +54,29 @@ class Admin extends Component {
         });
     }
 
+    /*
+    zwrocenieUzytkownikow = async () => {
+        const gUsers = await axios.post('http://localhost:5000/Grupa/Wyswietl/DanyLogin/Uzytkownicy', {
+            nazwaGrupy: this.state.nazwaGrupy
+        });
+        this.setState({
+            groupUsers: gUsers.data.wyswietl
+        }, () => {
+            document.getElementsByClassName('crud-table__header-cell')[8].click();
+        });
+    }
+
+    zwrocenieNazwyGrupy = (Grupa) => {
+        this.setState({
+            nazwaGrupy: Grupa
+        }, () => {
+            this.zwrocenieGrup();
+            this.zwrocenieUzytkownikow();
+        });
+    }
+    */
+
+
     zwrocenieSiebie = async () => {
         const login = await axios.post('http://localhost:5000/ReadToken', {
             token: localStorage.getItem('token')
@@ -82,7 +107,7 @@ class Admin extends Component {
                             className={classnames({ active: this.state.activeTab === '2' })}
                             onClick={() => { this.toggle('2'); }}
                         >
-                            Wszyscy użytkownicy
+                            Wszyscy użytkownicy (Administrator)
                         </NavLink>
                     </NavItem>
                     <NavItem>
@@ -90,7 +115,15 @@ class Admin extends Component {
                             className={classnames({ active: this.state.activeTab === '3' })}
                             onClick={() => { this.toggle('3'); }}
                         >
-                            Wszystkie grupy
+                             Szczegóły wszystkich grup (Administrator)
+                        </NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink
+                            className={classnames({ active: this.state.activeTab === '4' })}
+                            onClick={() => { this.toggle('4'); }}
+                        >
+                            Użytkownicy we wszystkich grupach (Administrator)
                         </NavLink>
                     </NavItem>
                 </Nav>
@@ -141,6 +174,36 @@ class Admin extends Component {
                             <Col xs={10} md={6} >
                                 <br />
                                 <GroupsTable groups={this.state.groups} />
+                                <br /><br /><br /><br /><br />
+                            </Col>
+                            <Col xs={1} md={3} >
+                            </Col>
+                        </Row>
+                    </TabPane>
+                    <TabPane tabId="4">
+                        <Row className="show-grid">
+                            <Col xs={1} md={3} >
+                            </Col>
+                            <Col xs={10} md={6} >
+                                <br />
+                                <center>
+                                    {/*   <DropdownGroup grupa={this.zwrocenieNazwyGrupy} /><br /><br />
+                                    <UinGTable groupUsers={this.state.groupUsers} groupName={this.state.nazwaGrupy} />*/}
+                                    [ADMIN, MODERATOR GRUPY DANEJ GRUPY]
+                                    <h4>Wybierz użytkownika:</h4> [ DLA MODA TO POMIJA SIĘ - WIDZI SIEBIE]
+                                   .. kazdego + siebie tez w sumie mozna wyswietlic + kolumne z flagami + wyswetlam tych zbanowanych tez
+
+                                    <h4>Wybierz grupe:</h4>
+                                     ... wyswietlam nazwe grupy gdzie jest modem w dropdown +  tabela gdzie jestem userem dolaczylem do grupy - gdzie jestem - tylko select ....
+
+                                    <h4>Użytkownicy w grupie:</h4>
+
+                                  ... 2 tabele obok siebie pokazuje modów obok wszystkich userow pozostalych ... (funkcjonalnosc ustawienia innego moderatora z grupy kiedy zablokuje moda) ...
+                                  ....  przy userach w tabeli "Nadaj Prawo Moderatora".... ( dla pozostałych)
+                                  ... przy modach nic....
+
+                                  ????  POMYSL JAKIS ZEBY ZROBIC NADAWANIE PRAWA INNEMU USEROWI Z DANEJ GRUPY JESLI ZBANUJE MODA ?????? - ZA DUZO ROBOTY TROCHE
+                                </center>
                                 <br /><br /><br /><br /><br />
                             </Col>
                             <Col xs={1} md={3} >

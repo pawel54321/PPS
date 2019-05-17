@@ -84,7 +84,7 @@ const UsersTable = (props) => (
         {Ustaw(props)}
 
         <CRUDTable style={{ width: '100%' }}
-            caption="Dane profilu"
+            caption="Dane Profilu"
             actionsLabel="Akcje"
             fetchItems={payload => service.fetchItems(payload)}
         >

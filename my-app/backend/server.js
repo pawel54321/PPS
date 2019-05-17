@@ -394,6 +394,21 @@ app.post('/Grupa/Wyswietl/DanyLogin/Uzytkownicy', async (req, res) => {
 });
 //GOTOWE [(user/moderator)] wyswietla uzytkownikow z grupy gdzie jestem modem
 
+//GOTOWE  (nie wyswietla zablokowanych userow w mojej grupie -> AND flaga=true) [(user/moderator)] wyswietla uzytkownikow z grupy gdzie jestem modem
+app.post('/Grupa/Wyswietl/DanyLogin/Uzytkownicy/Mod', async (req, res) => {
+
+    const nazwaGrupy = req.body.nazwaGrupy;
+    const zapytanie = await pgClient.query("SELECT uz.id, uz.login, uz.imie, uz.nazwisko FROM Grupa_Pokoj as gr, tabela_posrednia as ta, uzytkownik as uz WHERE uz.id = ta.id_uzytkownik AND ta.id_grupa = gr.id AND ta.moderator_grupy=true AND gr.nazwa='" + nazwaGrupy + "' AND gr.flaga=true AND uz.flaga='true'");
+    //console.log(zapytanie.rows);
+
+    res.send({
+        id: req.body.id,
+
+        wyswietl: zapytanie.rows
+    });
+});
+//GOTOWE [(user/moderator)] wyswietla uzytkownikow z grupy gdzie jestem modem
+
 //...
 
 //GOTOWE [(moderator)]

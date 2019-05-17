@@ -46,20 +46,7 @@ const service = {
     },
     fetchTotal: payload => {
         return Promise.resolve(tasks.length);
-    },
-    delete: (data) => {
-        const task = tasks.find(t => t.id === data.id);
-        axios.post('http://localhost:5000/Grupa/Zablokuj_Uzytkownika_Z_Mojej_Grupy', {
-            id: data.id,
-            nazwaGrupy: nazwa
-        });
-
-        tasks = tasks.filter(t => t.id !== task.id);
-
-        Alert.success('Poprawnie zablokowano użytkownika!', { position: 'top' });
-
-        return Promise.resolve(task);
-      },
+    }
 
 };
 
@@ -78,7 +65,7 @@ const UinGTable = (props) => (
         {Ustaw(props)}
 
         <CRUDTable style={{ width: '100%' }}
-            caption="Wszyscy Użytkownicy"
+            caption="Wszyscy Moderatorzy (razem z Tobą)"
             actionsLabel="Akcje"
             fetchItems={payload => service.fetchItems(payload)}
         >
@@ -101,20 +88,6 @@ const UinGTable = (props) => (
                 />
             </Fields>
 
-            <DeleteForm
-                title="Zablokuj użytkownika"
-                message="Jesteś pewien, że chcesz zablokować wybranego użytkownika?"
-                trigger="Zablokuj"
-                onSubmit={task => service.delete(task)}
-                submitText="Zablokuj i nie wyświetlaj"
-                validate={(values) => {
-                    const errors = {};
-                    if (!values.id) {
-                        errors.id = 'Brak id';
-                    }
-                    return errors;
-                }}
-            />
 
             <Pagination
                 itemsPerPage={5}
