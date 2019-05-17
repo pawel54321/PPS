@@ -169,22 +169,27 @@ class User extends Component {
                     </TabPane>
                     <TabPane tabId="3">
                         <Row className="show-grid">
-                            <Col xs={12} md={12} >
+                                <Col xs={12} md={12} >
                                 <br />
                                 <center>
                                     <h4>Wybierz nazwę swojej grupy:</h4>
                                     <DropdownGroup grupa={this.zwrocenieNazwyGrupy} /><br /><br />
-
-                                    <div style={{ float: 'left', paddingLeft: '16%' }}>
-                                        <UinGTable groupUsers={this.state.groupUsers} groupName={this.state.nazwaGrupy} />
-                                    </div>
-                                    <div style={{ float: 'left', paddingLeft: '15%' }}>
-                                <ModinGTable groupUsers={this.state.groupUsersMod} groupName={this.state.nazwaGrupy} />
-                                </div>
-                                     
-                                </center>
-                                <br /><br /><br /><br /><br />
+                                    </center>
                                 </Col>
+                        </Row>
+                        <Row className="show-grid">
+                            <Col xs={1}  >
+                            </Col>
+                                    <Col xs={5}>                                      
+                                        <UinGTable groupUsers={this.state.groupUsers} groupName={this.state.nazwaGrupy} />                                   
+                                    </Col>
+
+                                    <Col xs={5}>                               
+                                        <ModinGTable groupUsers={this.state.groupUsersMod} groupName={this.state.nazwaGrupy} />                                       
+                                    </Col>      
+                            <Col xs={1}>
+                            </Col>
+                            <br /><br /><br /><br /><br />                  
                         </Row>
                     </TabPane>
                 </TabContent>
