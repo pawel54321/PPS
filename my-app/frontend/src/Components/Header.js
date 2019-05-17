@@ -5,7 +5,10 @@ import { Navbar, NavbarBrand, //NavbarToggler,
 
 
 import history from '../history';
-import Alert from 'react-s-alert';
+
+//import Alert from 'react-s-alert';
+
+//import InvitationsComponent from './Invitations/InvitationsComponent';
 
 const ROLES = {
     ADMIN: 'Admin',
@@ -22,11 +25,6 @@ function Wylogowanie() {
     history.push('/');
     window.location.reload();
     //this.ROLES.reload();
-}
-
-function Zaproszenia()
-{
-    Alert.success('Test zaproszenia (wyswietli okno w którym są zaproszenia do grup/ lub listowac grupy???!', { position: 'top' });
 }
 
 
@@ -49,7 +47,7 @@ function Visible(props) {
                         <Collapse Collapse isOpen={true} navbar>
                             <Nav className="ml-auto" navbar>
                                 <NavItem>
-                                    <NavLink><Link onClick={Zaproszenia}><i className="fa fa-bell" /> Zaproszenia</Link></NavLink>
+                                    <NavLink><Link /*onSubmit={}*/><i className="fa fa-bell" /> Zaproszenia</Link></NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink><Link to="/user"><i className="fa fa-user" /> Panel Użytkownika</Link></NavLink>
@@ -75,7 +73,7 @@ function Visible(props) {
                         <Collapse Collapse isOpen={true} navbar>
                             <Nav className="ml-auto" navbar>
                                 <NavItem>
-                                    <NavLink><Link onClick={Zaproszenia}><i className="fa fa-bell" /> Zaproszenia</Link></NavLink>
+                                    <NavLink><Link /*onSubmit={}*/><i className="fa fa-bell" /> Zaproszenia</Link></NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink><Link to="/admin"><i className="fa fa-user-secret" /> Panel Admina</Link></NavLink>

@@ -26,13 +26,16 @@ import 'react-s-alert/dist/s-alert-css-effects/genie.css';
 import 'react-s-alert/dist/s-alert-css-effects/jelly.css';
 import 'react-s-alert/dist/s-alert-css-effects/stackslide.css';
 
+import InvitationsComponent from './Components/Invitations/InvitationsComponent';
+
 class App extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             user: null,
-            rola: null
+            rola: null,
+            stan: true
         };
     }
 
@@ -62,7 +65,7 @@ class App extends Component {
             user = null;
             admin = null;
         }
-
+    
         return (
             <Router history={history}>
                 <div className="App">
@@ -77,6 +80,8 @@ class App extends Component {
                         {group}
                         {admin}
                         {user}
+
+                        <InvitationsComponent info={this.state.stan}/>
                     </main>
                     <Footer />
                 </div>
