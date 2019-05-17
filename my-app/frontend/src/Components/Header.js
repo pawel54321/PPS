@@ -5,6 +5,7 @@ import { Navbar, NavbarBrand, //NavbarToggler,
 
 
 import history from '../history';
+import Alert from 'react-s-alert';
 
 const ROLES = {
     ADMIN: 'Admin',
@@ -22,6 +23,12 @@ function Wylogowanie() {
     window.location.reload();
     //this.ROLES.reload();
 }
+
+function Zaproszenia()
+{
+    Alert.success('Test zaproszenia (wyswietli okno w którym są zaproszenia do grup/ lub listowac grupy???!', { position: 'top' });
+}
+
 
 function Visible(props) {
 
@@ -42,10 +49,13 @@ function Visible(props) {
                         <Collapse Collapse isOpen={true} navbar>
                             <Nav className="ml-auto" navbar>
                                 <NavItem>
-                                    <NavLink><Link to="/user">Panel Użytkownika</Link></NavLink>
+                                    <NavLink><Link onClick={Zaproszenia}><i className="fa fa-bell" /> Zaproszenia</Link></NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink> <Link to="/" onClick={Wylogowanie}>Wyloguj</Link></NavLink>
+                                    <NavLink><Link to="/user"><i className="fa fa-user" /> Panel Użytkownika</Link></NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink> <Link to="/" onClick={Wylogowanie}><i className="fa fa-power-off" /> Wyloguj</Link></NavLink>
                                 </NavItem>
                             </Nav>
                         </Collapse>
@@ -65,10 +75,13 @@ function Visible(props) {
                         <Collapse Collapse isOpen={true} navbar>
                             <Nav className="ml-auto" navbar>
                                 <NavItem>
-                                    <NavLink><Link to="/admin">Panel Admina</Link></NavLink>
+                                    <NavLink><Link onClick={Zaproszenia}><i className="fa fa-bell" /> Zaproszenia</Link></NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink> <Link to="/" onClick={Wylogowanie}>Wyloguj</Link></NavLink>
+                                    <NavLink><Link to="/admin"><i className="fa fa-user-secret" /> Panel Admina</Link></NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink> <Link to="/" onClick={Wylogowanie}><i className="fa fa-power-off" /> Wyloguj</Link></NavLink>
                                 </NavItem>
                             </Nav>
                         </Collapse>
@@ -89,10 +102,10 @@ function Visible(props) {
                         <Collapse Collapse isOpen={true} navbar>
                             <Nav className="ml-auto" navbar>
                                 <NavItem>
-                                    <NavLink><Link to="/login">Logowanie</Link></NavLink>
+                                    <NavLink><Link to="/login"><i className="fa fa-user-circle-o" /> Logowanie</Link></NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink><Link to="/register">Rejestracja</Link></NavLink>
+                                    <NavLink><Link to="/register"><i className="fa fa-users" /> Rejestracja</Link></NavLink>
                                 </NavItem>
                             </Nav>
                         </Collapse>

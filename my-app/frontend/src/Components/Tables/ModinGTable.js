@@ -5,9 +5,9 @@ import CRUDTable, {
     DeleteForm,
     Pagination
 } from 'react-crud-table';
-import axios from 'axios';
+//import axios from 'axios';
 import './style.css';
-import Alert from 'react-s-alert';
+//import Alert from 'react-s-alert';
 
 let tasks = [];
 let nazwa = '';
