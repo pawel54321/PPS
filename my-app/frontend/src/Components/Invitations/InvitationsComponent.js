@@ -68,7 +68,7 @@ class InvitationsComponent extends Component {
         return <div ref={ref => this.el = ref}>         
 
 
-            <NavLink style={{ paddingLeft: "45%" }}><Link onClick={() => this.setState({ isPaneOpenLeft: true })}><i className="fa fa-bell" /> Zaproszenia</Link></NavLink>
+            <NavLink className="zaproszenia" style={{ paddingLeft: "45%" }}><Link onClick={() => this.setState({ isPaneOpenLeft: true })}><i className="fa fa-bell" /> Zaproszenia</Link></NavLink>
 
             <SlidingPane
                 isOpen={this.state.isPaneOpenLeft}
