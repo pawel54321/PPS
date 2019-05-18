@@ -46,9 +46,6 @@ function Visible(props) {
                         <Collapse Collapse isOpen={true} navbar>
                             <Nav className="ml-auto" navbar>
                                 <NavItem>
-                                    <NavLink><Link onClick={InvitationsComponent.prototype.KlikniecieSubmitZaproszenia}><i className="fa fa-bell" /> Zaproszenia</Link></NavLink>
-                                </NavItem>
-                                <NavItem>
                                     <NavLink><Link to="/user"><i className="fa fa-user" /> Panel Użytkownika</Link></NavLink>
                                 </NavItem>
                                 <NavItem>
@@ -71,9 +68,6 @@ function Visible(props) {
                         {/*<NavbarToggler />*/}
                         <Collapse Collapse isOpen={true} navbar>
                             <Nav className="ml-auto" navbar>
-                                <NavItem>
-                                    <NavLink><Link onClick={InvitationsComponent.prototype.KlikniecieSubmitZaproszenia}><i className="fa fa-bell" /> Zaproszenia</Link></NavLink>
-                                </NavItem>
                                 <NavItem>
                                     <NavLink><Link to="/admin"><i className="fa fa-user-secret" /> Panel Admina</Link></NavLink>
                                 </NavItem>

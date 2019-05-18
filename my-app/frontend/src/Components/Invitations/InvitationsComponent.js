@@ -23,13 +23,15 @@ class InvitationsComponent extends Component {
     }
 
 
-
     componentDidMount() {
-
         Modal.setAppElement(this.el);
 
-
+        this.setState({
+            isPaneOpenLeft: this.props.info
+        });
     }
+
+
 
     zwrocenieGrup = async () => {
         const token = await axios.post('http://localhost:5000/ReadToken', {
@@ -45,11 +47,11 @@ class InvitationsComponent extends Component {
     }
 
     
-    KlikniecieSubmitZaproszenia (event) {
-        event.preventDefault();
+    //KlikniecieSubmitZaproszenia (event) {
+     //   event.preventDefault();
 
         //this.setState({ isPaneOpenLeft: true });
-        Alert.error('Ustaw!', { position: 'bottom' });
+  //      Alert.error('Ustaw!', { position: 'bottom' });
 
        // this.setState({
        //     this.state.isPaneOpenLeft: true
@@ -57,7 +59,7 @@ class InvitationsComponent extends Component {
        
     
 
-    }
+  //  }
 
  
   
