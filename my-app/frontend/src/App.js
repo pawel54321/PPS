@@ -37,6 +37,8 @@ class App extends Component {
             rola: null,
             stan: true
         };
+
+   
     }
 
     componentDidMount() {
@@ -48,6 +50,14 @@ class App extends Component {
             });
         });
     }
+
+    KlikniecieSubmit(event) {
+        event.preventDefault();
+
+        //Alert.error('Niepoprawne dane!', { position: 'bottom' });
+
+    }
+
 
     render() {
        // let createGroup;

@@ -5,6 +5,7 @@ import SlidingPane from 'react-sliding-pane';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
 import axios from 'axios';
 import ListGroups from './ListGroups';
+import { ListGroup } from 'reactstrap';
 
 class InvitationsComponent extends Component {
 
@@ -64,8 +65,9 @@ class InvitationsComponent extends Component {
                 <br />*/}
                 <center><b>Wyślij zaproszenie do podanych grup:</b></center>
                 <br /> 
+                <ListGroup>
                 {this.state.groups.map(dane => <ListGroups info={dane} />)} { /*ADMIN*/}
-
+                </ListGroup>
             </SlidingPane>
         </div>;
     }

@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, NavbarBrand, //NavbarToggler,
-    Collapse, Nav, NavItem, NavLink } from 'reactstrap';
+    Collapse, Nav, NavItem, NavLink, Button } from 'reactstrap';
 
 
 import history from '../history';
-
-//import Alert from 'react-s-alert';
+import App from '../App';
 
 //import InvitationsComponent from './Invitations/InvitationsComponent';
 
@@ -47,7 +46,7 @@ function Visible(props) {
                         <Collapse Collapse isOpen={true} navbar>
                             <Nav className="ml-auto" navbar>
                                 <NavItem>
-                                    <NavLink><Link /*onSubmit={}*/><i className="fa fa-bell" /> Zaproszenia</Link></NavLink>
+                                    <NavLink><Link onClick={App.prototype.KlikniecieSubmit}><i className="fa fa-bell" /> Zaproszenia</Link></NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink><Link to="/user"><i className="fa fa-user" /> Panel Użytkownika</Link></NavLink>
@@ -73,7 +72,7 @@ function Visible(props) {
                         <Collapse Collapse isOpen={true} navbar>
                             <Nav className="ml-auto" navbar>
                                 <NavItem>
-                                    <NavLink><Link /*onSubmit={}*/><i className="fa fa-bell" /> Zaproszenia</Link></NavLink>
+                                    <NavLink><Link onClick={App.prototype.KlikniecieSubmit}><i className="fa fa-bell" /> Zaproszenia</Link></NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink><Link to="/admin"><i className="fa fa-user-secret" /> Panel Admina</Link></NavLink>
@@ -118,6 +117,10 @@ const Header = (props) => (
 
     Visible(props)
 );
-
-
 export default Header;
+
+
+
+
+
+

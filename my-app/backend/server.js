@@ -631,11 +631,16 @@ app.post('/Zaproszenia/Akceptacja_Lub_Odrzucenie_Zaproszenie_Uzytkownika_Do_Grup
 });
 //GOTOWE [(modearator grupy)]  IF AKCEPTACJA WYWOLAC DOLACZENI DO GRUP
 
-//.... + WYSWETLANIE LISTY GRUPA DO KOTRYCH MOGE DOLACZYC I NIE MOGE + .....
 
 
 
-//ZAPROSZENIE MODERATOR ---> USER
+
+
+
+
+//XXXXXXXXXXXXXXXXXXXXXXXXX
+
+//ZAPROSZENIE MODERATOR ---> USER NIE MA CZASU NIE ROBIMY ODWROTNIE
 
 //GOTOWE [(moderator)] 
 /*app.post('/Zaproszenia/Wyslij_Zapytanie', async (req, res) => {
@@ -672,3 +677,6 @@ app.post('/Zaproszenia/Akceptacja_Lub_Odrzucenie_Zaproszenie_Uzytkownika_Do_Grup
 //GOTOWE [(moderator)]
 
 //.... + WYSWETLANIE BUTTONA PRZY UZYTKOWNIKU KOTREGO ZARPASZAM .....
+
+
+//XXXXXXXXXXXXXXXXXXXXXXXXX
