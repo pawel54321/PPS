@@ -5,7 +5,9 @@ import SlidingPane from 'react-sliding-pane';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
 import axios from 'axios';
 import ListGroups from './ListGroups';
-import { Button, Col, Row, TabContent, ListGroup, NavLink, ListGroupItem } from 'reactstrap';
+import ModListGroups from './ModListGroups';
+
+import {Col, Row, TabContent, ListGroup, NavLink, ListGroupItem } from 'reactstrap';
 //import Alert from 'react-s-alert';
 import { Link } from 'react-router-dom';
 
@@ -16,17 +18,16 @@ class InvitationsComponent extends Component {
         this.state = {
             isPaneOpenLeft: false,            
             groups: [], 
-
+            modgroups: []
         };
         this.zwrocenieGrup();
-
+        this.zwrocenieModGrup();
 
     }
 
 
     componentDidMount() {
         Modal.setAppElement(this.el);
-
     }
 
     
@@ -42,6 +43,19 @@ class InvitationsComponent extends Component {
         console.log(groups);
         this.setState({
             groups: groups.data.wyswietl
+        });
+    }
+
+    zwrocenieModGrup = async () => {
+        const token = await axios.post('http://localhost:5000/ReadToken', {
+            token: localStorage.getItem('token')
+        });
+        const groups = await axios.post('http://localhost:5000/Zaproszenia/Wyswietl/DanyLogin', {
+            id: token.data.user.id
+        });
+        console.log(groups);
+        this.setState({
+            modgroups: groups.data.wyswietl
         });
     }
 
@@ -117,7 +131,7 @@ class InvitationsComponent extends Component {
                 </ListGroup>
                 <br />
 
-                <center><b>Otrzymane prośby o dołączenie do moich grup:</b></center>
+                <center><b>Otrzymane prośby o dołączenie do twoich grup:</b></center>
                 <br />
                 <ListGroupItem>
                     <ListGroup>
@@ -146,9 +160,9 @@ class InvitationsComponent extends Component {
                     </ListGroup>
                 </ListGroupItem>
                 <ListGroup>
-                    {/*this.state.groups.map(dane => <ListGroups info={dane} />)*/} 
+                    {this.state.modgroups.map(dane => <ModListGroups info={dane} />)} 
                 </ListGroup>
-
+                <br />
             </SlidingPane>
         </div>;
     }
