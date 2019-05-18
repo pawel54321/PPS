@@ -611,22 +611,23 @@ AND gr.flaga = true AND stan='Oczekujace' GROUP BY uz.id, uz.login
     //uz.login - wyswietla jaki mod zaprosił
 
     const zapytanie = await pgClient.query(
-        "SELECT u.nazwa, u.login " +
+        "SELECT u.nazwa, uz.login, u.id " +
         "FROM ( " +
-        	"SELECT uz.login, gr.nazwa " +
-        	"FROM uzytkownik as uz, zaproszenia as za, grupa_pokoj as gr " +
-        	"WHERE uz.id=za.id_uzytkownik " +
-        	"AND za.stan='Oczekujace' " +
-        	"AND uz.id <> '" + id + "'" +
-          "AND gr.id=za.id_grupa " +
-        ") u, " +
-        "Grupa_Pokoj as gr, tabela_posrednia as ta, uzytkownik as uz " +
-        "WHERE uz.id = ta.id_uzytkownik " +
-        "AND ta.id_grupa = gr.id " +
-        "AND ta.id_uzytkownik = '" + id + "'" +
-        "AND ta.moderator_grupy = true " +
-        "AND gr.flaga = true " +
-        "GROUP BY u.nazwa, u.login"
+        	"SELECT gr.nazwa, gr.id " +
+        	"FROM uzytkownik as uz, tabela_posrednia as ta, grupa_pokoj as gr " +
+        	"WHERE uz.id=ta.id_uzytkownik " +
+          "AND gr.id=ta.id_grupa " +
+        	"AND uz.id='" + id + "'" +
+        	"AND ta.moderator_grupy=true " +
+          "AND gr.flaga=true " +
+        ")u, Grupa_Pokoj as gr, zaproszenia as za, uzytkownik as uz " +
+        "WHERE uz.id=za.id_uzytkownik " +
+        "AND gr.id=za.id_grupa " +
+        "AND uz.id<>'" + id + "'" +
+        "AND gr.flaga=true " +
+        "AND u.id=gr.id " +
+        "AND za.stan='Oczekujace' " +
+        "GROUP BY u.nazwa, uz.login, u.id"
       );
     console.log(zapytanie.rows);
 
