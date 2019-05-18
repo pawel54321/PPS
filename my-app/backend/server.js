@@ -551,7 +551,7 @@ app.post('/Grupa/Wyswietl/DanyLogin/Grupy_Gdzie_Nie_Jestem', async (req, res) =>
 //PORAWIC NIE DZIALA ZWROCENIE TYLKO TAM GDZIE NIE WYSLALEM PROSBY [(user/moderator/admin)] wyswietla grupy - Gdzie Nie Jestem + Gdzie Nie wysłalem prośby
 
 
-//GOTOWE [(user)] 
+//GOTOWE [(user)]
 app.post('/Zaproszenia/Dolacz_Wysylajac_Tylko_Zapytanie', async (req, res) => {
     const id = req.body.id;
     const grupa = req.body.grupa;
@@ -583,7 +583,7 @@ app.post('/Zaproszenia/Dolacz_Wysylajac_Tylko_Zapytanie', async (req, res) => {
         zwracam_czy_stworzono: czyStworzono
     });
 });
-//GOTOWE [(user)] 
+//GOTOWE [(user)]
 
 
 //ZLE [(moderator)] wyswietla zaproszenie oczekujace
@@ -598,21 +598,37 @@ app.post('/Zaproszenia/Wyswietl/DanyLogin', async (req, res) => {
     WHERE uz.id = ta.id_uzytkownik AND ta.id_grupa = gr.id
     AND ta.id_uzytkownik = 2 AND ta.moderator_grupy=true
     AND gr.flaga = true
-     
+
      LOGIN:
 
      SELECT uz.id, uz.login FROM Grupa_Pokoj as gr, uzytkownik as uz, zaproszenia as za
 WHERE za.id_grupa = gr.id AND za.id_uzytkownik=uz.id
 AND gr.flaga = true AND stan='Oczekujace' GROUP BY uz.id, uz.login
-     
-     
+
+
      */
     const id = req.body.id; //uz.id_uzytkownika
     //uz.login - wyswietla jaki mod zaprosił
 
-    const zapytanie = await pgClient.query("SELECT gr.nazwa FROM Grupa_Pokoj as gr, tabela_posrednia as ta, uzytkownik as uz, zaproszenia as za "+
-        "WHERE uz.id = ta.id_uzytkownik AND ta.id_grupa = gr.id AND za.id_grupa = gr.id AND za.id_uzytkownik=uz.id AND za.id_uzytkownik = '" + id + "' AND gr.flaga = true AND stan='Oczekujace'");
-    //console.log(zapytanie.rows);
+    const zapytanie = await pgClient.query(
+        "SELECT u.nazwa, u.login " +
+        "FROM ( " +
+        	"SELECT uz.login, gr.nazwa " +
+        	"FROM uzytkownik as uz, zaproszenia as za, grupa_pokoj as gr " +
+        	"WHERE uz.id=za.id_uzytkownik " +
+        	"AND za.stan='Oczekujace' " +
+        	"AND uz.id <> '" + id + "'" +
+          "AND gr.id=za.id_grupa " +
+        ") u, " +
+        "Grupa_Pokoj as gr, tabela_posrednia as ta, uzytkownik as uz " +
+        "WHERE uz.id = ta.id_uzytkownik " +
+        "AND ta.id_grupa = gr.id " +
+        "AND ta.id_uzytkownik = '" + id + "'" +
+        "AND ta.moderator_grupy = true " +
+        "AND gr.flaga = true " +
+        "GROUP BY u.nazwa, u.login"
+      );
+    console.log(zapytanie.rows);
 
     res.send({
         id: req.body.id,
@@ -659,7 +675,7 @@ app.post('/Zaproszenia/Akceptacja_Lub_Odrzucenie_Zaproszenie_Uzytkownika_Do_Grup
 
 //ZAPROSZENIE MODERATOR ---> USER NIE MA CZASU NIE ROBIMY ODWROTNIE
 
-//GOTOWE [(moderator)] 
+//GOTOWE [(moderator)]
 /*app.post('/Zaproszenia/Wyslij_Zapytanie', async (req, res) => {
     const id = req.body.id;
     const grupa = req.body.grupa;
