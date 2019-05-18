@@ -34,8 +34,7 @@ class App extends Component {
         super(props);
         this.state = {
             user: null,
-            rola: null,
-            stan: true
+            rola: null
         };
 
    
@@ -50,14 +49,6 @@ class App extends Component {
             });
         });
     }
-
-    KlikniecieSubmit(event) {
-        event.preventDefault();
-
-        //Alert.error('Niepoprawne dane!', { position: 'bottom' });
-
-    }
-
 
     render() {
        // let createGroup;
@@ -91,7 +82,7 @@ class App extends Component {
                         {admin}
                         {user}
 
-                        <InvitationsComponent info={this.state.stan}/>
+                        <InvitationsComponent/>
                     </main>
                     <Footer />
                 </div>

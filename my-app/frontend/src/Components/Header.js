@@ -5,7 +5,7 @@ import { Navbar, NavbarBrand, //NavbarToggler,
 
 
 import history from '../history';
-import App from '../App';
+import InvitationsComponent from './Invitations/InvitationsComponent';
 
 //import InvitationsComponent from './Invitations/InvitationsComponent';
 
@@ -46,7 +46,7 @@ function Visible(props) {
                         <Collapse Collapse isOpen={true} navbar>
                             <Nav className="ml-auto" navbar>
                                 <NavItem>
-                                    <NavLink><Link onClick={App.prototype.KlikniecieSubmit}><i className="fa fa-bell" /> Zaproszenia</Link></NavLink>
+                                    <NavLink><Link onClick={InvitationsComponent.prototype.KlikniecieSubmitZaproszenia}><i className="fa fa-bell" /> Zaproszenia</Link></NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink><Link to="/user"><i className="fa fa-user" /> Panel Użytkownika</Link></NavLink>
@@ -72,7 +72,7 @@ function Visible(props) {
                         <Collapse Collapse isOpen={true} navbar>
                             <Nav className="ml-auto" navbar>
                                 <NavItem>
-                                    <NavLink><Link onClick={App.prototype.KlikniecieSubmit}><i className="fa fa-bell" /> Zaproszenia</Link></NavLink>
+                                    <NavLink><Link onClick={InvitationsComponent.prototype.KlikniecieSubmitZaproszenia}><i className="fa fa-bell" /> Zaproszenia</Link></NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink><Link to="/admin"><i className="fa fa-user-secret" /> Panel Admina</Link></NavLink>

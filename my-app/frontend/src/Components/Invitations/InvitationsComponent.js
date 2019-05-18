@@ -6,6 +6,7 @@ import 'react-sliding-pane/dist/react-sliding-pane.css';
 import axios from 'axios';
 import ListGroups from './ListGroups';
 import { ListGroup } from 'reactstrap';
+import Alert from 'react-s-alert';
 
 class InvitationsComponent extends Component {
 
@@ -17,16 +18,14 @@ class InvitationsComponent extends Component {
 
         };
         this.zwrocenieGrup();
+
+        this.funkcja = this.funkcja.bind(this)
     }
 
 
 
     componentDidMount() {
         Modal.setAppElement(this.el);
-    
-        this.setState({
-            isPaneOpenLeft: this.props.info
-        });
     }
 
 
@@ -42,8 +41,23 @@ class InvitationsComponent extends Component {
             groups: groups.data.wyswietl
         });
     }
-    
+
+    KlikniecieSubmitZaproszenia(event) {
+        event.preventDefault();
+
+        //this.setState({ isPaneOpenLeft: true });
+        Alert.error('Niepoprawne dane!', { position: 'bottom' });
+        funkcja();
+    }
+
+    funkcja() {
+        this.setState({ isPaneOpenLeft: true });
+    }
+
+  
     render() {
+
+
         return <div ref={ref => this.el = ref}>         
         
             <SlidingPane
