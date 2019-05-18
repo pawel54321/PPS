@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { render } from 'react-dom';
+//import { render } from 'react-dom';
 import Modal from 'react-modal';
 import SlidingPane from 'react-sliding-pane';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
 import axios from 'axios';
 import ListGroups from './ListGroups';
-import { ListGroup } from 'reactstrap';
-import Alert from 'react-s-alert';
+import { ListGroup, NavLink } from 'reactstrap';
+//import Alert from 'react-s-alert';
+import { Link } from 'react-router-dom';
 
 class InvitationsComponent extends Component {
 
@@ -26,11 +27,9 @@ class InvitationsComponent extends Component {
     componentDidMount() {
         Modal.setAppElement(this.el);
 
-        this.setState({
-            isPaneOpenLeft: this.props.info
-        });
     }
 
+    
 
 
     zwrocenieGrup = async () => {
@@ -67,7 +66,10 @@ class InvitationsComponent extends Component {
 
 
         return <div ref={ref => this.el = ref}>         
-        
+
+
+            <NavLink style={{ paddingLeft: "45%" }}><Link onClick={() => this.setState({ isPaneOpenLeft: true })}><i className="fa fa-bell" /> Zaproszenia</Link></NavLink>
+
             <SlidingPane
                 isOpen={this.state.isPaneOpenLeft}
                 title='Zarządzanie zaproszeniami'

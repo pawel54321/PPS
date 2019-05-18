@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, NavbarBrand, //NavbarToggler,
-    Collapse, Nav, NavItem, NavLink, Button } from 'reactstrap';
+    Collapse, Nav, NavItem, NavLink} from 'reactstrap';
 
 
 import history from '../history';
-import InvitationsComponent from './Invitations/InvitationsComponent';
 
 //import InvitationsComponent from './Invitations/InvitationsComponent';
 

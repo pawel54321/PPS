@@ -27,11 +27,6 @@ import 'react-s-alert/dist/s-alert-css-effects/jelly.css';
 import 'react-s-alert/dist/s-alert-css-effects/stackslide.css';
 
 import InvitationsComponent from './Components/Invitations/InvitationsComponent';
-import {
-    Navbar, NavbarBrand, //NavbarToggler,
-    Collapse, Nav, NavItem, NavLink, Button
-} from 'reactstrap';
-import { Link } from 'react-router-dom';
 
 class App extends Component {
 
@@ -39,8 +34,7 @@ class App extends Component {
         super(props);
         this.state = {
             user: null,
-            rola: null,
-            wlacz : false
+            rola: null        
         };
 
    
@@ -79,10 +73,8 @@ class App extends Component {
         return (
             <Router history={history}>
                 <div className="App">
+                    <InvitationsComponent />
                     <Header rola={this.state.rola} />
-
-                    <NavLink style={{ paddingLeft: "45%" }}><Link onClick={() => { this.setState({ wlacz: true }) }}><i className="fa fa-bell" /> Zaproszenia</Link></NavLink>
-
                     <main>
                         {this.props.children}
                         <center><Alert stack={{ limit: 1 }} html={false} timeout={2000} effect='bouncyflip' offset={65} /></center>
@@ -94,7 +86,7 @@ class App extends Component {
                         {admin}
                         {user}
 
-                        <InvitationsComponent info={this.state.wlacz}/>
+                        
                     </main>
                     <Footer />
                 </div>

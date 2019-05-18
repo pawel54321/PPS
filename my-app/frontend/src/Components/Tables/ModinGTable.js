@@ -2,7 +2,6 @@ import React from 'react';
 import CRUDTable, {
     Fields,
     Field,
-    DeleteForm,
     Pagination
 } from 'react-crud-table';
 //import axios from 'axios';
