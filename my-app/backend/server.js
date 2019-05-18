@@ -540,7 +540,7 @@ app.post('/Grupa/Wyswietl/DanyLogin/Grupy_Gdzie_Nie_Jestem', async (req, res) =>
 
     const id = req.body.id;
     const zapytanie = await pgClient.query("SELECT gr.id, gr.nazwa FROM Grupa_Pokoj as gr, tabela_posrednia as ta, uzytkownik as uz WHERE uz.id = ta.id_uzytkownik AND ta.id_grupa = gr.id AND uz.id <>'" + id + "' AND gr.flaga=true GROUP BY gr.nazwa, gr.id");
-    //console.log(zapytanie.rows);
+    console.log(zapytanie.rows);
 
     res.send({
         id: req.body.id,
@@ -586,7 +586,7 @@ app.post('/Zaproszenia/Dolacz_Wysylajac_Tylko_Zapytanie', async (req, res) => {
 //GOTOWE [(user)]
 
 
-//ZLE [(moderator)] wyswietla zaproszenie oczekujace
+//GOTOWE [(moderator)] wyswietla zaproszenie oczekujace
 app.post('/Zaproszenia/Wyswietl/DanyLogin', async (req, res) => {
 
 
@@ -636,7 +636,7 @@ AND gr.flaga = true AND stan='Oczekujace' GROUP BY uz.id, uz.login
         wyswietl: zapytanie.rows
     });
 });
-//ZLE [(moderator)] wyswietla zaproszenie oczekujace
+//GOTOWE [(moderator)] wyswietla zaproszenie oczekujace
 
 
 //GOTOWE [(modearator grupy)] IF AKCEPTACJA WYWOLAC DOLACZENI DO GRUP
