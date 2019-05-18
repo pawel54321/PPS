@@ -83,7 +83,7 @@ class ModListGroups extends Component {
                                    
                                 </form>
                                 <div style={{ padding: '1%' }}> </div>
-                                <div style={{ paddingLeft: '15%' }}>
+                                <div style={{ paddingLeft: '13%' }}>
                                 <form onSubmit={this.KlikniecieSubmit2}>
                                    
                                         <Button color="danger">Odrzuć!</Button>

@@ -88,7 +88,7 @@ class InvitationsComponent extends Component {
                 isOpen={this.state.isPaneOpenLeft}
                 title='Zarządzanie zaproszeniami'
                 from='left'
-                width='430px'
+                width='500px'
                 onRequestClose={() => this.setState({ isPaneOpenLeft: false })}>
 
                 {/*<center><b>Wysłane prośby o dołaczenie do grup:</b></center>
