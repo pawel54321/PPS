@@ -23,18 +23,19 @@ class ListGroups extends Component {
         if (OdpowiedzSerwera2.data.zwracam_czy_stworzono === true) {
             Alert.success('Wysłano prośbe o dołączenie do podanej grupy!', { position: 'bottom' });
 
-            //document.getElementsByClassName(this.props.info.nazwa).style.display = 'none';
+            document.getElementsByClassName(this.props.info.nazwa)[0].style.display = 'none';
         }  
         else if (OdpowiedzSerwera2.data.zwracam_czy_stworzono === false) {
             Alert.error('Wystąpił błąd podczas wysłania prośby o dołączenie!', { position: 'bottom' });
+          
         }
     }
 
     render() {
         return (
             <div>
-                <TabContent>
-                        <Row className="show-grid">
+                <TabContent className={this.props.info.nazwa}>
+                    <Row className="show-grid">
                             <Col xs={1}  >
                             </Col>
                         <Col xs={5}>
