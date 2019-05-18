@@ -46,7 +46,9 @@ class ListGroups extends Component {
 
                             <Col xs={5}>
                             <form onSubmit={this.KlikniecieSubmit}>
-                                <Button color="primary">Wyślij!</Button>
+                                <center>
+                                    <Button color="primary">Wyślij!</Button>
+                                    </center>
                         </form>
                             </Col>
                             <Col xs={1}>

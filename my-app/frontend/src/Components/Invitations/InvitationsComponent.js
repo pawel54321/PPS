@@ -5,7 +5,7 @@ import SlidingPane from 'react-sliding-pane';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
 import axios from 'axios';
 import ListGroups from './ListGroups';
-import { ListGroup, NavLink } from 'reactstrap';
+import { Button, Col, Row, TabContent, ListGroup, NavLink, ListGroupItem } from 'reactstrap';
 //import Alert from 'react-s-alert';
 import { Link } from 'react-router-dom';
 
@@ -74,7 +74,7 @@ class InvitationsComponent extends Component {
                 isOpen={this.state.isPaneOpenLeft}
                 title='Zarządzanie zaproszeniami'
                 from='left'
-                width='400px'
+                width='430px'
                 onRequestClose={() => this.setState({ isPaneOpenLeft: false })}>
 
                 {/*<center><b>Wysłane prośby o dołaczenie do grup:</b></center>
@@ -89,9 +89,66 @@ class InvitationsComponent extends Component {
                 <br />*/}
                 <center><b>Wyślij zaproszenie do podanych grup:</b></center>
                 <br /> 
+                <ListGroupItem>
                 <ListGroup>
-                {this.state.groups.map(dane => <ListGroups info={dane} />)} { /*ADMIN*/}
+                    <TabContent>
+                        <Row className="show-grid">
+                            <Col xs={1}  >
+                            </Col>
+                            <Col xs={5}>
+                                <div style={{ paddingTop: '5%' }}>
+                                    <b> <center>Nazwa Grupy</center></b>
+                                </div>
+                            </Col>
+
+                            <Col xs={5}>
+                                <div style={{ paddingTop: '5%' }}>
+                                    <b> <center>Akcje</center></b>
+                                </div>
+                            </Col>
+                            <Col xs={1}>
+                            </Col>
+                        </Row>
+                    </TabContent>
                 </ListGroup>
+                </ListGroupItem>
+                <ListGroup>
+                {this.state.groups.map(dane => <ListGroups info={dane} />)} 
+                </ListGroup>
+                <br />
+
+                <center><b>Otrzymane prośby o dołączenie do moich grup:</b></center>
+                <br />
+                <ListGroupItem>
+                    <ListGroup>
+                        <TabContent>
+                            <Row className="show-grid">
+                                
+                                <Col xs={4}>
+                                    <div style={{ paddingTop: '5%' }}>
+                                        <b> <center>Nazwa Grupy</center></b>
+                                    </div>
+                                </Col>
+                                <Col xs={4}>
+                                    <div style={{ paddingTop: '5%' }}>
+                                        <b> <center>Użytkownik</center></b>
+                                    </div>
+                                </Col>
+
+                                <Col xs={4}>
+                                    <div style={{ paddingTop: '5%' }}>
+                                        <b> <center>Akcje</center></b>
+                                    </div>
+                                </Col>
+                                
+                            </Row>
+                        </TabContent>
+                    </ListGroup>
+                </ListGroupItem>
+                <ListGroup>
+                    {/*this.state.groups.map(dane => <ListGroups info={dane} />)*/} 
+                </ListGroup>
+
             </SlidingPane>
         </div>;
     }
