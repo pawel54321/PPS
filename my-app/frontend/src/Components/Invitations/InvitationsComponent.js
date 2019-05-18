@@ -47,7 +47,7 @@ class InvitationsComponent extends Component {
 
         //this.setState({ isPaneOpenLeft: true });
         Alert.error('Niepoprawne dane!', { position: 'bottom' });
-        funkcja();
+        //funkcja();
     }
 
     funkcja() {
