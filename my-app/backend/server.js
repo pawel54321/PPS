@@ -639,7 +639,7 @@ AND gr.flaga = true AND stan='Oczekujace' GROUP BY uz.id, uz.login
 //GOTOWE [(moderator)] wyswietla zaproszenie oczekujace
 
 
-//GOTOWE [(modearator grupy)] IF AKCEPTACJA WYWOLAC DOLACZENI DO GRUP
+//NIE MA CALOSCI LOGIN I NAZWE GRUPY TRZEBA [(modearator grupy)] IF AKCEPTACJA WYWOLAC DOLACZENI DO GRUP
 app.post('/Zaproszenia/Akceptacja_Lub_Odrzucenie_Zaproszenie_Uzytkownika_Do_Grupy', async (req, res) => {
 
     //const id_uzytkownik = 1; // TOKEN/(ID)???
@@ -662,7 +662,7 @@ app.post('/Zaproszenia/Akceptacja_Lub_Odrzucenie_Zaproszenie_Uzytkownika_Do_Grup
         zwracam_czy_zablokowano: czyZablokowano
     });
 });
-//GOTOWE [(modearator grupy)]  IF AKCEPTACJA WYWOLAC DOLACZENI DO GRUP
+//NIE MA CALOSCI LOGIN I NAZWE GRUPY TRZEBA [(modearator grupy)]  IF AKCEPTACJA WYWOLAC DOLACZENI DO GRUP
 
 
 

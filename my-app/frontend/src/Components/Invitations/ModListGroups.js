@@ -5,12 +5,12 @@ import { Button, Col, Row, TabContent, ListGroupItem } from 'reactstrap';
 
 class ModListGroups extends Component {
 
-    /*
+    
     KlikniecieSubmit = async (event) => {
         event.preventDefault();
 
 
-    
+    /*
         // console.log(token.data.user.id);
         //console.log(this.props.info.id);
         const OdpowiedzSerwera2 = await axios.post('http://localhost:5000/Zaproszenia/Akceptacja_Lub_Odrzucenie_Zaproszenie_Uzytkownika_Do_Grupy', {
@@ -30,12 +30,13 @@ class ModListGroups extends Component {
             Alert.error('Wystąpił błąd podczas zaakceptowania!', { position: 'bottom' });
 
         }
+        */
     }
 
     KlikniecieSubmit2 = async (event) => {
         event.preventDefault();
 
-
+        /*
         // console.log(token.data.user.id);
         //console.log(this.props.info.id);
         const OdpowiedzSerwera2 = await axios.post('http://localhost:5000/Zaproszenia/Akceptacja_Lub_Odrzucenie_Zaproszenie_Uzytkownika_Do_Grupy', {
@@ -53,8 +54,9 @@ class ModListGroups extends Component {
             Alert.error('Wystąpił błąd podczas odrzucenia!', { position: 'bottom' });
 
         }
+        */
         
-    }*/
+    }
 
     render() {
         return (
