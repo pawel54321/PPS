@@ -58,22 +58,29 @@ class App extends Component {
         let group;
         let admin;
         let user;
+
+        let inv;
+
         if(this.state.rola !== null) {
          //   createGroup = <PrivateRoute rola={this.state.rola} roles={['User']} path='/create' component={CreateGroup} />
             group = <PrivateRoute rola={this.state.rola} roles={['User','Admin']} path='/group' component={Group} />
             admin = <PrivateRoute rola={this.state.rola} roles={['Admin']} path='/admin' component={Admin} />
             user = <PrivateRoute rola={this.state.rola} roles={['User']} path='/user' component={User} />
+            inv = <InvitationsComponent />
         } else {
          //   createGroup = null;
             group = null;
             user = null;
             admin = null;
+            inv = null
+
+           // document.getElementsByClassName("zaproszenia")[0].style.display = 'none';
         }
     
         return (
             <Router history={history}>
                 <div className="App">
-                    <InvitationsComponent />
+                    {inv}
                     <Header rola={this.state.rola} />
                     <main>
                         {this.props.children}

@@ -82,6 +82,9 @@ function Visible(props) {
         );
     }
     else {
+
+      
+
         return (
             <nav>
                 <header className="App-header">

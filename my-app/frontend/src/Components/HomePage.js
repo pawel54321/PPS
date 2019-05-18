@@ -5,6 +5,7 @@ import GroupList from './GroupList';
 class HomePage extends Component {
 
     render() {
+
         return (
             <div>
                 <Row>
