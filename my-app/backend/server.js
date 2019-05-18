@@ -377,22 +377,6 @@ app.post('/Grupa/Wyswietl/DanyLogin', async (req, res) => {
 });
 //GOTOWE [(user/moderator)] wyswietla grupy gdzie jestem modem powinno byc DanyLogin/Grupy
 
-//PORAWIC NIE DZIALA ZWROCENIE TYLKO TAM GDZIE NIE WYSLALEM PROSBY [(user/moderator/admin)] wyswietla grupy - Gdzie Nie Jestem + Gdzie Nie wysłalem prośby
-app.post('/Grupa/Wyswietl/DanyLogin/Grupy_Gdzie_Nie_Jestem', async (req, res) => {
-
-    const id = req.body.id;
-    const zapytanie = await pgClient.query("SELECT gr.id, gr.nazwa FROM Grupa_Pokoj as gr, tabela_posrednia as ta, uzytkownik as uz WHERE uz.id = ta.id_uzytkownik AND ta.id_grupa = gr.id AND uz.id <>'" + id + "' AND gr.flaga=true GROUP BY gr.nazwa, gr.id");
-    //console.log(zapytanie.rows);
-
-    res.send({
-        id: req.body.id,
-
-        wyswietl: zapytanie.rows
-    });
-});
-//PORAWIC NIE DZIALA ZWROCENIE TYLKO TAM GDZIE NIE WYSLALEM PROSBY [(user/moderator/admin)] wyswietla grupy - Gdzie Nie Jestem + Gdzie Nie wysłalem prośby
-
-//...
 
 //GOTOWE  (nie wyswietla zablokowanych userow w mojej grupie -> AND flaga=true) [(user/moderator)] wyswietla uzytkownikow z grupy gdzie jestem modem
 app.post('/Grupa/Wyswietl/DanyLogin/Uzytkownicy', async (req, res) => {
@@ -551,6 +535,22 @@ app.post('/Uzytkownik/Zablokuj_Uzytkownika', async (req, res) => {
 
 //ZAPROSZENIE USER ---> MODERATOR
 
+//PORAWIC NIE DZIALA ZWROCENIE TYLKO TAM GDZIE NIE WYSLALEM PROSBY [(user/moderator/admin)] wyswietla grupy - Gdzie Nie Jestem + Gdzie Nie wysłalem prośby
+app.post('/Grupa/Wyswietl/DanyLogin/Grupy_Gdzie_Nie_Jestem', async (req, res) => {
+
+    const id = req.body.id;
+    const zapytanie = await pgClient.query("SELECT gr.id, gr.nazwa FROM Grupa_Pokoj as gr, tabela_posrednia as ta, uzytkownik as uz WHERE uz.id = ta.id_uzytkownik AND ta.id_grupa = gr.id AND uz.id <>'" + id + "' AND gr.flaga=true GROUP BY gr.nazwa, gr.id");
+    //console.log(zapytanie.rows);
+
+    res.send({
+        id: req.body.id,
+
+        wyswietl: zapytanie.rows
+    });
+});
+//PORAWIC NIE DZIALA ZWROCENIE TYLKO TAM GDZIE NIE WYSLALEM PROSBY [(user/moderator/admin)] wyswietla grupy - Gdzie Nie Jestem + Gdzie Nie wysłalem prośby
+
+
 //GOTOWE [(user)] 
 app.post('/Zaproszenia/Dolacz_Wysylajac_Tylko_Zapytanie', async (req, res) => {
     const id = req.body.id;
@@ -586,10 +586,27 @@ app.post('/Zaproszenia/Dolacz_Wysylajac_Tylko_Zapytanie', async (req, res) => {
 //GOTOWE [(user)] 
 
 
-
-//ZLE [(user)] wyswietla zaproszenie oczekujace
+//ZLE [(moderator)] wyswietla zaproszenie oczekujace
 app.post('/Zaproszenia/Wyswietl/DanyLogin', async (req, res) => {
 
+
+    /*
+     GRUPA W KOTREJ JESTEM MODEM - MOJA GRUPA:
+
+
+    SELECT gr.id, gr.nazwa FROM Grupa_Pokoj as gr, uzytkownik as uz, tabela_posrednia as ta
+    WHERE uz.id = ta.id_uzytkownik AND ta.id_grupa = gr.id
+    AND ta.id_uzytkownik = 2 AND ta.moderator_grupy=true
+    AND gr.flaga = true
+     
+     LOGIN:
+
+     SELECT uz.id, uz.login FROM Grupa_Pokoj as gr, uzytkownik as uz, zaproszenia as za
+WHERE za.id_grupa = gr.id AND za.id_uzytkownik=uz.id
+AND gr.flaga = true AND stan='Oczekujace' GROUP BY uz.id, uz.login
+     
+     
+     */
     const id = req.body.id; //uz.id_uzytkownika
     //uz.login - wyswietla jaki mod zaprosił
 
@@ -603,7 +620,7 @@ app.post('/Zaproszenia/Wyswietl/DanyLogin', async (req, res) => {
         wyswietl: zapytanie.rows
     });
 });
-//ZLE [(user)] wyswietla zaproszenie oczekujace
+//ZLE [(moderator)] wyswietla zaproszenie oczekujace
 
 
 //GOTOWE [(modearator grupy)] IF AKCEPTACJA WYWOLAC DOLACZENI DO GRUP
