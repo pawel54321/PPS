@@ -19,15 +19,17 @@ class InvitationsComponent extends Component {
         };
         this.zwrocenieGrup();
 
-        this.funkcja = this.funkcja.bind(this)
+
     }
 
 
 
     componentDidMount() {
-        Modal.setAppElement(this.el);
-    }
 
+        Modal.setAppElement(this.el);
+
+
+    }
 
     zwrocenieGrup = async () => {
         const token = await axios.post('http://localhost:5000/ReadToken', {
@@ -42,18 +44,22 @@ class InvitationsComponent extends Component {
         });
     }
 
-    KlikniecieSubmitZaproszenia(event) {
+    
+    KlikniecieSubmitZaproszenia (event) {
         event.preventDefault();
 
         //this.setState({ isPaneOpenLeft: true });
-        Alert.error('Niepoprawne dane!', { position: 'bottom' });
-        //funkcja();
+        Alert.error('Ustaw!', { position: 'bottom' });
+
+       // this.setState({
+       //     this.state.isPaneOpenLeft: true
+      //  });
+       
+    
+
     }
 
-    funkcja() {
-        this.setState({ isPaneOpenLeft: true });
-    }
-
+ 
   
     render() {
 
