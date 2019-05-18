@@ -11,9 +11,10 @@ import Register from './Components/Register';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 //import CreateGroup from './Components/CreateGroup';
-import Group from './Components/Group';
 import User from './Components/User';
 import Admin from './Components/Admin';
+
+import Group from './Components/PostsForGroups/Group';
 
 import Alert from 'react-s-alert';
 import 'react-s-alert/dist/s-alert-default.css';

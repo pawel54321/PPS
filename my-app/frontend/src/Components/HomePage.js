@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Col, Row } from 'reactstrap';
-import GroupList from './GroupList';
+import GroupList from './PostsForGroups/GroupList';
 
 class HomePage extends Component {
 
