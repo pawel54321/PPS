@@ -377,6 +377,31 @@ app.post('/Grupa/Wyswietl/DanyLogin', async (req, res) => {
 });
 //GOTOWE [(user/moderator)] wyswietla grupy gdzie jestem modem powinno byc DanyLogin/Grupy
 
+//GOTOWE [(user/moderator/admin)] wyswietla grupy - Gdzie Nie Jestem + Gdzie Nie wysłalem prośby
+app.post('/Grupa/Wyswietl/DanyLogin/Grupy_Gdzie_Nie_Jestem', async (req, res) => {
+
+    const id = req.body.id;
+
+
+    const czyJestJuz = await pgClient.query("SELECT COUNT(id) FROM Zaproszenia WHERE stan='Oczekujace'");
+
+    const tablicaCzyJestJuz = czyJestJuz.rows;
+
+    zapytanie = null;
+
+    if (tablicaCzyJestJuz[0].count == 0) {
+        zapytanie = await pgClient.query("SELECT gr.id, gr.nazwa FROM Grupa_Pokoj as gr, tabela_posrednia as ta, uzytkownik as uz WHERE uz.id = ta.id_uzytkownik AND ta.id_grupa = gr.id AND uz.id <>'" + id + "' AND gr.flaga=true GROUP BY gr.nazwa, gr.id");
+        //console.log(zapytanie.rows);
+    }
+
+    res.send({
+        id: req.body.id,
+
+        wyswietl: zapytanie.rows
+    });
+});
+//GOTOWE [(user/moderator/admin)] wyswietla grupy - Gdzie Nie Jestem + Gdzie Nie wysłalem prośby
+
 //...
 
 //GOTOWE  (nie wyswietla zablokowanych userow w mojej grupie -> AND flaga=true) [(user/moderator)] wyswietla uzytkownikow z grupy gdzie jestem modem
@@ -533,3 +558,127 @@ app.post('/Uzytkownik/Zablokuj_Uzytkownika', async (req, res) => {
 //GOTOWE [(admin)] + DODAC ASPEKTY JESLI ZABLOKUJE MODERATORA GRUPY MOZLIWOSC PRZEKAZANIA PRAW INNEMU UZYTKOWNIKOWI LUB ADMINOWI SYSTEMU
 
 // --------------------------------------------------------------
+
+//ZAPROSZENIE USER ---> MODERATOR
+
+//GOTOWE [(user)] 
+app.post('/Zaproszenia/Dolacz_Wysylajac_Tylko_Zapytanie', async (req, res) => {
+    const id = req.body.id;
+    const grupa = req.body.grupa;
+
+    const czyJestJuz = await pgClient.query("SELECT COUNT(id) FROM Zaproszenia WHERE id_uzytkownik='" + id + "' AND id_grupa='" + grupa + "'");
+    const tablicaCzyJestJuz = czyJestJuz.rows;
+
+    //console.log(tablicaCzyJestJuzNazwa[0].count);
+
+    let czyStworzono = false;
+
+    if (tablicaCzyJestJuz[0].count == 0) {
+        pgClient.query('INSERT INTO Zaproszenia(id_uzytkownik, id_grupa, stan) VALUES($1,$2,$3)', [id, grupa, 'Oczekujace'])
+            .catch((error) => {
+                console.log(error);
+            });
+
+        czyStworzono = true;
+        //  }
+    }
+    else {
+        czyStworzono = false; // istnieje juz taka nazwa
+    }
+
+    res.send({
+        id: req.body.id,
+        grupa: req.body.grupa,
+
+        zwracam_czy_stworzono: czyStworzono
+    });
+});
+//GOTOWE [(user)] 
+
+
+
+//ZLE [(user)] wyswietla zaproszenie oczekujace
+app.post('/Zaproszenia/Wyswietl/DanyLogin', async (req, res) => {
+
+    const id = req.body.id; //uz.id_uzytkownika
+    //uz.login - wyswietla jaki mod zaprosił
+
+    const zapytanie = await pgClient.query("SELECT gr.nazwa FROM Grupa_Pokoj as gr, tabela_posrednia as ta, uzytkownik as uz, zaproszenia as za "+
+        "WHERE uz.id = ta.id_uzytkownik AND ta.id_grupa = gr.id AND za.id_grupa = gr.id AND za.id_uzytkownik=uz.id AND za.id_uzytkownik = '" + id + "' AND gr.flaga = true AND stan='Oczekujace'");
+    //console.log(zapytanie.rows);
+
+    res.send({
+        id: req.body.id,
+
+        wyswietl: zapytanie.rows
+    });
+});
+//ZLE [(user)] wyswietla zaproszenie oczekujace
+
+
+//GOTOWE [(modearator grupy)] IF AKCEPTACJA WYWOLAC DOLACZENI DO GRUP
+app.post('/Zaproszenia/Akceptacja_Lub_Odrzucenie_Zaproszenie_Uzytkownika_Do_Grupy', async (req, res) => {
+
+    //const id_uzytkownik = 1; // TOKEN/(ID)???
+    const id_uzytkownik = req.body.id;
+    const coZrobic = req.body.coZrobic; // Zaakceptowane / Odrzucone
+
+    let czyZablokowano = true;
+
+    pgClient.query("UPDATE Zaproszenia SET stan='" + coZrobic + "' WHERE id_uzytkownik='" + id_uzytkownik + "'")
+        .catch((error) => {
+            console.log(error);
+            czyZablokowano = false;
+        });
+
+
+    res.send({
+        id: req.body.id,
+        coZrobic: req.body.coZrobic,
+
+        zwracam_czy_zablokowano: czyZablokowano
+    });
+});
+//GOTOWE [(modearator grupy)]  IF AKCEPTACJA WYWOLAC DOLACZENI DO GRUP
+
+//.... + WYSWETLANIE LISTY GRUPA DO KOTRYCH MOGE DOLACZYC I NIE MOGE + .....
+
+
+
+//ZAPROSZENIE MODERATOR ---> USER
+
+//GOTOWE [(moderator)] 
+/*app.post('/Zaproszenia/Wyslij_Zapytanie', async (req, res) => {
+    const id = req.body.id;
+    const grupa = req.body.grupa;
+
+    const czyJestJuz = await pgClient.query("SELECT COUNT(id) FROM Zaproszenia WHERE id_użytkownik='" + id + "' AND id_grupa='" + grupa + "'");
+    const tablicaCzyJestJuz = czyJestJuz.rows;
+
+    //console.log(tablicaCzyJestJuzNazwa[0].count);
+
+    let czyStworzono = false;
+
+    if (tablicaCzyJestJuz[0].count == 0) {
+        pgClient.query('INSERT INTO Zaproszenia(id_użytkownik, id_grupa, stan) VALUES($1,$2,$3)', [id, grupa, 'Oczekujace'])
+            .catch((error) => {
+                console.log(error);
+            });
+
+        czyStworzono = true;
+        //  }
+    }
+    else {
+        czyStworzono = false; // istnieje juz taka nazwa
+    }
+
+    res.send({
+        id: req.body.id,
+        grupa: req.body.grupa,
+
+        zwracam_czy_stworzono: czyStworzono
+    });
+});*/
+//GOTOWE [(moderator)]
+
+//.... + WYSWETLANIE BUTTONA PRZY UZYTKOWNIKU KOTREGO ZARPASZAM .....

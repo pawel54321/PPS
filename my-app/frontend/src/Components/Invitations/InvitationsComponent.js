@@ -3,20 +3,42 @@ import { render } from 'react-dom';
 import Modal from 'react-modal';
 import SlidingPane from 'react-sliding-pane';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
+import axios from 'axios';
+import ListGroups from './ListGroups';
 
 class InvitationsComponent extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            isPaneOpenLeft: false
+            isPaneOpenLeft: false,            
+            groups: [], 
+
         };
+        this.zwrocenieGrup();
     }
+
+
+
     componentDidMount() {
         Modal.setAppElement(this.el);
     
         this.setState({
             isPaneOpenLeft: this.props.info
+        });
+    }
+
+
+    zwrocenieGrup = async () => {
+        const token = await axios.post('http://localhost:5000/ReadToken', {
+            token: localStorage.getItem('token')
+        });
+        const groups = await axios.post('http://localhost:5000/Grupa/Wyswietl/DanyLogin/Grupy_Gdzie_Nie_Jestem', {
+            id: token.data.user.id
+        });
+        console.log(groups);
+        this.setState({
+            groups: groups.data.wyswietl
         });
     }
     
@@ -29,7 +51,8 @@ class InvitationsComponent extends Component {
                 from='left'
                 width='400px'
                 onRequestClose={() => this.setState({ isPaneOpenLeft: false })}>
-                <center><b>Wysłane prośby o dołaczenie do grup:</b></center>
+
+                {/*<center><b>Wysłane prośby o dołaczenie do grup:</b></center>
                 <br/>
                 &#8592; Twoje zapytanie do grupy 'AAA' oczekuje na akceptacje... [USER]<br />
                 <br />
@@ -38,6 +61,11 @@ class InvitationsComponent extends Component {
                 &#8592; Zaproszono Cię do grupy 'AAA' [USER]<br />
                 &#8594; Użytkownik 'A' chce dołączyć do twojej grupy 'AAA' [MOD]
                 <br />
+                <br />*/}
+                <center><b>Wyślij zaproszenie do podanych grup:</b></center>
+                <br /> 
+                {this.state.groups.map(dane => <ListGroups info={dane} />)} { /*ADMIN*/}
+
             </SlidingPane>
         </div>;
     }
