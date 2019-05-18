@@ -377,22 +377,12 @@ app.post('/Grupa/Wyswietl/DanyLogin', async (req, res) => {
 });
 //GOTOWE [(user/moderator)] wyswietla grupy gdzie jestem modem powinno byc DanyLogin/Grupy
 
-//GOTOWE [(user/moderator/admin)] wyswietla grupy - Gdzie Nie Jestem + Gdzie Nie wysłalem prośby
+//PORAWIC NIE DZIALA ZWROCENIE TYLKO TAM GDZIE NIE WYSLALEM PROSBY [(user/moderator/admin)] wyswietla grupy - Gdzie Nie Jestem + Gdzie Nie wysłalem prośby
 app.post('/Grupa/Wyswietl/DanyLogin/Grupy_Gdzie_Nie_Jestem', async (req, res) => {
 
     const id = req.body.id;
-
-
-    const czyJestJuz = await pgClient.query("SELECT COUNT(id) FROM Zaproszenia WHERE stan='Oczekujace'");
-
-    const tablicaCzyJestJuz = czyJestJuz.rows;
-
-    zapytanie = null;
-
-    if (tablicaCzyJestJuz[0].count == 0) {
-        zapytanie = await pgClient.query("SELECT gr.id, gr.nazwa FROM Grupa_Pokoj as gr, tabela_posrednia as ta, uzytkownik as uz WHERE uz.id = ta.id_uzytkownik AND ta.id_grupa = gr.id AND uz.id <>'" + id + "' AND gr.flaga=true GROUP BY gr.nazwa, gr.id");
-        //console.log(zapytanie.rows);
-    }
+    const zapytanie = await pgClient.query("SELECT gr.id, gr.nazwa FROM Grupa_Pokoj as gr, tabela_posrednia as ta, uzytkownik as uz WHERE uz.id = ta.id_uzytkownik AND ta.id_grupa = gr.id AND uz.id <>'" + id + "' AND gr.flaga=true GROUP BY gr.nazwa, gr.id");
+    //console.log(zapytanie.rows);
 
     res.send({
         id: req.body.id,
@@ -400,7 +390,7 @@ app.post('/Grupa/Wyswietl/DanyLogin/Grupy_Gdzie_Nie_Jestem', async (req, res) =>
         wyswietl: zapytanie.rows
     });
 });
-//GOTOWE [(user/moderator/admin)] wyswietla grupy - Gdzie Nie Jestem + Gdzie Nie wysłalem prośby
+//PORAWIC NIE DZIALA ZWROCENIE TYLKO TAM GDZIE NIE WYSLALEM PROSBY [(user/moderator/admin)] wyswietla grupy - Gdzie Nie Jestem + Gdzie Nie wysłalem prośby
 
 //...
 

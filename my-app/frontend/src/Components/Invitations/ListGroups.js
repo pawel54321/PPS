@@ -23,7 +23,7 @@ class ListGroups extends Component {
         if (OdpowiedzSerwera2.data.zwracam_czy_stworzono === true) {
             Alert.success('Wysłano prośbe o dołączenie do podanej grupy!', { position: 'bottom' });
 
-
+            //document.getElementsByClassName(this.props.info.nazwa).style.display = 'none';
         }  
         else if (OdpowiedzSerwera2.data.zwracam_czy_stworzono === false) {
             Alert.error('Wystąpił błąd podczas wysłania prośby o dołączenie!', { position: 'bottom' });
