@@ -1,4 +1,4 @@
-/*.App {
+﻿/*.App {
   text-align: center;
 }
 
@@ -42,11 +42,19 @@
 /*body{
 
 }*/
+/*
+.rce-citem-body--bottom-status span:before {
+    display:block !important;
+    content: 'Polubienia: \A' !important;
+   
+    font-size: 15px !important
+}
+*/
 
-.row
-{
-   margin-right: 0% !important; /* bootstrap psuje szerokosc??*/
- /* background-color: #d3d3d3; */ /*Tlo*/
+
+.row {
+    margin-right: 0% !important; /* bootstrap psuje szerokosc??*/
+    /* background-color: #d3d3d3; */ /*Tlo*/
 }
 .nav-link {
   cursor: pointer /* bootstrap zepsuty navlink dla myszki??*/
