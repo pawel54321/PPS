@@ -1,5 +1,0 @@
-cd C:\Projekt PPS\PPS\my-app\backend
-nodemon
-
-cd C:\Projekt PPS\PPS\my-app\frontend
-npm start
