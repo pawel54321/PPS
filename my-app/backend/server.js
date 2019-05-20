@@ -640,20 +640,43 @@ AND gr.flaga = true AND stan='Oczekujace' GROUP BY uz.id, uz.login
 //GOTOWE [(moderator)] wyswietla zaproszenie oczekujace
 
 
-//NIE MA CALOSCI LOGIN I NAZWE GRUPY TRZEBA [(modearator grupy)] IF AKCEPTACJA WYWOLAC DOLACZENI DO GRUP
+//GOTOWE [(modearator grupy)] IF AKCEPTACJA WYWOLAC DOLACZENI DO GRUP
 app.post('/Zaproszenia/Akceptacja_Lub_Odrzucenie_Zaproszenie_Uzytkownika_Do_Grupy', async (req, res) => {
 
     //const id_uzytkownik = 1; // TOKEN/(ID)???
-    const id_uzytkownik = req.body.id;
+    const login = req.body.login;
+    const grupa = req.body.grupa;
     const coZrobic = req.body.coZrobic; // Zaakceptowane / Odrzucone
 
     let czyZablokowano = true;
 
-    pgClient.query("UPDATE Zaproszenia SET stan='" + coZrobic + "' WHERE id_uzytkownik='" + id_uzytkownik + "'")
+    const id_u = await pgClient.query("SELECT id FROM uzytkownik WHERE login='" + login + "'")
         .catch((error) => {
             console.log(error);
             czyZablokowano = false;
         });
+    const id_uzytkownik = id_u.rows[0].id;
+
+    const id_g = await pgClient.query("SELECT id FROM grupa_pokoj WHERE nazwa='" + grupa + "'")
+        .catch((error) => {
+            console.log(error);
+            czyZablokowano = false;
+        });
+    const id_grupa = id_g.rows[0].id;
+
+    pgClient.query("UPDATE Zaproszenia SET stan='" + coZrobic + "' WHERE id_uzytkownik='" + id_uzytkownik + "' AND id_grupa='" + id_grupa + "'")
+        .catch((error) => {
+            console.log(error);
+            czyZablokowano = false;
+        });
+
+    if(coZrobic == 'Zaakceptowane') {
+        pgClient.query("INSERT INTO tabela_posrednia (id_uzytkownik, id_grupa, moderator_grupy) VALUES ('" + id_uzytkownik + "', '" + id_grupa +"', 'false')")
+            .catch((error) => {
+                console.log(error);
+                czyZablokowano = false;
+            });
+    }
 
 
     res.send({
@@ -663,7 +686,7 @@ app.post('/Zaproszenia/Akceptacja_Lub_Odrzucenie_Zaproszenie_Uzytkownika_Do_Grup
         zwracam_czy_zablokowano: czyZablokowano
     });
 });
-//NIE MA CALOSCI LOGIN I NAZWE GRUPY TRZEBA [(modearator grupy)]  IF AKCEPTACJA WYWOLAC DOLACZENI DO GRUP
+//GOTOWE [(modearator grupy)]  IF AKCEPTACJA WYWOLAC DOLACZENI DO GRUP
 
 
 

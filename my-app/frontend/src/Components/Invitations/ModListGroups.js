@@ -5,21 +5,17 @@ import { Button, Col, Row, TabContent, ListGroupItem } from 'reactstrap';
 
 class ModListGroups extends Component {
 
-    
+
     KlikniecieSubmit = async (event) => {
         event.preventDefault();
 
-
-    /*
         // console.log(token.data.user.id);
         //console.log(this.props.info.id);
         const OdpowiedzSerwera2 = await axios.post('http://localhost:5000/Zaproszenia/Akceptacja_Lub_Odrzucenie_Zaproszenie_Uzytkownika_Do_Grupy', {
-            id: this.props.info.login,
+            login: this.props.info.login,
+            grupa: this.props.info.nazwa,
             coZrobic: 'Zaakceptowane'
         });
-
-        //... dodac insert do tabeli posredniej
-
 
         if (OdpowiedzSerwera2.data.zwracam_czy_zablokowano === true) {
             Alert.success('Zaakceptowano prośbe o dołączenie do podanej grupy!', { position: 'bottom' });
@@ -30,20 +26,18 @@ class ModListGroups extends Component {
             Alert.error('Wystąpił błąd podczas zaakceptowania!', { position: 'bottom' });
 
         }
-        */
     }
 
     KlikniecieSubmit2 = async (event) => {
         event.preventDefault();
 
-        /*
         // console.log(token.data.user.id);
         //console.log(this.props.info.id);
         const OdpowiedzSerwera2 = await axios.post('http://localhost:5000/Zaproszenia/Akceptacja_Lub_Odrzucenie_Zaproszenie_Uzytkownika_Do_Grupy', {
-            id: this.props.info.login,
+            login: this.props.info.login,
+            grupa: this.props.info.nazwa,
             coZrobic: 'Odrzucone'
         });
-
 
         if (OdpowiedzSerwera2.data.zwracam_czy_zablokowano === true) {
             Alert.success('Odrzucono prośbe o dołączenie do podanej grupy!', { position: 'bottom' });
@@ -54,8 +48,7 @@ class ModListGroups extends Component {
             Alert.error('Wystąpił błąd podczas odrzucenia!', { position: 'bottom' });
 
         }
-        */
-        
+
     }
 
     render() {
@@ -76,18 +69,18 @@ class ModListGroups extends Component {
                         </Col>
 
                         <Col xs={4}>
-                            <div>                      
+                            <div>
                                 <form onSubmit={this.KlikniecieSubmit}>
-                                
+
                                         <Button color="success">Zaakceptuj!</Button>
-                                   
+
                                 </form>
                                 <div style={{ padding: '1%' }}> </div>
                                 <div style={{ paddingLeft: '13%' }}>
                                 <form onSubmit={this.KlikniecieSubmit2}>
-                                   
+
                                         <Button color="danger">Odrzuć!</Button>
-                                  
+
                                     </form>
                                 </div>
                             </div>
