@@ -40,7 +40,7 @@ class ModListGroups extends Component {
         });
 
         if (OdpowiedzSerwera2.data.zwracam_czy_zablokowano === true) {
-            Alert.success('Odrzucono prośbe o dołączenie do podanej grupy!', { position: 'bottom' });
+            Alert.info('Odrzucono prośbe o dołączenie do podanej grupy!', { position: 'bottom' });
 
             document.getElementsByClassName(this.props.info.login)[0].style.display = 'none';
         }
@@ -79,7 +79,7 @@ class ModListGroups extends Component {
                                 <div style={{ paddingLeft: '13%' }}>
                                 <form onSubmit={this.KlikniecieSubmit2}>
 
-                                        <Button color="danger">Odrzuć!</Button>
+                                        <Button color="info">Odrzuć!</Button>
 
                                     </form>
                                 </div>

@@ -72,8 +72,16 @@ class InvitationsComponent extends Component {
        
     
 
-  //  }
+    //  }
+    Aktualizacja = (event) => {
+        event.preventDefault();
 
+       // this.zwrocenieGrup();
+       // this.zwrocenieModGrup();
+
+        this.setState({ isPaneOpenLeft: true });
+       
+    }
  
   
     render() {
@@ -82,7 +90,8 @@ class InvitationsComponent extends Component {
         return <div ref={ref => this.el = ref}>         
 
 
-            <NavLink className="zaproszenia" style={{ paddingLeft: "45%" }}><Link onClick={() => this.setState({ isPaneOpenLeft: true })}><i className="fa fa-bell" /> Zaproszenia</Link></NavLink>
+            <NavLink className="zaproszenia" style={{ paddingLeft: "45%" }}>
+                <Link onClick={this.Aktualizacja }><i className="fa fa-bell" /> Zaproszenia</Link></NavLink>
 
             <SlidingPane
                 isOpen={this.state.isPaneOpenLeft}
@@ -110,13 +119,13 @@ class InvitationsComponent extends Component {
                             <Col xs={1}  >
                             </Col>
                             <Col xs={5}>
-                                <div style={{ paddingTop: '5%' }}>
+                                <div style={{ paddingTop: '0%' }}>
                                     <b> <center>Nazwa Grupy</center></b>
                                 </div>
                             </Col>
 
                             <Col xs={5}>
-                                <div style={{ paddingTop: '5%' }}>
+                                <div style={{ paddingTop: '0%' }}>
                                     <b> <center>Akcje</center></b>
                                 </div>
                             </Col>
@@ -139,18 +148,18 @@ class InvitationsComponent extends Component {
                             <Row className="show-grid">
                                 
                                 <Col xs={4}>
-                                    <div style={{ paddingTop: '5%' }}>
+                                    <div style={{ paddingTop: '0%' }}>
                                         <b> <center>Nazwa Grupy</center></b>
                                     </div>
                                 </Col>
                                 <Col xs={4}>
-                                    <div style={{ paddingTop: '5%' }}>
+                                    <div style={{ paddingTop: '0%' }}>
                                         <b> <center>Użytkownik</center></b>
                                     </div>
                                 </Col>
 
                                 <Col xs={4}>
-                                    <div style={{ paddingTop: '5%' }}>
+                                    <div style={{ paddingTop: '0%' }}>
                                         <b> <center>Akcje</center></b>
                                     </div>
                                 </Col>
