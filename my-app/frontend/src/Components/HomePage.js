@@ -28,7 +28,7 @@ class HomePage extends Component {
                                 <Button
                                     color='white'
                                     backgroundColor='black'
-                                    text='Wyslij' />
+                                    text='Wyślij' />
                             } />
                         
                     </Col>

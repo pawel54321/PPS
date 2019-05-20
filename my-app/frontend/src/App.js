@@ -67,7 +67,11 @@ class App extends Component {
             group = <PrivateRoute rola={this.state.rola} roles={['User','Admin']} path='/group' component={Group} />
             admin = <PrivateRoute rola={this.state.rola} roles={['Admin']} path='/admin' component={Admin} />
             user = <PrivateRoute rola={this.state.rola} roles={['User']} path='/user' component={User} />
-            inv = <InvitationsComponent />
+            if (this.state.rola === 'User') {
+                inv = <InvitationsComponent />
+            } else {
+                inv = null;
+            }
         } else {
          //   createGroup = null;
             group = null;
