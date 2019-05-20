@@ -21,16 +21,25 @@ class Post extends Component {
         }
         //this.handleClick = this.handleClick.bind(this);
     }
+    componentDidMount() {
+
+        // pobierz ile ma lajkow kazdy post dla Cb i ustaw
+    }
 
     dodaj = async (event) => {
         event.preventDefault();
 
-        this.setState(
-            {
-                likes: this.state.likes + 1
-            }) 
-
-        Alert.info('Polubiono post!', { position: 'bottom' });
+        if (this.state.likes === 0) {
+            Alert.info('Polubiono post!', { position: 'bottom' });
+            this.setState(
+                {
+                    likes: 1
+                })
+        }
+        else {
+            Alert.error('Ten post został już polubiony!', { position: 'bottom' });
+        }
+        
     }
 
     render() {
@@ -124,6 +133,97 @@ class Post extends Component {
                     onClick={this.dodaj}
 
                 />
+                <ChatItem
+                    avatar={Av}
+                    alt={'Komentarz'}
+                    title={'Login'}
+                    subtitle={'Tekst'}
+                    date={new Date(2019, 1, 1, 10, 20, 20)}
+                    unread={this.state.likes}
+                    onClick={this.dodaj}
+
+                />
+                <ChatItem
+                    avatar={Av}
+                    alt={'Komentarz'}
+                    title={'Login'}
+                    subtitle={'Tekst'}
+                    date={new Date(2019, 1, 1, 10, 20, 20)}
+                    unread={this.state.likes}
+                    onClick={this.dodaj}
+
+                />
+                <ChatItem
+                    avatar={Av}
+                    alt={'Komentarz'}
+                    title={'Login'}
+                    subtitle={'Tekst'}
+                    date={new Date(2019, 1, 1, 10, 20, 20)}
+                    unread={this.state.likes}
+                    onClick={this.dodaj}
+
+                />
+                <ChatItem
+                    avatar={Av}
+                    alt={'Komentarz'}
+                    title={'Login'}
+                    subtitle={'Tekst'}
+                    date={new Date(2019, 1, 1, 10, 20, 20)}
+                    unread={this.state.likes}
+                    onClick={this.dodaj}
+
+                />
+                <ChatItem
+                    avatar={Av}
+                    alt={'Komentarz'}
+                    title={'Login'}
+                    subtitle={'Tekst'}
+                    date={new Date(2019, 1, 1, 10, 20, 20)}
+                    unread={this.state.likes}
+                    onClick={this.dodaj}
+
+                />
+                <ChatItem
+                    avatar={Av}
+                    alt={'Komentarz'}
+                    title={'Login'}
+                    subtitle={'Tekst'}
+                    date={new Date(2019, 1, 1, 10, 20, 20)}
+                    unread={this.state.likes}
+                    onClick={this.dodaj}
+
+                />
+                <ChatItem
+                    avatar={Av}
+                    alt={'Komentarz'}
+                    title={'Login'}
+                    subtitle={'Tekst'}
+                    date={new Date(2019, 1, 1, 10, 20, 20)}
+                    unread={this.state.likes}
+                    onClick={this.dodaj}
+
+                />
+                <ChatItem
+                    avatar={Av}
+                    alt={'Komentarz'}
+                    title={'Login'}
+                    subtitle={'Tekst'}
+                    date={new Date(2019, 1, 1, 10, 20, 20)}
+                    unread={this.state.likes}
+                    onClick={this.dodaj}
+
+                />
+                <ChatItem
+                    avatar={Av}
+                    alt={'Komentarz'}
+                    title={'Login'}
+                    subtitle={'Tekst'}
+                    date={new Date(2019, 1, 1, 10, 20, 20)}
+                    unread={this.state.likes}
+                    onClick={this.dodaj}
+
+                />
+
 
                     {/*     </CardBody>
             </Card >*/}

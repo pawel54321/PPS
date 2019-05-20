@@ -33,8 +33,9 @@
 }
 */
 
-
-
+.rce-input {
+    background-color: #e1e1e1;
+}
 
 /*.App {*/
   /*text-align: center;*/
