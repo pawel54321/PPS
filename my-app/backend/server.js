@@ -49,13 +49,6 @@ pgClient.on('error', () => {
 //TABELE
 
 pgClient
-    .query('CREATE TABLE IF NOT EXISTS Polubienia (id SERIAL PRIMARY KEY, liczba_polubien INT)')
-    .catch((error) => {
-        console.log("Polubienia" + error);
-    });
-
-
-pgClient
     .query('CREATE TABLE IF NOT EXISTS Grupa_Pokoj (id SERIAL PRIMARY KEY, nazwa VARCHAR(255), opis VARCHAR(255), flaga BOOLEAN DEFAULT true)')
     .catch((error) => {
         console.log("Grupa_Pokoj"+error);
@@ -71,7 +64,7 @@ pgClient
 
 //REFERENCES
 pgClient
-    .query('CREATE TABLE IF NOT EXISTS Post_Komentarz (id SERIAL PRIMARY KEY, id_grupa INT REFERENCES Grupa_Pokoj (id), id_uzytkownik INT REFERENCES Uzytkownik (id), zawartosc VARCHAR(255), id_polubienia INT REFERENCES Polubienia (id), data DATE)')
+    .query('CREATE TABLE IF NOT EXISTS Post_Komentarz (id SERIAL PRIMARY KEY, id_grupa INT REFERENCES Grupa_Pokoj (id), id_uzytkownik INT REFERENCES Uzytkownik (id), zawartosc VARCHAR(255), data DATE)')
     .catch((error) => {
         console.log("Post_Komentarz" + error);
     });
@@ -88,6 +81,14 @@ pgClient
     .catch((error) => {
         console.log("Tabela_Posrednia" + error);
     });
+
+pgClient
+    .query('CREATE TABLE IF NOT EXISTS Polubienia (id SERIAL PRIMARY KEY, liczba_polubien INT, id_post INT REFERENCES Post_Komentarz (id), id_uzytkownik INT REFERENCES Uzytkownik (id))')
+    .catch((error) => {
+        console.log("Polubienia" + error);
+    });
+
+
 //REFERENCES
 
 //----------------- CREATE WAIT-------------------
