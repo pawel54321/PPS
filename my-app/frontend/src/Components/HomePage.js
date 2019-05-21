@@ -62,13 +62,13 @@ class HomePage extends Component {
 
 
             return (
-                <div>
+                <div className={"chat"}>
 
                     <Row>
-                        <Col md={3}>
+                        <Col md={3} style={{ padding: "0px" }}>
                             <GroupList />
                         </Col>
-                        <Col md={9}>
+                        <Col md={9} style={{ padding:"0px" }}>
                             {/*zawartość grupy*/}
 
                             <Post />
@@ -92,7 +92,7 @@ class HomePage extends Component {
                     {/*
                  jesli zalogowany to po lewej lista grup (panel) ktore 'ma' i moze w nie klikac i sie pojawia mozliwosc po prawej stronie dodania postu/komentarza do tej grupy
                  */}
-                    <br />  <br />  <br />
+                    <br />  <br />  <br /> <br /> <br /> <br /> <br /> <br /> <br />
                 </div>
             );
         }

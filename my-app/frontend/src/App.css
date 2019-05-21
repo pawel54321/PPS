@@ -33,6 +33,14 @@
 }
 */
 
+.chat{
+    background-image:url("chat.jpg");
+}
+.rce-citem {
+  
+    opacity: 0.9;
+}
+
 .rce-input {
     background-color: #e1e1e1;
 }

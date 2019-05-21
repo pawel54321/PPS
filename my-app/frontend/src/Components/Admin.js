@@ -118,14 +118,15 @@ class Admin extends Component {
                              Szczegóły wszystkich grup (Administrator)
                         </NavLink>
                     </NavItem>
-                    <NavItem>
+                    
+                    {/*<NavItem>
                         <NavLink
                             className={classnames({ active: this.state.activeTab === '4' })}
                             onClick={() => { this.toggle('4'); }}
                         >
                             Użytkownicy we wszystkich grupach (Administrator)
                         </NavLink>
-                    </NavItem>
+                    </NavItem>*/}
                 </Nav>
 
                 <TabContent activeTab={this.state.activeTab}>
