@@ -698,10 +698,7 @@ app.post('/Zaproszenia/Akceptacja_Lub_Odrzucenie_Zaproszenie_Uzytkownika_Do_Grup
                 console.log(error);
                 czyZablokowano = false;
             });
-    } else {
-        czyZablokowano = false;
     }
-
 
     res.send({
         id: req.body.id,
