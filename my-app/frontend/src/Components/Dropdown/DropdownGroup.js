@@ -34,6 +34,8 @@ export default class DropdownGroup extends Component {
         this.setState({
             Grupa: event.target.value
         });
+
+      
     }
 
     render() {
@@ -44,7 +46,7 @@ export default class DropdownGroup extends Component {
         });
 
         return (
-            <select value={this.state.Grupa} onChange={this.handleChange}>
+            <select value={this.state.Grupa} onChange={this.handleChange} onClick={this.ZwrocenieTabeliGrupa}>
                 <option>-</option>
                 {grupy}
             </select>
