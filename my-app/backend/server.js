@@ -540,7 +540,24 @@ app.post('/Uzytkownik/Zablokuj_Uzytkownika', async (req, res) => {
 app.post('/Grupa/Wyswietl/DanyLogin/Grupy_Gdzie_Nie_Jestem', async (req, res) => {
 
     const id = req.body.id;
-    const zapytanie = await pgClient.query("SELECT gr.id, gr.nazwa FROM Grupa_Pokoj as gr, tabela_posrednia as ta, uzytkownik as uz WHERE uz.id = ta.id_uzytkownik AND ta.id_grupa = gr.id AND uz.id <>'" + id + "' AND gr.flaga=true AND ta.moderator_grupy=true GROUP BY gr.nazwa, gr.id");
+    const zapytanie = await pgClient.query(
+      "SELECT gr.id, gr.nazwa " +
+      "FROM Grupa_Pokoj as gr, tabela_posrednia as ta, uzytkownik as uz " +
+      "WHERE uz.id=ta.id_uzytkownik " +
+      "AND ta.id_grupa=gr.id " +
+      "AND uz.id<>'" + id + "' " +
+      "AND gr.flaga=true " +
+      "AND ta.moderator_grupy=true " +
+      "AND gr.id NOT IN ( " +
+      	"SELECT za.id_grupa " +
+      	"FROM Grupa_Pokoj as gr, zaproszenia as za, uzytkownik as uz " +
+      	"WHERE uz.id=za.id_uzytkownik " +
+      	"AND za.id_grupa=gr.id " +
+      	"AND uz.id='" + id + "' " +
+      	"AND gr.flaga=true " +
+      ") " +
+      "GROUP BY gr.id, gr.nazwa"
+    );
     console.log(zapytanie.rows);
 
     res.send({
