@@ -40,19 +40,20 @@ class HomePage extends Component {
         if (!this.state.token) {
 
             return (
-                <div>
-                    <br/>
+                <div className={"chat"}>
+                    <br />
                     <Col sm='12' md={{ size: 12, offset: 0 }}>
                         <Row>
 
-                            <h4 style={{ textAlign: 'center', width: '100%' }}>
+                            <h4 style={{ textAlign: 'center', width: '100%', color:"white" }}>
                                 <br /> <br /> <br /> <br /> <br />
                                 <h1>Witamy!</h1><br />
                                 Do prawidłowego korzystania z serwisu wymagane jest posiadanie konta!<br />
                                 Zarejestruj się, klikając w odpowiedni przycisk w panelu nawigacyjnym lub <Link to="/register">Tutaj</Link>.<br /><br />
-                                <h3>Dziękujemy za korzystanie z serwisu i życzymy udanych integracji!</h3></h4>
+                                    <h3>Dziękujemy za korzystanie z serwisu i życzymy udanych integracji!</h3></h4>
                         </Row>
                     </Col>
+                    <br /> <br /> <br /> <br /> <br /><br /> <br /> <br /> <br /> <br /><br /> <br /> <br /> <br /> <br /><br />
                 </div>
             );
 
