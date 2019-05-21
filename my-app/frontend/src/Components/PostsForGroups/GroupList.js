@@ -8,8 +8,7 @@ class GroupList extends Component {
     constructor(props) {
         super(props);
         this.state ={
-            groups: [],
-            user: null
+            groups: []
         }
         this.zwrocenieGrup();
     }
@@ -30,14 +29,22 @@ class GroupList extends Component {
     render() {
         return (
             <div>
-                <br />
-                <center><b>Moje grupy</b></center>
-                <br />
-                <div style={{ "overflow-y": "auto", "overflow-x": "hidden", "height": "700px", "scrollbar-width": "none" }}>
-                    <ListGroup>
-                        {this.state.groups.map(dane => <MyGroup info={dane} />)}
-                    </ListGroup>
-                </div>
+                <Row>
+                    <Col xs={1}>
+                    </Col>
+                    <Col xs={10}>
+                        <br />
+                        <center><b>Moje grupy</b></center>
+                        <br />
+                        <div style={{ "overflow-y": "auto", "overflow-x": "hidden", "height": "700px", "scrollbar-width": "none" }}>
+                            <ListGroup>
+                                {this.state.groups.map(dane => <MyGroup info={dane} />)}
+                            </ListGroup>
+                        </div>
+                    </Col>
+                    <Col xs={1}>
+                    </Col>
+                </Row>
             </div>
         );
     }
