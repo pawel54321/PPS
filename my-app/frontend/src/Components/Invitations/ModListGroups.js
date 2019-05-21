@@ -20,7 +20,7 @@ class ModListGroups extends Component {
         if (OdpowiedzSerwera2.data.zwracam_czy_zablokowano === true) {
             Alert.success('Zaakceptowano prośbe o dołączenie do podanej grupy!', { position: 'bottom' });
 
-            document.getElementsByClassName(this.props.info.login)[0].style.display = 'none';
+            document.getElementsByClassName(this.props.info.login + "2" + this.props.info.nazwa + "2")[0].style.display = 'none';
         }
         else if (OdpowiedzSerwera2.data.zwracam_czy_zablokowano === false) {
             Alert.error('Wystąpił błąd podczas zaakceptowania!', { position: 'bottom' });
@@ -36,24 +36,26 @@ class ModListGroups extends Component {
         const OdpowiedzSerwera2 = await axios.post('http://localhost:5000/Zaproszenia/Akceptacja_Lub_Odrzucenie_Zaproszenie_Uzytkownika_Do_Grupy', {
             login: this.props.info.login,
             grupa: this.props.info.nazwa,
-            coZrobic: 'Odrzucone'
+            coZrobic: 'Odrzucone' // Zablokowanie
         });
 
         if (OdpowiedzSerwera2.data.zwracam_czy_zablokowano === true) {
-            Alert.info('Odrzucono prośbe o dołączenie do podanej grupy!', { position: 'bottom' });
+            Alert.info('Zablokowano prośbe o dołączenie do podanej grupy!', { position: 'bottom' });
 
-            document.getElementsByClassName(this.props.info.login)[0].style.display = 'none';
+            document.getElementsByClassName(this.props.info.login + "2" + this.props.info.nazwa + "2")[0].style.display = 'none';
         }
         else if (OdpowiedzSerwera2.data.zwracam_czy_zablokowano === false) {
-            Alert.error('Wystąpił błąd podczas odrzucenia!', { position: 'bottom' });
+            Alert.error('Wystąpił błąd podczas zablokowania!', { position: 'bottom' });
 
         }
+
+         
 
     }
 
     render() {
         return (
-            <ListGroupItem className={this.props.info.login}>
+            <ListGroupItem className={this.props.info.login+"2"+this.props.info.nazwa+"2"}>
                 <TabContent>
                     <Row className="show-grid">
 
@@ -79,7 +81,7 @@ class ModListGroups extends Component {
                                 <div style={{ paddingLeft: '13%' }}>
                                 <form onSubmit={this.KlikniecieSubmit2}>
 
-                                        <Button color="info">Odrzuć!</Button>
+                                        <Button color="danger">Zablokuj!</Button>
 
                                     </form>
                                 </div>

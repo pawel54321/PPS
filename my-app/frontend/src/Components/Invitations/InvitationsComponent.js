@@ -76,8 +76,11 @@ class InvitationsComponent extends Component {
     Aktualizacja = (event) => {
         event.preventDefault();
 
-       // this.zwrocenieGrup();
-       // this.zwrocenieModGrup();
+        if (this.state.groups!==null)
+        this.setState({ groups: [], modgroups: [] });
+
+        this.zwrocenieGrup();
+        this.zwrocenieModGrup();
 
         this.setState({ isPaneOpenLeft: true });
        
@@ -110,7 +113,7 @@ class InvitationsComponent extends Component {
                 &#8594; Użytkownik 'A' chce dołączyć do twojej grupy 'AAA' [MOD]
                 <br />
                 <br />*/}
-                <center><b>Wyślij zaproszenie do podanych grup:</b></center>
+                <center><b>Wyślij prośbę o dołączenie do podanych grup:</b></center>
                 <br /> 
                 <ListGroupItem>
                 <ListGroup>

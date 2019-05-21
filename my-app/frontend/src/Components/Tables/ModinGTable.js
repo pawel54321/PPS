@@ -9,7 +9,7 @@ import './style.css';
 //import Alert from 'react-s-alert';
 
 let tasks = [];
-let nazwa = '';
+//let nazwa = '';
 
 const SORTERS = {
     NUMBER_ASCENDING: mapper => (a, b) => mapper(a) - mapper(b),
@@ -55,7 +55,7 @@ const styles = {
 
 function Ustaw(props) {
     tasks = props.groupUsers;
-    nazwa = props.groupName;
+    //nazwa = props.groupName;
 }
 
 const UinGTable = (props) => (
