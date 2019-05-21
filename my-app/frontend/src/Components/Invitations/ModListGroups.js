@@ -36,8 +36,8 @@ class ModListGroups extends Component {
         const OdpowiedzSerwera2 = await axios.post('http://localhost:5000/Zaproszenia/Akceptacja_Lub_Odrzucenie_Zaproszenie_Uzytkownika_Do_Grupy', {
             login: this.props.info.login,
             grupa: this.props.info.nazwa,
-            coZrobic: 'Odrzucone' // Zablokowanie
-        });
+            coZrobic: 'Odrzucone' 
+        }); // Zablokowanie
 
         if (OdpowiedzSerwera2.data.zwracam_czy_zablokowano === true) {
             Alert.info('Zablokowano prośbe o dołączenie do podanej grupy!', { position: 'bottom' });
@@ -78,7 +78,7 @@ class ModListGroups extends Component {
 
                                 </form>
                                 <div style={{ padding: '1%' }}> </div>
-                                <div style={{ paddingLeft: '13%' }}>
+                                <div style={{ paddingLeft: '8%' }}>
                                 <form onSubmit={this.KlikniecieSubmit2}>
 
                                         <Button color="danger">Zablokuj!</Button>
