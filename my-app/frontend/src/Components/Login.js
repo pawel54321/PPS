@@ -72,7 +72,7 @@ class Login extends Component {
                                 <input type="password" name="haslo" value={this.state.haslo} required onChange={this.ZmianaWCzasieRzeczywistynInput2} /><br /><br />
                                 <Button color="primary">Zaloguj się!</Button>
                                 <br /><br />
-                                <p>Nie masz konta? </p><Link to="/register">Zarejestruj się!</Link>
+                                Nie masz konta?<br /><Link to="/register">Zarejestruj się!</Link>
                             </center>
                         </form>
                     </Col>

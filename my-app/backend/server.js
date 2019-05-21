@@ -64,7 +64,7 @@ pgClient
 
 //REFERENCES
 pgClient
-    .query('CREATE TABLE IF NOT EXISTS Post_Komentarz (id SERIAL PRIMARY KEY, id_grupa INT REFERENCES Grupa_Pokoj (id), id_uzytkownik INT REFERENCES Uzytkownik (id), zawartosc VARCHAR(255), data DATE)')
+    .query('CREATE TABLE IF NOT EXISTS Post_Komentarz (id SERIAL PRIMARY KEY, id_grupa INT REFERENCES Grupa_Pokoj (id), id_uzytkownik INT REFERENCES Uzytkownik (id), zawartosc VARCHAR(255), data VARCHAR(255))')
     .catch((error) => {
         console.log("Post_Komentarz" + error);
     });
@@ -723,6 +723,72 @@ app.post('/Grupa/Wyswietl/DanyLogin/User', async (req, res) => {
     });
 });
 //GOTOWE [(user/moderator)] wyswietla grupy gdzie jestem modem powinno byc DanyLogin/Grupy
+
+
+
+
+
+//..............
+
+//GOTOWE [(user/moderator/admin)]
+app.post('/Post/Stworz', async (req, res) => {
+    const id_uzytkownik = req.body.id_uzytkownik;
+    const id_grupa = req.body.id_grupa;
+    const zawartosc = req.body.zawartosc;
+    const data = req.body.data;
+
+    let czyStworzono = false;
+
+
+    /*
+currentDate.getHours() + ":" + currentDate.getMinutes() + ":"+currentDate.getSeconds()
+currentDate.getDate() + "." + (currentDate.getMonth()+1) + "." + currentDate.getFullYear();
+     */
+    pgClient.query('INSERT INTO Post_Komentarz(id_uzytkownik, id_grupa, zawartosc, data)) VALUES($1, $2, $3, $4, $5)', [id_uzytkownik, id_grupa, zawartosc, data ])
+        .catch((error) => {
+            console.log(error);
+            czyStworzono = false;
+        }
+    ).then(czyStworzono = true);
+
+
+    res.send({
+        id_uzytkownik: req.body.id_uzytkownik,
+        id_grupa: req.body.id_grupa,
+        zawartosc: req.body.zawartosc,
+        data: req.body.data,
+
+        zwracam_czy_stworzono: czyStworzono
+    });
+});
+//GOTOWE [(user/moderator/admin)]
+
+
+
+//GOTOWE [(user/moderator/admin)]
+app.post('/Post/Wyswietl/DanyLogin', async (req, res) => {
+
+    const id_uzytkownik = req.body.id_uzytkownik;
+    const id_grupa = req.body.id_grupa;
+
+    const zapytanie = await pgClient.query("SELECT * FROM Post_Komentarz WHERE id_uzytkownik='" + id_uzytkownik+"' AND id_grupa='" + id_grupa+"'")
+
+
+    res.send({
+        id_uzytkownik: req.body.id_uzytkownik,
+        id_grupa: req.body.id_grupa,
+
+        wyswietl: zapytanie.rows
+    });
+});
+//GOTOWE [(user/moderator/admin)]
+
+
+
+
+
+
+
 
 
 

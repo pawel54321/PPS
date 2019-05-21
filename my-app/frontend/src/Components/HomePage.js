@@ -45,12 +45,12 @@ class HomePage extends Component {
                     <Col sm='12' md={{ size: 12, offset: 0 }}>
                         <Row>
 
-                            <h4 style={{ textAlign: 'center', width: '100%', color:"white" }}>
+                            <p style={{ textAlign: 'center', width: '100%', color: "white" }}> <h4 >
                                 <br /> <br /> <br /> <br /> <br />
                                 <h1>Witamy!</h1><br />
                                 Do prawidłowego korzystania z serwisu wymagane jest posiadanie konta!<br />
                                 Zarejestruj się, klikając w odpowiedni przycisk w panelu nawigacyjnym lub <Link to="/register">Tutaj</Link>.<br /><br />
-                                    <h3>Dziękujemy za korzystanie z serwisu i życzymy udanych integracji!</h3></h4>
+                                <h3>Dziękujemy za korzystanie z serwisu i życzymy udanych integracji!</h3></h4></p>
                         </Row>
                     </Col>
                     <br /> <br /> <br /> <br /> <br /><br /> <br /> <br /> <br /> <br /><br /> <br /> <br /> <br /> <br /><br />
