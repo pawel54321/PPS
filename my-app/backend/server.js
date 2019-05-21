@@ -252,8 +252,8 @@ app.post('/Grupa/Stworz_Moderatora_Z_Dolaczeniem_Do_Grupy_Lub_Uzytkownika_Z_Dola
     const id_uzytkownik = req.body.id; // TOKEN/(ID)???
    // const id_uzytkownik = 1; // TOKEN/(ID)???
 
-    console.log(nazwa);
-    console.log(id_uzytkownik);
+    //console.log(nazwa);
+    //console.log(id_uzytkownik);
 
     let czyStworzono = false;
     const czyJestJuzNazwa = await pgClient.query("SELECT COUNT(nazwa) FROM Grupa_Pokoj WHERE nazwa='" + nazwa + "'");
@@ -268,9 +268,9 @@ app.post('/Grupa/Stworz_Moderatora_Z_Dolaczeniem_Do_Grupy_Lub_Uzytkownika_Z_Dola
 
         //  if (Object.keys(tablicaGrupa).length != 0) {
 
-        console.log("tab" + tablicaGrupa[0].id);
+        //console.log("tab" + tablicaGrupa[0].id);
         const id_grupy = tablicaGrupa[0].id;
-        console.log("id_grupa" + id_grupy);
+        //console.log("id_grupa" + id_grupy);
         // }
         // else {
         // id_grupy = 1;
@@ -423,7 +423,7 @@ app.post('/Grupa/Zablokuj_Uzytkownika_Z_Mojej_Grupy', async (req, res) => {
         .catch((error) => {
             console.log(error);
         });
-        console.log(zapytanie.rows);
+        //console.log(zapytanie.rows);
 
     const idGrupy = zapytanie.rows[0].id;
 
@@ -558,7 +558,7 @@ app.post('/Grupa/Wyswietl/DanyLogin/Grupy_Gdzie_Nie_Jestem', async (req, res) =>
       ") " +
       "GROUP BY gr.id, gr.nazwa"
     );
-    console.log(zapytanie.rows);
+    //console.log(zapytanie.rows);
 
     res.send({
         id: req.body.id,
@@ -647,7 +647,7 @@ AND gr.flaga = true AND stan='Oczekujace' GROUP BY uz.id, uz.login
         "AND za.stan='Oczekujace' " +
         "GROUP BY u.nazwa, uz.login, u.id"
       );
-    console.log(zapytanie.rows);
+    //console.log(zapytanie.rows);
 
     res.send({
         id: req.body.id,
@@ -688,12 +688,18 @@ app.post('/Zaproszenia/Akceptacja_Lub_Odrzucenie_Zaproszenie_Uzytkownika_Do_Grup
             czyZablokowano = false;
         });
 
-    if(coZrobic == 'Zaakceptowane') {
+    const czyJestJuz = await pgClient.query("SELECT COUNT(id) FROM tabela_posrednia WHERE id_uzytkownik='" + id_uzytkownik + "' AND id_grupa='" + id_grupa + "'");
+    const tablicaCzyJestJuz = czyJestJuz.rows;
+
+    if(coZrobic == 'Zaakceptowane' && tablicaCzyJestJuz[0].count==0) {
+
         pgClient.query("INSERT INTO tabela_posrednia (id_uzytkownik, id_grupa, moderator_grupy) VALUES ('" + id_uzytkownik + "', '" + id_grupa +"', 'false')")
             .catch((error) => {
                 console.log(error);
                 czyZablokowano = false;
             });
+    } else {
+        czyZablokowano = false;
     }
 
 
