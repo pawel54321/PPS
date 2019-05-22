@@ -809,7 +809,14 @@ app.post('/Post/Wyswietl/DanyLogin', async (req, res) => {
 //GOTOWE [(user/moderator/admin)]
 
 
-
+//WYSWIETLA ALL POLUBIENIA
+/*
+ SELECT pol.liczba_polubien, pol.id_post, pol.id_uzytkownik
+	FROM polubienia as pol, uzytkownik as uz, post_komentarz as pos
+	WHERE pos.id=pol.id_post AND pol.id_uzytkownik=uz.id
+  
+  
+  */
 
 
 
