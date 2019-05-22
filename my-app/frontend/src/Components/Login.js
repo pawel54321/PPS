@@ -57,7 +57,7 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
+            <div className={"login"}>
                 <Row className="show-grid">
                     <Col xs={6} md={5}>
                     </Col>
@@ -73,6 +73,7 @@ class Login extends Component {
                                 <Button color="primary">Zaloguj się!</Button>
                                 <br /><br />
                                 Nie masz konta?<br /><Link to="/register">Zarejestruj się!</Link>
+                                <br /><br />    <br /><br />    <br /><br />    <br /><br />   
                             </center>
                         </form>
                     </Col>

@@ -129,7 +129,7 @@ class Admin extends Component {
                     </NavItem>*/}
                 </Nav>
 
-                <TabContent activeTab={this.state.activeTab}>
+                <TabContent activeTab={this.state.activeTab} className={"admin"}>
                     <TabPane tabId="0">
                         <Row>
                             <Col xs={6} md={3} >
@@ -211,6 +211,7 @@ class Admin extends Component {
                             </Col>
                         </Row>
                     </TabPane>
+                    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
                 </TabContent>
             </div>
         );

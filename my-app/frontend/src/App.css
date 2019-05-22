@@ -36,6 +36,20 @@
 .chat{
     background-image:url("chat.jpg");
 }
+.admin {
+    background-image: url("admin.png");
+}
+.user {
+    background-image: url("user.png");
+}
+
+.login {
+    background-image: url("save.png");
+}
+.register {
+    background-image: url("save.png");
+}
+
 .rce-citem {
   
     opacity: 0.9;

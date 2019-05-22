@@ -128,7 +128,7 @@ class User extends Component {
                     </NavItem>
                 </Nav>
 
-                <TabContent activeTab={this.state.activeTab}>
+                <TabContent activeTab={this.state.activeTab} className={"user"}>
                     <TabPane tabId="0">
                         <Row>
                             <Col xs={6} md={3} >
@@ -192,6 +192,7 @@ class User extends Component {
                             <br /><br /><br /><br /><br />                  
                         </Row>
                     </TabPane>
+                    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
                 </TabContent>
             </div>
         );

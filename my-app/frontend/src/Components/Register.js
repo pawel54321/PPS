@@ -58,7 +58,7 @@ class Register extends Component {
 
     render() {
         return (
-            <div>
+            <div className={"register"}>
                 <Row className="show-grid">
                     <Col xs={6} md={5}>
                     </Col>
@@ -77,7 +77,8 @@ class Register extends Component {
                                 <input type="password" name="haslo" value={this.state.haslo} required onChange={this.ZmianaWCzasieRzeczywistynInput} /><br /><br />
                                 <Button color="primary">Zarejestruj się!</Button>
                                 <br /><br />
-                                Masz konto?<br/><Link to="/login">Zaloguj się!</Link>
+                                Masz konto?<br /><Link to="/login">Zaloguj się!</Link>
+                                <br /><br />    <br /><br />    <br /><br />
                             </center>
                         </form>
                     </Col>
