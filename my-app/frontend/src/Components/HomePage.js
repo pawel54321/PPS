@@ -41,6 +41,8 @@ class HomePage extends Component {
         this.setState({
             posts: posts.data.wyswietl
         });
+
+        console.log(posts.data.wyswietl);
     }
 
     KlikniecieSubmit = async (event) => {
@@ -49,7 +51,7 @@ class HomePage extends Component {
             id_uzytkownik: this.state.token.data.user.id,
             grupa: this.state.grupa,
             zawartosc: this.refs.input.input.value,
-            data: new Date()
+            data: new Date() 
         });
 
 

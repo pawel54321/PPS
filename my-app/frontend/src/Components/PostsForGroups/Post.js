@@ -40,15 +40,18 @@ class Post extends Component {
 
     render() {
         return (
+            <div>
             <ChatItem
                 avatar={Av}
                 alt={'Komentarz'}
                 title={this.props.post.login}
                 subtitle={this.props.post.zawartosc}
-                date={/*new Date(2019, 1, 1, 10, 20, 20)*/this.props.post.data}
+                date={new Date(this.props.post.data)}
                 unread={/*this.state.likes*/0}
                 onClick={this.dodaj}
             />
+                {/*this.props.post.data*/}
+                </div>
         );
     }
 }
