@@ -550,6 +550,11 @@ app.post('/Uzytkownik/Zablokuj_Uzytkownika', async (req, res) => {
 //PORAWIC NIE DZIALA ZWROCENIE TYLKO TAM GDZIE NIE WYSLALEM PROSBY [(user/moderator/admin)] wyswietla grupy - Gdzie Nie Jestem + Gdzie Nie wysłalem prośby
 app.post('/Grupa/Wyswietl/DanyLogin/Grupy_Gdzie_Nie_Jestem', async (req, res) => {
 
+    const admin = await pgClient.query("SELECT id FROM uzytkownik WHERE prawa='Admin'");
+    const tablicaAdmin = admin.rows;
+
+    const id_admin = tablicaAdmin[0].id;
+
     const id = req.body.id;
     const zapytanie = await pgClient.query(
       "SELECT gr.id, gr.nazwa " +
@@ -557,6 +562,7 @@ app.post('/Grupa/Wyswietl/DanyLogin/Grupy_Gdzie_Nie_Jestem', async (req, res) =>
       "WHERE uz.id=ta.id_uzytkownik " +
       "AND ta.id_grupa=gr.id " +
       "AND uz.id<>'" + id + "' " +
+      "AND uz.id<>'" + id_admin + "' " +
       "AND gr.flaga=true " +
       "AND ta.moderator_grupy=true " +
       "AND gr.id NOT IN ( " +
