@@ -5,30 +5,14 @@ import { Button, Col, Row, TabContent, ListGroupItem } from 'reactstrap';
 
 class ListGroups extends Component {
 
-    KlikniecieSubmit = async (event) => {
+    constructor(props) {
+        super(props);
+        this.KlikniecieSubmit = this.KlikniecieSubmit.bind(this);
+    }
+
+    KlikniecieSubmit = (event) => {
         event.preventDefault();
-
-
-        const token = await axios.post('http://localhost:5000/ReadToken', {
-            token: localStorage.getItem('token')
-        });
-       // console.log(token.data.user.id);
-        //console.log(this.props.info.id);
-        /*const OdpowiedzSerwera2 = await axios.post('http://localhost:5000/Zaproszenia/Dolacz_Wysylajac_Tylko_Zapytanie', {
-            id: token.data.user.id,
-            grupa: this.props.info.id
-        });
-
-
-        if (OdpowiedzSerwera2.data.zwracam_czy_stworzono === true) {
-            Alert.success('Wysłano prośbe o dołączenie do podanej grupy!', { position: 'bottom' });
-
-            document.getElementsByClassName(this.props.info.nazwa)[0].style.display = 'none';
-        }
-        else if (OdpowiedzSerwera2.data.zwracam_czy_stworzono === false) {
-            Alert.error('Wystąpił błąd podczas wysyłania prośby o dołączenie!', { position: 'bottom' });
-
-        }*/
+        this.props.grupa(this.props.info.nazwa);
     }
 
     render() {
@@ -39,11 +23,9 @@ class ListGroups extends Component {
                         <Col xs={1}  >
                         </Col>
                         <Col xs={10}>
-                            <form onSubmit={this.KlikniecieSubmit}>
                                 <center>
-                                    <Button color="link">{this.props.info.nazwa}</Button>
+                                    <Button onClick={this.KlikniecieSubmit} color="link">{this.props.info.nazwa}</Button>
                                 </center>
-                            </form>
                         </Col>
                         <Col xs={1}>
                         </Col>

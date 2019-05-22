@@ -733,18 +733,21 @@ app.post('/Grupa/Wyswietl/DanyLogin/User', async (req, res) => {
 //GOTOWE [(user/moderator/admin)]
 app.post('/Post/Stworz', async (req, res) => {
     const id_uzytkownik = req.body.id_uzytkownik;
-    const id_grupa = req.body.id_grupa;
+    const grupa = req.body.grupa;
     const zawartosc = req.body.zawartosc;
     const data = req.body.data;
 
     let czyStworzono = false;
 
 
+    const id = await pgClient.query("SELECT id FROM grupa_pokoj WHERE nazwa='" + grupa + "'");
+    const id_grupa = id.rows[0].id;
+
     /*
 currentDate.getHours() + ":" + currentDate.getMinutes() + ":"+currentDate.getSeconds()
 currentDate.getDate() + "." + (currentDate.getMonth()+1) + "." + currentDate.getFullYear();
      */
-    pgClient.query('INSERT INTO Post_Komentarz(id_uzytkownik, id_grupa, zawartosc, data)) VALUES($1, $2, $3, $4, $5)', [id_uzytkownik, id_grupa, zawartosc, data ])
+    pgClient.query('INSERT INTO Post_Komentarz(id_uzytkownik, id_grupa, zawartosc, data) VALUES($1, $2, $3, $4)', [id_uzytkownik, id_grupa, zawartosc, data ])
         .catch((error) => {
             console.log(error);
             czyStworzono = false;
@@ -754,7 +757,7 @@ currentDate.getDate() + "." + (currentDate.getMonth()+1) + "." + currentDate.get
 
     res.send({
         id_uzytkownik: req.body.id_uzytkownik,
-        id_grupa: req.body.id_grupa,
+        id_grupa: id_grupa,
         zawartosc: req.body.zawartosc,
         data: req.body.data,
 
@@ -762,6 +765,28 @@ currentDate.getDate() + "." + (currentDate.getMonth()+1) + "." + currentDate.get
     });
 });
 //GOTOWE [(user/moderator/admin)]
+
+
+
+//GOTOWE [(user/moderator/admin)]
+app.post('/Post/Wyswietl/Grupa', async (req, res) => {
+
+    const grupa = req.body.grupa;
+
+    const id = await pgClient.query("SELECT id FROM grupa_pokoj WHERE nazwa='" + grupa + "'");
+    const id_grupa = id.rows[0].id;
+
+    const zapytanie = await pgClient.query("SELECT * FROM Post_Komentarz as pk, uzytkownik as uz WHERE pk.id_grupa='" + id_grupa+"' AND uz.id=pk.id_uzytkownik ORDER BY pk.data DESC")
+
+
+    res.send({
+        id_grupa: req.body.id_grupa,
+
+        wyswietl: zapytanie.rows
+    });
+});
+//GOTOWE [(user/moderator/admin)]
+
 
 
 
@@ -782,11 +807,6 @@ app.post('/Post/Wyswietl/DanyLogin', async (req, res) => {
     });
 });
 //GOTOWE [(user/moderator/admin)]
-
-
-
-
-
 
 
 

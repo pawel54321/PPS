@@ -15,12 +15,8 @@ import Av from './User_font_awesome.svg.png';
 class Post extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-
-            likes: 0
-        }
-        //this.handleClick = this.handleClick.bind(this);
     }
+
     componentDidMount() {
 
         // pobierz ile ma lajkow kazdy post dla Cb i ustaw
@@ -28,7 +24,7 @@ class Post extends Component {
 
     dodaj = async (event) => {
         event.preventDefault();
-
+/*
         if (this.state.likes === 0) {
             Alert.info('Polubiono post!', { position: 'bottom' });
             this.setState(
@@ -39,202 +35,20 @@ class Post extends Component {
         else {
             Alert.error('Ten post został już polubiony!', { position: 'bottom' });
         }
-        
+*/
     }
 
     render() {
         return (
-
-            <div style={{ "overflow-y": "scroll", "overflow-x": "hidden", "height": "450px" }}>
-              
-                    {/*            <Card style={{marginBottom: '20px', boxShadow: '0 .5rem 1rem rgba(0,0,0,.15)'}}>
-                <CardHeader className='text-center' style={{backgroundColor: '#ddd'}}><b><i>*/}{/*this.props.atrakcja.nazwa*/}
-                    {/*</i></b ></CardHeader >
-                <CardBody className='text-center'>*/}
-
-           
-                    <ChatItem
-                    avatar={Av}
-                    alt={'Komentarz'}
-                    title={'Login'}
-                    subtitle={'Tekst'}
-                    date={new Date(2019, 1, 1, 10, 20, 20)}
-                    unread={this.state.likes}
-                    onClick={this.dodaj}
-
-                    />
-                <ChatItem
-                    avatar={Av}
-                    alt={'Komentarz'}
-                    title={'Login'}
-                    subtitle={'Tekst'}
-                    date={new Date(2019, 1, 1, 10, 20, 20)}
-                    unread={this.state.likes}
-                    onClick={this.dodaj}
-
-                />
-                <ChatItem
-                    avatar={Av}
-                    alt={'Komentarz'}
-                    title={'Login'}
-                    subtitle={'Tekst'}
-                    date={new Date(2019, 1, 1, 10, 20, 20)}
-                    unread={this.state.likes}
-                    onClick={this.dodaj}
-
-                />
-                <ChatItem
-                    avatar={Av}
-                    alt={'Komentarz'}
-                    title={'Login'}
-                    subtitle={'Tekst'}
-                    date={new Date(2019, 1, 1, 10, 20, 20)}
-                    unread={this.state.likes}
-                    onClick={this.dodaj}
-
-                />
-                <ChatItem
-                    avatar={Av}
-                    alt={'Komentarz'}
-                    title={'Login'}
-                    subtitle={'Tekst'}
-                    date={new Date(2019, 1, 1, 10, 20, 20)}
-                    unread={this.state.likes}
-                    onClick={this.dodaj}
-
-                />
-                <ChatItem
-                    avatar={Av}
-                    alt={'Komentarz'}
-                    title={'Login'}
-                    subtitle={'Tekst'}
-                    date={new Date(2019, 1, 1, 10, 20, 20)}
-                    unread={this.state.likes}
-                    onClick={this.dodaj}
-
-                />
-                <ChatItem
-                    avatar={Av}
-                    alt={'Komentarz'}
-                    title={'Login'}
-                    subtitle={'Tekst'}
-                    date={new Date(2019, 1, 1, 10, 20, 20)}
-                    unread={this.state.likes}
-                    onClick={this.dodaj}
-
-                />
-                <ChatItem
-                    avatar={Av}
-                    alt={'Komentarz'}
-                    title={'Login'}
-                    subtitle={'Tekst'}
-                    date={new Date(2019, 1, 1, 10, 20, 20)}
-                    unread={this.state.likes}
-                    onClick={this.dodaj}
-
-                />
-                <ChatItem
-                    avatar={Av}
-                    alt={'Komentarz'}
-                    title={'Login'}
-                    subtitle={'Tekst'}
-                    date={new Date(2019, 1, 1, 10, 20, 20)}
-                    unread={this.state.likes}
-                    onClick={this.dodaj}
-
-                />
-                <ChatItem
-                    avatar={Av}
-                    alt={'Komentarz'}
-                    title={'Login'}
-                    subtitle={'Tekst'}
-                    date={new Date(2019, 1, 1, 10, 20, 20)}
-                    unread={this.state.likes}
-                    onClick={this.dodaj}
-
-                />
-                <ChatItem
-                    avatar={Av}
-                    alt={'Komentarz'}
-                    title={'Login'}
-                    subtitle={'Tekst'}
-                    date={new Date(2019, 1, 1, 10, 20, 20)}
-                    unread={this.state.likes}
-                    onClick={this.dodaj}
-
-                />
-                <ChatItem
-                    avatar={Av}
-                    alt={'Komentarz'}
-                    title={'Login'}
-                    subtitle={'Tekst'}
-                    date={new Date(2019, 1, 1, 10, 20, 20)}
-                    unread={this.state.likes}
-                    onClick={this.dodaj}
-
-                />
-                <ChatItem
-                    avatar={Av}
-                    alt={'Komentarz'}
-                    title={'Login'}
-                    subtitle={'Tekst'}
-                    date={new Date(2019, 1, 1, 10, 20, 20)}
-                    unread={this.state.likes}
-                    onClick={this.dodaj}
-
-                />
-                <ChatItem
-                    avatar={Av}
-                    alt={'Komentarz'}
-                    title={'Login'}
-                    subtitle={'Tekst'}
-                    date={new Date(2019, 1, 1, 10, 20, 20)}
-                    unread={this.state.likes}
-                    onClick={this.dodaj}
-
-                />
-                <ChatItem
-                    avatar={Av}
-                    alt={'Komentarz'}
-                    title={'Login'}
-                    subtitle={'Tekst'}
-                    date={new Date(2019, 1, 1, 10, 20, 20)}
-                    unread={this.state.likes}
-                    onClick={this.dodaj}
-
-                />
-                <ChatItem
-                    avatar={Av}
-                    alt={'Komentarz'}
-                    title={'Login'}
-                    subtitle={'Tekst'}
-                    date={new Date(2019, 1, 1, 10, 20, 20)}
-                    unread={this.state.likes}
-                    onClick={this.dodaj}
-
-                />
-                <ChatItem
-                    avatar={Av}
-                    alt={'Komentarz'}
-                    title={'Login'}
-                    subtitle={'Tekst'}
-                    date={new Date(2019, 1, 1, 10, 20, 20)}
-                    unread={this.state.likes}
-                    onClick={this.dodaj}
-
-                />
-
-
-                    {/*     </CardBody>
-            </Card >*/}
-
-                    {/*<CardText>{this.props.text}</CardText>
-                    <CardText><b>Godz. otwarcia:</b> {this.props.atrakcja.godzina_otwarcia}</CardText>
-                    <CardText><b>Godz. zamknięcia:</b> {this.props.atrakcja.godzina_zamkniecia}</CardText>
-                    <CardTitle><b>Cena: </b> {this.props.atrakcja.cena}</CardTitle>
-                    <Button color='primary' onClick={this.handleClick}>Wybierz</Button>*/}
-                </div>
-       
+            <ChatItem
+                avatar={Av}
+                alt={'Komentarz'}
+                title={this.props.post.login}
+                subtitle={this.props.post.zawartosc}
+                date={/*new Date(2019, 1, 1, 10, 20, 20)*/this.props.post.data}
+                unread={/*this.state.likes*/0}
+                onClick={this.dodaj}
+            />
         );
     }
 }

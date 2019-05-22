@@ -7,8 +7,9 @@ class GroupList extends Component {
 
     constructor(props) {
         super(props);
-        this.state ={
-            groups: []
+        this.state = {
+            groups: [],
+            grupa: ''
         }
         this.zwrocenieGrup();
     }
@@ -26,6 +27,14 @@ class GroupList extends Component {
         });
     }
 
+    grupa = (nazwa) => {
+        this.setState({
+            grupa: nazwa
+        }, () => {
+            this.props.grupa(this.state.grupa);
+        });
+    }
+
     render() {
         return (
             <div>
@@ -38,7 +47,7 @@ class GroupList extends Component {
                         <br />
                         <div style={{ "overflow-y": "auto", "overflow-x": "hidden", "height": "700px", "scrollbar-width": "none" }}>
                             <ListGroup>
-                                {this.state.groups.map(dane => <MyGroup info={dane} />)}
+                                {this.state.groups.map(dane => <MyGroup info={dane} grupa={this.grupa}/>)}
                             </ListGroup>
                         </div>
                     </Col>

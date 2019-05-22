@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Col, Row } from 'reactstrap';
 import GroupList from './PostsForGroups/GroupList';
-import Post from './PostsForGroups/Post';
-
+import Posts from './PostsForGroups/Posts';
+import Alert from 'react-s-alert';
 import {Input } from 'react-chat-elements';
 import { Button } from 'react-chat-elements'
 import axios from 'axios';
@@ -15,15 +15,14 @@ class HomePage extends Component {
 
         this.state = {
             token: null,
+            posts: [],
+            grupa: ''
         }
-
-       
-
     }
+
     componentDidMount() {
-        this.zwrocenieCzyZalogowany();    
+        this.zwrocenieCzyZalogowany();
     }
-
 
     zwrocenieCzyZalogowany = async () => {
         const token = await axios.post('http://localhost:5000/ReadToken', {
@@ -32,6 +31,44 @@ class HomePage extends Component {
 
         this.setState({
             token: token
+        });
+    }
+
+    zwroceniePostow = async () => {
+        const posts = await axios.post('http://localhost:5000/Post/Wyswietl/Grupa', {
+            grupa: this.state.grupa
+        });
+        this.setState({
+            posts: posts.data.wyswietl
+        });
+    }
+
+    KlikniecieSubmit = async (event) => {
+        event.preventDefault();
+        const OdpowiedzSerwera2 = await axios.post('http://localhost:5000/Post/Stworz', {
+            id_uzytkownik: this.state.token.data.user.id,
+            grupa: this.state.grupa,
+            zawartosc: this.refs.input.input.value,
+            data: new Date()
+        });
+
+
+        if (OdpowiedzSerwera2.data.zwracam_czy_stworzono === true) {
+            Alert.success('Wiadomość wysłana!', { position: 'bottom' });
+            this.zwroceniePostow();
+        }
+        else if (OdpowiedzSerwera2.data.zwracam_czy_stworzono === false) {
+            Alert.error('Wystąpił błąd podczas wysyłania wiadomości!', { position: 'bottom' });
+        }
+
+        this.refs.input.clear();
+    }
+
+    nazwaGrupy = (grupa) => {
+        this.setState({
+            grupa: grupa
+        }, () => {
+            this.zwroceniePostow();
         });
     }
 
@@ -67,26 +104,27 @@ class HomePage extends Component {
 
                     <Row>
                         <Col md={3} style={{ padding: "0px" }}>
-                            <GroupList />
+                            <GroupList grupa={this.nazwaGrupy}/>
                         </Col>
                         <Col md={9} style={{ padding:"0px" }}>
                             {/*zawartość grupy*/}
+                            <br />
+                            <center>{this.state.grupa}</center>
+                            <br />
+                            <Posts posts={this.state.posts}/>
 
-                            <Post />
-
-                            <Input
-
-                                placeholder="Skomentuj..."
-                                multiline={false}
-                                rightButtons={
-                                    <Button
-                                        color='white'
-                                        backgroundColor='black'
-                                        text='Wyślij' />
-                                }
-
-                            /*OnKeyPress={(e) => { this.refs.input.clear() }}*/ />
-
+                              <Input
+                                  ref='input'
+                                  placeholder="Skomentuj..."
+                                  multiline={false}
+                                  rightButtons={
+                                      <Button
+                                          onClick={this.KlikniecieSubmit}
+                                          color='white'
+                                          backgroundColor='black'
+                                          text='Wyślij' />
+                                  }
+                              /*OnKeyPress={(e) => { this.refs.input.clear() }}*/ />
                             {/* emitonki*/}
                         </Col>
                     </Row>
