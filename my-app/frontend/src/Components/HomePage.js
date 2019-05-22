@@ -45,7 +45,7 @@ class HomePage extends Component {
                     <Col sm='12' md={{ size: 12, offset: 0 }}>
                         <Row>
 
-                            <p style={{ textAlign: 'center', width: '100%', color: "white" }}> <h4 >
+                            <p style={{ textAlign: 'center', width: '100%', color: "black" }}> <h4 >
                                 <br /> <br /> <br /> <br /> <br />
                                 <h1>Witamy!</h1><br />
                                 Do prawidłowego korzystania z serwisu wymagane jest posiadanie konta!<br />

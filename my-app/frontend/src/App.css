@@ -34,7 +34,7 @@
 */
 
 .chat{
-    background-image:url("chat.jpg");
+    background-image:url("group.png");
 }
 .admin {
     background-image: url("admin.png");
@@ -56,10 +56,10 @@
 }
 
 p {
-    text-shadow: -1px 1px 2px #000, 
+    /* text-shadow: -1px 1px 2px #000, 
         1px 1px 2px #000, 
         1px -1px 0 #000, 
-        -1px -1px 0 #000 !important;
+        -1px -1px 0 #000 !important;*/
 }
 
 
