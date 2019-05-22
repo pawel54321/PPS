@@ -285,6 +285,17 @@ app.post('/Grupa/Stworz_Moderatora_Z_Dolaczeniem_Do_Grupy_Lub_Uzytkownika_Z_Dola
                     czyStworzono = false;
                 });
 
+                const admin = await pgClient.query("SELECT id FROM uzytkownik WHERE prawa='Admin'");
+                const tablicaAdmin = admin.rows;
+
+                const id_admin = tablicaAdmin[0].id;
+
+                pgClient.query('INSERT INTO Tabela_Posrednia(id_grupa, id_uzytkownik, moderator_grupy) VALUES($1,$2,$3)', [id_grupy, id_admin, coZrobic])
+                    .catch((error) => {
+                        console.log(error);
+                        czyStworzono = false;
+                    });
+
             czyStworzono = true;
         }
     }
@@ -814,8 +825,8 @@ app.post('/Post/Wyswietl/DanyLogin', async (req, res) => {
  SELECT pol.liczba_polubien, pol.id_post, pol.id_uzytkownik
 	FROM polubienia as pol, uzytkownik as uz, post_komentarz as pos
 	WHERE pos.id=pol.id_post AND pol.id_uzytkownik=uz.id
-  
-  
+
+
   */
 
 
