@@ -39,19 +39,16 @@ class GroupList extends Component {
         return (
             <div>
                 <Row>
-                    <Col xs={1}>
-                    </Col>
-                    <Col xs={10}>
+                    <Col xs={12} style={{ padding:0 }}>
                         <br />
                         <center><b>Moje grupy</b></center>
                         <br />
-                        <div style={{ "overflow-y": "auto", "overflow-x": "hidden", "height": "700px", "scrollbar-width": "none" }}>
+
+                        <div style={{ "overflow-y": "scroll", "overflow-x": "hidden", "height": "484px", "backgroundColor": "rgba(255,255,255,.8)", padding:"0px" }}>
                             <ListGroup>
                                 {this.state.groups.map(dane => <MyGroup info={dane} grupa={this.grupa}/>)}
                             </ListGroup>
                         </div>
-                    </Col>
-                    <Col xs={1}>
                     </Col>
                 </Row>
             </div>
@@ -60,3 +57,5 @@ class GroupList extends Component {
 }
 
 export default GroupList;
+
+//style={{ "overflow-y": "scroll", "overflow-x": "hidden", "height": "450px", "backgroundColor": "rgba(255,255,255,.8)" }}

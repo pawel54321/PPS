@@ -90,7 +90,7 @@ class HomePage extends Component {
                                 <h3>Dziękujemy za korzystanie z serwisu i życzymy udanych integracji!</h3></h4></p>
                         </Row>
                     </Col>
-                    <br /> <br /> <br /> <br /> <br /><br /> <br /> <br /> <br /> <br /><br /> <br /> <br /> <br /> <br /><br />
+                   <br /> <br /><br /> <br /> <br /> <br /> <br /><br /> <br /> <br />
                 </div>
             );
 
@@ -109,7 +109,7 @@ class HomePage extends Component {
                         <Col md={9} style={{ padding:"0px" }}>
                             {/*zawartość grupy*/}
                             <br />
-                            <center>{this.state.grupa}</center>
+                            <center><b>{this.state.grupa ? this.state.grupa : 'Aby wyświetlić posty należy wybrać grupę!'}</b></center>
                             <br />
                             <Posts posts={this.state.posts}/>
 
@@ -131,7 +131,7 @@ class HomePage extends Component {
                     {/*
                  jesli zalogowany to po lewej lista grup (panel) ktore 'ma' i moze w nie klikac i sie pojawia mozliwosc po prawej stronie dodania postu/komentarza do tej grupy
                  */}
-                    <br />  <br />  <br /> <br /> <br /> <br /> <br /> <br /> <br />
+                    <br /> <br />
                 </div>
             );
         }
