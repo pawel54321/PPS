@@ -27,7 +27,7 @@ class Posts extends Component {
 
     render() {
         return (
-            <div style={{ "overflow-y": "scroll", "overflow-x": "hidden", "height": "450px", "backgroundColor": "rgba(255,255,255,.8)" }}>
+            <div style={{ "overflow-y": "scroll", "overflow-x": "hidden", "height": "440px", "backgroundColor": "rgba(255,255,255,.8)" }}>
                 {this.state.posts.map(post => <Post post={post} />)}
             </div>
         );
