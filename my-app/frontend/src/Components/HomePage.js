@@ -7,7 +7,7 @@ import Alert from 'react-s-alert';
 //import { Button } from 'react-chat-elements'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { read } from 'fs';
+//import { read } from 'fs';
 
 class HomePage extends Component {
 
@@ -108,8 +108,6 @@ class HomePage extends Component {
         reader.readAsDataURL(files[0]);
 
         reader.onload = (event) => {
-
-            //console.warn(event.target.result);
 
             this.setState({
                 danePliku: event.target.result
