@@ -1,6 +1,6 @@
 ﻿import React, { Component } from 'react';
-import axios from 'axios';
-import Alert from 'react-s-alert';
+//import axios from 'axios';
+//import Alert from 'react-s-alert';
 import { Button, Col, Row, TabContent, ListGroupItem } from 'reactstrap';
 
 class ListGroups extends Component {

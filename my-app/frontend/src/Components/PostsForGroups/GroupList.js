@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import {Col, Row, TabContent, ListGroup, NavLink, ListGroupItem } from 'reactstrap';
+import {
+    Col, Row, //TabContent, 
+    ListGroup//, NavLink, ListGroupItem
+} from 'reactstrap';
 import MyGroup from './MyGroup';
 import axios from 'axios';
 

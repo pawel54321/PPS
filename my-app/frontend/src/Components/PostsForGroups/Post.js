@@ -8,14 +8,16 @@
 import 'react-chat-elements/dist/main.css';
 // MessageBox component
 import { ChatItem } from 'react-chat-elements';
-import Alert from 'react-s-alert';
+//import Alert from 'react-s-alert';
 
 import Av from './User_font_awesome.svg.png';
 
 class Post extends Component {
+    /*
     constructor(props) {
         super(props);
     }
+    */
 
     componentDidMount() {
 
