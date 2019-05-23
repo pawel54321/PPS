@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 
+const fileUpload = require('express-fileupload');
+
 // express app setup
 const appHandlers = [
     cors(),
@@ -17,6 +19,8 @@ app.use(appHandlers);
 app.listen(5000, error => {
     console.log('Listening on port 5000');
 });
+
+app.use(fileUpload());
 
 //test
 /*
@@ -86,6 +90,36 @@ pgClient.on('error', () => {
     //REFERENCES
 })();
 //TABELE
+
+
+app.post('/Uzytkownik/Wyslij_Plik', async (req, res) => {
+   // const url = req.body.url;
+   // const fd = req.body.fd;
+
+    /*
+    pgClient.query('INSERT INTO Uzytkownik(imie, nazwisko, login, haslo, prawa) VALUES($1,$2,$3,$4,$5)', [imie, nazwisko, login, haslo, prawa])
+        .catch((error) => {
+            console.log(error);
+        });
+*/
+
+    if (Object.keys(req.body).length == 0) {
+        return res.status(400).send('Nie załadowano pliku.');
+    }
+
+    // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+    let fd = req.body.fd;
+
+    // Use the mv() method to place the file somewhere on your server
+    fd.mv('C:/Projekt PPS/PPS/my-app/frontend/src/Upload/' + fd, function (err) {
+        if (err)
+            return res.status(500).send(err);
+
+        res.send('Załadowano plik!');
+    });
+
+});
+
 
 
 app.post('/Uzytkownik/Rejestracja', async (req, res) => {

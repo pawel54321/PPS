@@ -18,7 +18,7 @@ class HomePage extends Component {
             token: null,
             posts: [],
             grupa: '',
-            danePliku:''
+            plik:null
         }
     }
 
@@ -63,10 +63,18 @@ class HomePage extends Component {
         }
 
 
-        if (this.state.danePliku !== "") {
+        if (this.state.plik !== null) {
 
-            console.log(this.state.danePliku);
+            //console.log(this.state.danePliku);
             // wrzucanie pliku (dane i plik)
+
+            const fd = new FormData();
+            fd.append('image', this.state.plik, this.state.plik.name);
+          
+
+            await axios.post('http://localhost:5000/Uzytkownik/Wyslij_Plik', {
+                fd: fd
+            });
 
         }
         
@@ -101,18 +109,19 @@ class HomePage extends Component {
     }
 
 
-    onChange (event) {
-        let files = event.target.files;
+    onChange = event => {
+        //let files = event.target.files;
 
-        let reader = new FileReader();
-        reader.readAsDataURL(files[0]);
+       // let reader = new FileReader();
+      //  reader.readAsDataURL(files[0]);
 
-        reader.onload = (event) => {
+      //  reader.onload = (event) => {
 
             this.setState({
-                danePliku: event.target.result
+               // danePliku: event.target.result
+                danePlik: event.target.files[0]
             });
-        }
+       // }
     }
 
 
@@ -158,10 +167,10 @@ class HomePage extends Component {
                             <Posts posts={this.state.posts}/>
 
                             <form onSubmit={this.KlikniecieSubmit}>
-                                <Row style={{ paddingLeft: "14px" }}>
+                                <Row style={{ paddingLeft: "16px" }}>
                                     <Col md={11} style={{ padding: "0px" }}>
                                         <Input type="text" name="zawartosc" placeholder="Skomentuj..." />
-                                        <Input type="file" name="plik" onChange={(e) => this.onChange(e)} />
+                                        <b>Jeśli chcesz możesz dodać załącznik: </b><Input type="file" name="plik" onChange={(e) => this.onChange(e)} />
                                     </Col>
                                     <Col md={1} style={{ padding: "0px" }}>
                                         <Button color="primary">Wyślij!</Button>
