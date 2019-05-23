@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { Col, Row } from 'reactstrap';
+import { Col, Row, Input, Button} from 'reactstrap';
 import GroupList from './PostsForGroups/GroupList';
 import Posts from './PostsForGroups/Posts';
 import Alert from 'react-s-alert';
-import {Input } from 'react-chat-elements';
-import { Button } from 'react-chat-elements'
+//import { Input } from 'react-chat-elements';
+//import { Button } from 'react-chat-elements'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { read } from 'fs';
 
 class HomePage extends Component {
 
@@ -16,7 +17,8 @@ class HomePage extends Component {
         this.state = {
             token: null,
             posts: [],
-            grupa: ''
+            grupa: '',
+            danePliku:''
         }
     }
 
@@ -48,33 +50,46 @@ class HomePage extends Component {
     KlikniecieSubmit = async (event) => {
         event.preventDefault();
 
+       
+
         if (this.state.grupa === "") {
             Alert.info('Proszę wybrać grupę!', { position: 'bottom' });
             return;
         }
 
-        if (this.refs.input.input.value === "") {
+        if (document.getElementsByName("zawartosc")[0].value === "") {
             Alert.error('Pole nie może być puste!', { position: 'bottom' });
             return;
+        }
+
+
+        if (this.state.danePliku !== "") {
+
+            console.log(this.state.danePliku);
+            // wrzucanie pliku (dane i plik)
+
         }
         
         const OdpowiedzSerwera2 = await axios.post('http://localhost:5000/Post/Stworz', {
             id_uzytkownik: this.state.token.data.user.id,
             grupa: this.state.grupa,
-            zawartosc: this.refs.input.input.value,
+            zawartosc: document.getElementsByName("zawartosc")[0].value,
             data: new Date() 
         });
 
 
         if (OdpowiedzSerwera2.data.zwracam_czy_stworzono === true) {
-            Alert.success('Wiadomość wysłana!', { position: 'bottom' });
+            Alert.success('Wiadomość została wysłana!', { position: 'bottom' });
+            document.getElementsByName("zawartosc")[0].value = "";
             this.zwroceniePostow();
+             // + zwrocenie plików (dane i plik)
         }
         else if (OdpowiedzSerwera2.data.zwracam_czy_stworzono === false) {
             Alert.error('Wystąpił błąd podczas wysyłania wiadomości!', { position: 'bottom' });
         }
 
-        this.refs.input.clear();
+ 
+        //this.refs.input.clear();
     }
 
     nazwaGrupy = (grupa) => {
@@ -84,6 +99,24 @@ class HomePage extends Component {
             this.zwroceniePostow();
         });
     }
+
+
+    onChange (event) {
+        let files = event.target.files;
+
+        let reader = new FileReader();
+        reader.readAsDataURL(files[0]);
+
+        reader.onload = (event) => {
+
+            //console.warn(event.target.result);
+
+            this.setState({
+                danePliku: event.target.result
+            });
+        }
+    }
+
 
     render() {
 
@@ -126,19 +159,19 @@ class HomePage extends Component {
                             <br />
                             <Posts posts={this.state.posts}/>
 
-                              <Input
-                               
-                                  ref='input'
-                                  placeholder="Skomentuj..."
-                                  multiline={false}
-                                  rightButtons={
-                                      <Button
-                                          onClick={this.KlikniecieSubmit}
-                                          color='white'
-                                          backgroundColor='black'
-                                          text='Wyślij' />
-                                  }
-                              /*OnKeyPress={(e) => { this.refs.input.clear() }}*/ />
+                            <form onSubmit={this.KlikniecieSubmit}>
+                                <Row style={{ paddingLeft: "14px" }}>
+                                    <Col md={11} style={{ padding: "0px" }}>
+                                        <Input type="text" name="zawartosc" placeholder="Skomentuj..." />
+                                        <Input type="file" name="plik" onChange={(e) => this.onChange(e)} />
+                                    </Col>
+                                    <Col md={1} style={{ padding: "0px" }}>
+                                        <Button color="primary">Wyślij!</Button>
+                                    </Col>
+                                 </Row>  
+                            </form>
+                            
+
                             {/* emitonki*/}
                         </Col>
                     </Row>

@@ -47,7 +47,7 @@ class GroupList extends Component {
                         <center><b>Moje grupy</b></center>
                         <br />
 
-                        <div style={{ "overflow-y": "scroll", "overflow-x": "hidden", "height": "484px", "backgroundColor": "rgba(255,255,255,.8)", padding:"0px" }}>
+                        <div style={{ "overflow-y": "scroll", "overflow-x": "hidden", "height": "524px", "backgroundColor": "rgba(255,255,255,.8)", padding:"0px" }}>
                             <ListGroup>
                                 {this.state.groups.map(dane => <MyGroup info={dane} grupa={this.grupa}/>)}
                             </ListGroup>

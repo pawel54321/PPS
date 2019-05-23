@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Alert from 'react-s-alert';
-import { Button, Col, Row } from 'reactstrap';
+import { Button, Col, Row, Input } from 'reactstrap';
 import history from '../history';
 
 class Login extends Component {
@@ -66,10 +66,10 @@ class Login extends Component {
                             <center>
                             <br/> <br/> <br/> <br/> <br/>
                                 <h5>Logowanie:</h5><br />
-                                <label style={{ paddingRight: '140px' }}>Login: </label><br />
-                                <input type="text" name="login" value={this.state.login} required onChange={this.ZmianaWCzasieRzeczywistynInput2} /><br />
-                                <label style={{ paddingRight: '140px' }}>Hasło: </label><br />
-                                <input type="password" name="haslo" value={this.state.haslo} required onChange={this.ZmianaWCzasieRzeczywistynInput2} /><br /><br />
+                                <label style={{ paddingRight: '240px' }}>Login: </label><br />
+                                <Input type="text" name="login" value={this.state.login} required onChange={this.ZmianaWCzasieRzeczywistynInput2} /><br />
+                                <label style={{ paddingRight: '240px' }}>Hasło: </label><br />
+                                <Input type="password" name="haslo" value={this.state.haslo} required onChange={this.ZmianaWCzasieRzeczywistynInput2} /><br /><br />
                                 <Button color="primary">Zaloguj się!</Button>
                                 <br /><br />
                                 Nie masz konta?<br /><Link to="/register">Zarejestruj się!</Link>

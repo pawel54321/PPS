@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Alert from 'react-s-alert';
-import { Button, Col, Row } from 'reactstrap';
+import { Button, Col, Row, Input } from 'reactstrap';
 
 class Register extends Component {
 
@@ -67,14 +67,14 @@ class Register extends Component {
                             <center>
                             <br/> <br/> <br/>
                                 <h5>Rejestracja:</h5><br />
-                                <label style={{ paddingRight: '150px' }}>Imię: </label><br />
-                                <input type="text" name="imie" value={this.state.imie} required onChange={this.ZmianaWCzasieRzeczywistynInput} /><br />
-                                <label style={{ paddingRight: '110px' }}>Nazwisko: </label><br />
-                                <input type="text" name="nazwisko" value={this.state.nazwisko} required onChange={this.ZmianaWCzasieRzeczywistynInput} /><br />
-                                <label style={{ paddingRight: '140px' }}>Login: </label><br />
-                                <input type="text" name="login" value={this.state.login} required onChange={this.ZmianaWCzasieRzeczywistynInput} /><br />
-                                <label style={{ paddingRight: '140px' }}>Hasło: </label><br />
-                                <input type="password" name="haslo" value={this.state.haslo} required onChange={this.ZmianaWCzasieRzeczywistynInput} /><br /><br />
+                                <label style={{ paddingRight: '250px' }}>Imię: </label><br />
+                                <Input type="text" name="imie" value={this.state.imie} required onChange={this.ZmianaWCzasieRzeczywistynInput} /><br />
+                                <label style={{ paddingRight: '210px' }}>Nazwisko: </label><br />
+                                <Input type="text" name="nazwisko" value={this.state.nazwisko} required onChange={this.ZmianaWCzasieRzeczywistynInput} /><br />
+                                <label style={{ paddingRight: '240px' }}>Login: </label><br />
+                                <Input type="text" name="login" value={this.state.login} required onChange={this.ZmianaWCzasieRzeczywistynInput} /><br />
+                                <label style={{ paddingRight: '240px' }}>Hasło: </label><br />
+                                <Input type="password" name="haslo" value={this.state.haslo} required onChange={this.ZmianaWCzasieRzeczywistynInput} /><br /><br />
                                 <Button color="primary">Zarejestruj się!</Button>
                                 <br /><br />
                                 Masz konto?<br /><Link to="/login">Zaloguj się!</Link>
