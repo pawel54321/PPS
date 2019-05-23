@@ -119,7 +119,7 @@ class HomePage extends Component {
 
             this.setState({
                // danePliku: event.target.result
-                danePlik: event.target.files[0]
+                plik: event.target.files[0]
             });
        // }
     }
