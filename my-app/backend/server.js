@@ -58,36 +58,38 @@ pgClient
     .query('CREATE TABLE IF NOT EXISTS Uzytkownik (id SERIAL PRIMARY KEY, imie VARCHAR(255), nazwisko VARCHAR(255), login VARCHAR(255), haslo VARCHAR(255), prawa VARCHAR(255), flaga BOOLEAN DEFAULT true)')
     .catch((error) => {
         console.log("Uzytkownik" + error);
-    })
-    .then(
-        //----------------- CREATE WAIT-------------------
+    });
 
-        //REFERENCES
-        pgClient
-            .query('CREATE TABLE IF NOT EXISTS Post_Komentarz (id SERIAL PRIMARY KEY, id_grupa INT REFERENCES Grupa_Pokoj (id), id_uzytkownik INT REFERENCES Uzytkownik (id), zawartosc VARCHAR(255), data VARCHAR(255))')
-            .catch((error) => {
-                console.log("Post_Komentarz" + error);
-            })
-    ).then(
-        pgClient
-            .query('CREATE TABLE IF NOT EXISTS Zaproszenia (id SERIAL PRIMARY KEY, id_grupa INT REFERENCES Grupa_Pokoj (id), id_uzytkownik INT REFERENCES Uzytkownik (id), stan VARCHAR(255))')
-            .catch((error) => {
-                console.log("Zaproszenia" + error);
-            })
-    ).then(
+//----------------- CREATE WAIT-------------------
+a();
+function a() {
 
-        pgClient
-            .query('CREATE TABLE IF NOT EXISTS Tabela_Posrednia (id SERIAL PRIMARY KEY, id_grupa INT REFERENCES Grupa_Pokoj (id), id_uzytkownik INT REFERENCES Uzytkownik (id), moderator_grupy BOOLEAN)')
-            .catch((error) => {
-                console.log("Tabela_Posrednia" + error);
-            })
-    ).then(
-        pgClient
-            .query('CREATE TABLE IF NOT EXISTS Polubienia (id SERIAL PRIMARY KEY, liczba_polubien INT, id_post INT REFERENCES Post_Komentarz (id), id_uzytkownik INT REFERENCES Uzytkownik (id))')
-            .catch((error) => {
-                console.log("Polubienia" + error);
-            })
-    );
+    //REFERENCES
+    pgClient
+        .query('CREATE TABLE IF NOT EXISTS Post_Komentarz (id SERIAL PRIMARY KEY, id_grupa INT REFERENCES Grupa_Pokoj (id), id_uzytkownik INT REFERENCES Uzytkownik (id), zawartosc VARCHAR(255), data VARCHAR(255))')
+        .catch((error) => {
+            console.log("Post_Komentarz" + error);
+        });
+
+    pgClient
+        .query('CREATE TABLE IF NOT EXISTS Zaproszenia (id SERIAL PRIMARY KEY, id_grupa INT REFERENCES Grupa_Pokoj (id), id_uzytkownik INT REFERENCES Uzytkownik (id), stan VARCHAR(255))')
+        .catch((error) => {
+            console.log("Zaproszenia" + error);
+        });
+
+
+    pgClient
+        .query('CREATE TABLE IF NOT EXISTS Tabela_Posrednia (id SERIAL PRIMARY KEY, id_grupa INT REFERENCES Grupa_Pokoj (id), id_uzytkownik INT REFERENCES Uzytkownik (id), moderator_grupy BOOLEAN)')
+        .catch((error) => {
+            console.log("Tabela_Posrednia" + error);
+        });
+
+    pgClient
+        .query('CREATE TABLE IF NOT EXISTS Polubienia (id SERIAL PRIMARY KEY, liczba_polubien INT, id_post INT REFERENCES Post_Komentarz (id), id_uzytkownik INT REFERENCES Uzytkownik (id))')
+        .catch((error) => {
+            console.log("Polubienia" + error);
+        });
+}
 
 //REFERENCES
 
