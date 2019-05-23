@@ -47,6 +47,17 @@ class HomePage extends Component {
 
     KlikniecieSubmit = async (event) => {
         event.preventDefault();
+
+        if (this.state.grupa === "") {
+            Alert.info('Proszę wybrać grupę!', { position: 'bottom' });
+            return;
+        }
+
+        if (this.refs.input.input.value === "") {
+            Alert.error('Pole nie może być puste!', { position: 'bottom' });
+            return;
+        }
+        
         const OdpowiedzSerwera2 = await axios.post('http://localhost:5000/Post/Stworz', {
             id_uzytkownik: this.state.token.data.user.id,
             grupa: this.state.grupa,
@@ -116,6 +127,7 @@ class HomePage extends Component {
                             <Posts posts={this.state.posts}/>
 
                               <Input
+                               
                                   ref='input'
                                   placeholder="Skomentuj..."
                                   multiline={false}

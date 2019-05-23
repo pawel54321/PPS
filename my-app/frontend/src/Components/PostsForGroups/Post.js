@@ -7,7 +7,9 @@
 // RCE CSS
 import 'react-chat-elements/dist/main.css';
 // MessageBox component
-import { ChatItem } from 'react-chat-elements';
+import {
+    ChatItem //, MessageBox
+} from 'react-chat-elements';
 //import Alert from 'react-s-alert';
 
 import Av from './User_font_awesome.svg.png';
@@ -43,7 +45,8 @@ class Post extends Component {
     render() {
         return (
             <div>
-            <ChatItem
+                <ChatItem
+                
                 avatar={Av}
                 alt={'Komentarz'}
                 title={this.props.post.login}
@@ -51,7 +54,19 @@ class Post extends Component {
                 date={new Date(this.props.post.data)}
                 unread={/*this.state.likes*/0}
                 onClick={this.dodaj}
-            />
+                />
+
+                {/* <MessageBox
+                    position={'left'}
+                    type={'photo'}
+                    text={'react.svg'}
+                    data={{
+                        uri: 'user_font_awesome.svg.png',
+                        status: {
+                            click: false,
+                            loading: 0,
+                        }
+                    }} />*/}
                 {/*this.props.post.data*/}
                 </div>
         );
