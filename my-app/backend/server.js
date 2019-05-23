@@ -61,35 +61,33 @@ pgClient
     });
 
 //----------------- CREATE WAIT-------------------
-a();
-function a() {
 
-    //REFERENCES
-    pgClient
-        .query('CREATE TABLE IF NOT EXISTS Post_Komentarz (id SERIAL PRIMARY KEY, id_grupa INT REFERENCES Grupa_Pokoj (id), id_uzytkownik INT REFERENCES Uzytkownik (id), zawartosc VARCHAR(255), data VARCHAR(255))')
-        .catch((error) => {
-            console.log("Post_Komentarz" + error);
-        });
+//REFERENCES
+pgClient
+    .query('CREATE TABLE IF NOT EXISTS Post_Komentarz (id SERIAL PRIMARY KEY, id_grupa INT REFERENCES Grupa_Pokoj (id), id_uzytkownik INT REFERENCES Uzytkownik (id), zawartosc VARCHAR(255), data VARCHAR(255))')
+    .catch((error) => {
+        console.log("Post_Komentarz" + error);
+    });
 
-    pgClient
-        .query('CREATE TABLE IF NOT EXISTS Zaproszenia (id SERIAL PRIMARY KEY, id_grupa INT REFERENCES Grupa_Pokoj (id), id_uzytkownik INT REFERENCES Uzytkownik (id), stan VARCHAR(255))')
-        .catch((error) => {
-            console.log("Zaproszenia" + error);
-        });
+pgClient
+    .query('CREATE TABLE IF NOT EXISTS Zaproszenia (id SERIAL PRIMARY KEY, id_grupa INT REFERENCES Grupa_Pokoj (id), id_uzytkownik INT REFERENCES Uzytkownik (id), stan VARCHAR(255))')
+    .catch((error) => {
+        console.log("Zaproszenia" + error);
+    });
 
 
-    pgClient
-        .query('CREATE TABLE IF NOT EXISTS Tabela_Posrednia (id SERIAL PRIMARY KEY, id_grupa INT REFERENCES Grupa_Pokoj (id), id_uzytkownik INT REFERENCES Uzytkownik (id), moderator_grupy BOOLEAN)')
-        .catch((error) => {
-            console.log("Tabela_Posrednia" + error);
-        });
+pgClient
+    .query('CREATE TABLE IF NOT EXISTS Tabela_Posrednia (id SERIAL PRIMARY KEY, id_grupa INT REFERENCES Grupa_Pokoj (id), id_uzytkownik INT REFERENCES Uzytkownik (id), moderator_grupy BOOLEAN)')
+    .catch((error) => {
+        console.log("Tabela_Posrednia" + error);
+    });
 
-    pgClient
-        .query('CREATE TABLE IF NOT EXISTS Polubienia (id SERIAL PRIMARY KEY, liczba_polubien INT, id_post INT REFERENCES Post_Komentarz (id), id_uzytkownik INT REFERENCES Uzytkownik (id))')
-        .catch((error) => {
-            console.log("Polubienia" + error);
-        });
-}
+pgClient
+    .query('CREATE TABLE IF NOT EXISTS Polubienia (id SERIAL PRIMARY KEY, liczba_polubien INT, id_post INT REFERENCES Post_Komentarz (id), id_uzytkownik INT REFERENCES Uzytkownik (id))')
+    .catch((error) => {
+        console.log("Polubienia" + error);
+    });
+
 
 //REFERENCES
 
