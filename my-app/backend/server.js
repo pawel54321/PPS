@@ -92,6 +92,41 @@ pgClient.on('error', () => {
 //TABELE
 
 
+app.post('/upload', function (req, res) {
+
+
+    //console.log(req.);
+    
+    if (Object.keys(req.files).length == 0) {
+        return res.status(400).send('Załącznik nie został dodany na serwer.');
+    }
+
+    // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+    let sampleFile = req.files.file;
+
+    // Use the mv() method to place the file somewhere on your server
+    sampleFile.mv('./Upload/'+ sampleFile.name, function (err) {
+        if (err)
+            return res.status(500).send(err);
+
+        res.send('Pomyślnie dodano załącznik!');
+    });
+    
+
+
+   // res.send({ odpowiedz: req.body.get('file') });
+   // res.send({ odpowiedz: req.files });
+
+});
+
+
+
+
+
+
+
+
+
 app.post('/Uzytkownik/Wyslij_Plik', async (req, res) => {
    // const url = req.body.url;
    // const fd = req.body.fd;
