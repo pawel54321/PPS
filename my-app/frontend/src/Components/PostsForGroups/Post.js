@@ -8,7 +8,7 @@
 import 'react-chat-elements/dist/main.css';
 // MessageBox component
 import {
-    ChatItem //, MessageBox
+    ChatItem, MessageBox
 } from 'react-chat-elements';
 //import Alert from 'react-s-alert';
 
@@ -56,15 +56,19 @@ class Post extends Component {
                 onClick={this.dodaj}
                 />
 
-                {/* <MessageBox
-                    position={'left'}
+
+
+                {/*  <img alt="" height="100%" width="100%" src="C:/Projekt PPS/PPS/my-app/frontend/b.jpg"></img>*/}
+
+                {/*<MessageBox
+                    position={'right'}
                     type={'photo'}
-                    text={'react.svg'}
+                    text={this.props.post.zalacznik}
                     data={{
-                        uri: 'user_font_awesome.svg.png',
+                        uri: "C:/Projekt PPS/PPS/my-app/backend/Upload/b.jpg",
                         status: {
-                            click: false,
-                            loading: 0,
+                            click: true//,
+                           //loading: 100,
                         }
                     }} />*/}
                 {/*this.props.post.data*/}

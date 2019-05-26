@@ -66,7 +66,7 @@ pgClient.on('error', () => {
     //REFERENCES
 
     await pgClient
-        .query('CREATE TABLE IF NOT EXISTS Post_Komentarz (id SERIAL PRIMARY KEY, id_grupa INT REFERENCES Grupa_Pokoj (id), id_uzytkownik INT REFERENCES Uzytkownik (id), zawartosc VARCHAR(255), data VARCHAR(255))')
+        .query('CREATE TABLE IF NOT EXISTS Post_Komentarz (id SERIAL PRIMARY KEY, id_grupa INT REFERENCES Grupa_Pokoj (id), id_uzytkownik INT REFERENCES Uzytkownik (id), zawartosc VARCHAR(255), data VARCHAR(255), zalacznik VARCHAR(255))')
         .catch((error) => {
             console.log("Post_Komentarz" + error);
         });
@@ -146,7 +146,7 @@ app.post('/Uzytkownik/Wyslij_Plik', async (req, res) => {
     let fd = req.body.fd;
 
     // Use the mv() method to place the file somewhere on your server
-    fd.mv('C:/Projekt PPS/PPS/my-app/frontend/src/Upload/' + fd, function (err) {
+    fd.mv('./Upload/' + fd, function (err) {
         if (err)
             return res.status(500).send(err);
 
@@ -815,6 +815,8 @@ app.post('/Post/Stworz', async (req, res) => {
     const zawartosc = req.body.zawartosc;
     const data = req.body.data;
 
+    const urlzalacznik = req.body.urlzalacznik;
+
     let czyStworzono = false;
 
 
@@ -825,7 +827,7 @@ app.post('/Post/Stworz', async (req, res) => {
 currentDate.getHours() + ":" + currentDate.getMinutes() + ":"+currentDate.getSeconds()
 currentDate.getDate() + "." + (currentDate.getMonth()+1) + "." + currentDate.getFullYear();
      */
-    pgClient.query('INSERT INTO Post_Komentarz(id_uzytkownik, id_grupa, zawartosc, data) VALUES($1, $2, $3, $4)', [id_uzytkownik, id_grupa, zawartosc, data ])
+    pgClient.query('INSERT INTO Post_Komentarz(id_uzytkownik, id_grupa, zawartosc, data, zalacznik) VALUES($1, $2, $3, $4, $5)', [id_uzytkownik, id_grupa, zawartosc, data, urlzalacznik ])
         .catch((error) => {
             console.log(error);
             czyStworzono = false;
@@ -838,6 +840,7 @@ currentDate.getDate() + "." + (currentDate.getMonth()+1) + "." + currentDate.get
         id_grupa: id_grupa,
         zawartosc: req.body.zawartosc,
         data: req.body.data,
+        urlzalacznik: req.body.urlzalacznik,
 
         zwracam_czy_stworzono: czyStworzono
     });

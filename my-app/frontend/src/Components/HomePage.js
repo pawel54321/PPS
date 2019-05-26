@@ -112,7 +112,8 @@ class HomePage extends Component {
             id_uzytkownik: this.state.token.data.user.id,
             grupa: this.state.grupa,
             zawartosc: document.getElementsByName("zawartosc")[0].value,
-            data: new Date() 
+            data: new Date(),
+            urlzalacznik: "./Upload/"+this.state.file
         });
 
 
