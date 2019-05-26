@@ -63,6 +63,17 @@ class HomePage extends Component {
      //       console.log(response.data);
      //   })
 
+       
+        if (this.state.grupa === "") {
+            Alert.info('Proszę wybrać grupę!', { position: 'bottom' });
+            return;
+        }
+
+        if (document.getElementsByName("zawartosc")[0].value === "") {
+            Alert.error('Pole nie może być puste!', { position: 'bottom' });
+            return;
+        }
+
         if (this.state.file != null) {
             const url = 'http://localhost:5000/upload';
             const formData = new FormData();
@@ -78,17 +89,6 @@ class HomePage extends Component {
 
             axios.post(url, formData, config);
         }
-       
-        if (this.state.grupa === "") {
-            Alert.info('Proszę wybrać grupę!', { position: 'bottom' });
-            return;
-        }
-
-        if (document.getElementsByName("zawartosc")[0].value === "") {
-            Alert.error('Pole nie może być puste!', { position: 'bottom' });
-            return;
-        }
-
 
         //if (this.state.plik !== null) {
 
