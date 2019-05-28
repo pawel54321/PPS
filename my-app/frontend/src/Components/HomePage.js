@@ -138,6 +138,10 @@ class HomePage extends Component {
             Alert.success('Wiadomość została wysłana!', { position: 'bottom' });
             document.getElementsByName("zawartosc")[0].value = "";
             document.getElementsByClassName("inputfile")[0].value = "";
+            this.setState({
+                file: null
+            });
+
             this.zwroceniePostow();
              // + zwrocenie plików (dane i plik)
         }
