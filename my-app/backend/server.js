@@ -82,11 +82,12 @@ pgClient.on('error', () => {
         .catch((error) => {
             console.log("Tabela_Posrednia" + error);
         });
+    /*
     await pgClient
         .query('CREATE TABLE IF NOT EXISTS Polubienia (id SERIAL PRIMARY KEY, liczba_polubien INT, id_post INT REFERENCES Post_Komentarz (id), id_uzytkownik INT REFERENCES Uzytkownik (id))')
         .catch((error) => {
             console.log("Polubienia" + error);
-        });
+        });*/
     //REFERENCES
 })();
 //TABELE
