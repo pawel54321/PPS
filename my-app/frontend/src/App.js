@@ -1,61 +1,110 @@
-import axios from 'axios';
-import React, { Component } from 'react';
+﻿import React, { Component } from 'react';
 import './App.css';
+import { Router, Route } from 'react-router-dom';
+import history from './history';
+import PrivateRoute from './PrivateRoute'
+import {token} from './Token';
+
+import HomePage from './Components/HomePage';
+import Login from './Components/Login';
+import Register from './Components/Register';
+import Header from './Components/Header';
+import Footer from './Components/Footer';
+//import CreateGroup from './Components/CreateGroup';
+import User from './Components/User';
+import Admin from './Components/Admin';
+
+import Group from './Components/PostsForGroups/Group';
+
+import Alert from 'react-s-alert';
+import 'react-s-alert/dist/s-alert-default.css';
+// optional - you can choose the effect you want
+import 'react-s-alert/dist/s-alert-css-effects/slide.css';
+import 'react-s-alert/dist/s-alert-css-effects/scale.css';
+import 'react-s-alert/dist/s-alert-css-effects/bouncyflip.css';
+import 'react-s-alert/dist/s-alert-css-effects/flip.css';
+import 'react-s-alert/dist/s-alert-css-effects/genie.css';
+import 'react-s-alert/dist/s-alert-css-effects/jelly.css';
+import 'react-s-alert/dist/s-alert-css-effects/stackslide.css';
+
+import InvitationsComponent from './Components/Invitations/InvitationsComponent';
+
 class App extends Component {
 
-/*
-//test
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: '',
-      counter: 0
-    }
-    this.getValues = this.getValues.bind(this);
-  }
-
-  getValues = async (event) => {
-    event.preventDefault();
-    const response = await axios.post('http://localhost:5000/api/value', {
-      value: this.state.value,
-    });
-    if (response) {
-      const value = response.data.value;
-      this.setState((prevState, props) => {
-        return {
-          value,
-          counter: prevState.counter + 1
+    constructor(props) {
+        super(props);
+        this.state = {
+            user: null,
+            rola: null        
         };
-      });
+
+   
     }
-  }
-//test
-*/
+
+    componentDidMount() {
+        token()
+        .then((data) => {
+            this.setState({
+                user: data.data.user.login,
+                rola: data.data.user.jaki_user
+            });
+        });
+    }
+
+  
+
+
     render() {
-    //test
-    //const { value, counter } = this.state;
-    //test
-    return (
-      <div className="App">
-        {/*
-         * test
-        <form onSubmit={this.getValues}>
-          <button type="submit">Click getValues()</button>
-        </form>
+       // let createGroup;
+        let group;
+        let admin;
+        let user;
 
-        {value ?
-          (<div>
-            <p>Wartość testowa: {value}, po raz: {counter}</p>
-          </div>) :
-          null
+        let inv;
+
+        if(this.state.rola !== null) {
+         //   createGroup = <PrivateRoute rola={this.state.rola} roles={['User']} path='/create' component={CreateGroup} />
+            group = <PrivateRoute rola={this.state.rola} roles={['User','Admin']} path='/group' component={Group} />
+            admin = <PrivateRoute rola={this.state.rola} roles={['Admin']} path='/admin' component={Admin} />
+            user = <PrivateRoute rola={this.state.rola} roles={['User']} path='/user' component={User} />
+            if (this.state.rola === 'User') {
+                inv = <InvitationsComponent />
+            } else {
+                inv = null;
+            }
+        } else {
+         //   createGroup = null;
+            group = null;
+            user = null;
+            admin = null;
+            inv = null
+
+           // document.getElementsByClassName("zaproszenia")[0].style.display = 'none';
         }
-        * test
-        */}
+    
+        return (
+            <Router history={history}>
+                <div className="App">
+                    {inv}
+                    <Header rola={this.state.rola} />
+                    <main>
+                        {this.props.children}
+                        <center><Alert stack={{ limit: 1 }} html={false} timeout={2000} effect='bouncyflip' offset={65} /></center>
+                        <Route exact path='/' component={HomePage} />
+                        <Route path='/login' component={Login} />
+                        <Route path='/register' component={Register} />
+                        {/*createGroup*/}
+                        {group}
+                        {admin}
+                        {user}
 
-
-      </div>
-    );
-  }
+                        
+                    </main>
+                    <Footer />
+                </div>
+            </Router>
+        );
+    }
 }
 
 export default App;
