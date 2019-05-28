@@ -109,11 +109,14 @@ class HomePage extends Component {
 
         if (this.state.file !== null) {
 
-            const formData2 = new FormData();
-            formData2.append('file', this.state.file)
+            
+        //    const formData2 = new FormData();
+         //   formData2.append('file', this.state.file);
 
-            if (formData2.name !== undefined) {
-                nazwa = "./Upload/" + formData2.name;
+          //  console.log(formData2);
+
+            if (this.state.file.name !== undefined) {
+                nazwa = 'http://localhost:5000/Upload/' + this.state.file.name;
             }
             else {
                 nazwa = null;

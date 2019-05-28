@@ -92,7 +92,7 @@ pgClient.on('error', () => {
 //TABELE
 
 
-app.use('/Upload', express.static('public'));
+app.use(express.static('public'));
 
 app.post('/upload', function (req, res) {
 
@@ -109,7 +109,7 @@ app.post('/upload', function (req, res) {
         let sampleFile = req.files.file;
 
         // Use the mv() method to place the file somewhere on your server
-        sampleFile.mv('./Upload/' + sampleFile.name, function (err) {
+        sampleFile.mv('http://localhost:5000/Upload/' + sampleFile.name, function (err) {
             if (err)
                 return res.status(500).send(err);
 
@@ -124,42 +124,6 @@ app.post('/upload', function (req, res) {
 
    // res.send({ odpowiedz: req.body.get('file') });
    // res.send({ odpowiedz: req.files });
-
-});
-
-
-
-
-
-
-
-
-
-app.post('/Uzytkownik/Wyslij_Plik', async (req, res) => {
-   // const url = req.body.url;
-   // const fd = req.body.fd;
-
-    /*
-    pgClient.query('INSERT INTO Uzytkownik(imie, nazwisko, login, haslo, prawa) VALUES($1,$2,$3,$4,$5)', [imie, nazwisko, login, haslo, prawa])
-        .catch((error) => {
-            console.log(error);
-        });
-*/
-
-    if (Object.keys(req.body).length == 0) {
-        return res.status(400).send('Nie załadowano pliku.');
-    }
-
-    // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-    let fd = req.body.fd;
-
-    // Use the mv() method to place the file somewhere on your server
-    fd.mv('./Upload/' + fd, function (err) {
-        if (err)
-            return res.status(500).send(err);
-
-        res.send('Załadowano plik!');
-    });
 
 });
 
