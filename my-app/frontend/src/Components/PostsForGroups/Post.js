@@ -8,7 +8,7 @@
 import 'react-chat-elements/dist/main.css';
 // MessageBox component
 import {
-    ChatItem, MessageBox
+    ChatItem//, MessageBox
 } from 'react-chat-elements';
 //import Alert from 'react-s-alert';
 
@@ -56,7 +56,8 @@ class Post extends Component {
                 onClick={this.dodaj}
                 />
 
-
+                
+                {this.props.post.zalacznik ? <img alt="obrazek" src={this.props.post.zalacznik} /> : <div></div>}
 
                 {/*  <img alt="" height="100%" width="100%" src="C:/Projekt PPS/PPS/my-app/frontend/b.jpg"></img>*/}
 

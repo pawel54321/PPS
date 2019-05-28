@@ -92,27 +92,35 @@ pgClient.on('error', () => {
 //TABELE
 
 
+app.use('/Upload', express.static('public'));
+
 app.post('/upload', function (req, res) {
 
+    if (req.files.file.mimetype == "image/x-png" || req.files.file.mimetype == "image/gif" || req.files.file.mimetype == "image/jpeg" ) {
 
-    //console.log(req.);
-    
-    if (Object.keys(req.files).length == 0) {
-        return res.status(400).send('Załącznik nie został dodany na serwer.');
+
+        //console.log(req.);
+
+        if (Object.keys(req.files).length == 0) {
+            return res.status(400).send('Załącznik nie został dodany na serwer.');
+        }
+
+        // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+        let sampleFile = req.files.file;
+
+        // Use the mv() method to place the file somewhere on your server
+        sampleFile.mv('./Upload/' + sampleFile.name, function (err) {
+            if (err)
+                return res.status(500).send(err);
+
+            res.send('Pomyślnie dodano załącznik!');
+        });
+
     }
-
-    // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-    let sampleFile = req.files.file;
-
-    // Use the mv() method to place the file somewhere on your server
-    sampleFile.mv('./Upload/'+ sampleFile.name, function (err) {
-        if (err)
-            return res.status(500).send(err);
-
-        res.send('Pomyślnie dodano załącznik!');
-    });
-    
-
+    else
+    {
+        res.send('Niepoprawny format!');
+    }
 
    // res.send({ odpowiedz: req.body.get('file') });
    // res.send({ odpowiedz: req.files });
@@ -819,6 +827,7 @@ app.post('/Post/Stworz', async (req, res) => {
 
     let czyStworzono = false;
 
+    console.log(urlzalacznik);
 
     const id = await pgClient.query("SELECT id FROM grupa_pokoj WHERE nazwa='" + grupa + "'");
     const id_grupa = id.rows[0].id;

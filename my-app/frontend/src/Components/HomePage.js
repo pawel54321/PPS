@@ -105,7 +105,21 @@ class HomePage extends Component {
 
      //   }
 
+        let nazwa = null;
 
+        if (this.state.file !== null) {
+
+            const formData2 = new FormData();
+            formData2.append('file', this.state.file)
+
+            if (formData2.name !== undefined) {
+                nazwa = "./Upload/" + formData2.name;
+            }
+            else {
+                nazwa = null;
+            }
+        }
+       
 
         
         const OdpowiedzSerwera2 = await axios.post('http://localhost:5000/Post/Stworz', {
@@ -113,7 +127,7 @@ class HomePage extends Component {
             grupa: this.state.grupa,
             zawartosc: document.getElementsByName("zawartosc")[0].value,
             data: new Date(),
-            urlzalacznik: "./Upload/"+this.state.file
+            urlzalacznik: nazwa
         });
 
 
@@ -185,7 +199,7 @@ class HomePage extends Component {
                                 <Row style={{ paddingLeft: "16px" }}>
                                     <Col md={11} style={{ padding: "0px" }}>
                                         <Input type="text" name="zawartosc" placeholder="Skomentuj..." />
-                                        <b>Jeśli chcesz możesz dodać załącznik: </b><Input type="file" className="inputfile" name="plik" onChange={this.onChange} />
+                                        <b>Jeśli chcesz możesz dodać załącznik: </b><Input type="file" className="inputfile" name="plik" onChange={this.onChange} accept="image/x-png,image/gif,image/jpeg" />
                                     </Col>
                                     <Col md={1} style={{ padding: "0px" }}>
                                         <Button color="primary">Wyślij!</Button>
