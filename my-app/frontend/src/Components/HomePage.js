@@ -87,7 +87,7 @@ class HomePage extends Component {
 
             // console.log(formData.get('file'));
 
-            axios.post(url, formData, config);
+           await axios.post(url, formData, config);
         }
 
         //if (this.state.plik !== null) {
@@ -137,6 +137,7 @@ class HomePage extends Component {
         if (OdpowiedzSerwera2.data.zwracam_czy_stworzono === true) {
             Alert.success('Wiadomość została wysłana!', { position: 'bottom' });
             document.getElementsByName("zawartosc")[0].value = "";
+            document.getElementsByClassName("inputfile")[0].value = "";
             this.zwroceniePostow();
              // + zwrocenie plików (dane i plik)
         }
@@ -202,7 +203,7 @@ class HomePage extends Component {
                                 <Row style={{ paddingLeft: "16px" }}>
                                     <Col md={11} style={{ padding: "0px" }}>
                                         <Input type="text" name="zawartosc" placeholder="Skomentuj..." />
-                                        <b>Jeśli chcesz możesz dodać załącznik: </b><Input type="file" className="inputfile" name="plik" onChange={this.onChange} accept="image/x-png,image/gif,image/jpeg" />
+                                        <b>Jeśli chcesz możesz dodać załącznik: </b><Input type="file" className="inputfile" name="plik" onChange={this.onChange} accept="image/gif,image/jpeg" /> {/*image/x-png,*/}
                                     </Col>
                                     <Col md={1} style={{ padding: "0px" }}>
                                         <Button color="primary">Wyślij!</Button>

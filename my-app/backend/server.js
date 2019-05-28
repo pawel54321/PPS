@@ -96,7 +96,10 @@ app.use(express.static('public'));
 
 app.post('/upload', function (req, res) {
 
-    if (req.files.file.mimetype == "image/x-png" || req.files.file.mimetype == "image/gif" || req.files.file.mimetype == "image/jpeg" ) {
+    //req.files.file.mimetype == "image/x-png" ||
+
+    if (req.files.file.mimetype == "image/gif" || req.files.file.mimetype == "image/jpeg") //jpg
+    {
 
 
         //console.log(req.);
@@ -109,9 +112,9 @@ app.post('/upload', function (req, res) {
         let sampleFile = req.files.file;
 
         // Use the mv() method to place the file somewhere on your server
-        sampleFile.mv('http://localhost:5000/Upload/' + sampleFile.name, function (err) {
-            if (err)
-                return res.status(500).send(err);
+        sampleFile.mv('./public/Upload/' + sampleFile.name, function (err) {
+           // if (err)
+            //    return res.status(500).send(err);
 
             res.send('Pomyślnie dodano załącznik!');
         });
