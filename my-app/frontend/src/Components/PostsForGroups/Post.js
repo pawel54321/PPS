@@ -57,7 +57,7 @@ class Post extends Component {
                 />
 
                 
-                {this.props.post.zalacznik ? <img alt="obrazek" src={this.props.post.zalacznik} /> : <div></div>}
+                {this.props.post.zalacznik ? <img alt="obrazek" height="100px" src={this.props.post.zalacznik} /> : <div></div>}
 
                 {/*  <img alt="" height="100%" width="100%" src="C:/Projekt PPS/PPS/my-app/frontend/b.jpg"></img>*/}
 
