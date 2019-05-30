@@ -1,5 +1,6 @@
 ﻿import React, { Component } from 'react';
 import axios from 'axios';
+import { Input } from 'reactstrap';
 
 export default class DropdownGroup extends Component {
     constructor(props) {
@@ -34,8 +35,6 @@ export default class DropdownGroup extends Component {
         this.setState({
             Grupa: event.target.value
         });
-
-      
     }
 
     render() {
@@ -46,10 +45,10 @@ export default class DropdownGroup extends Component {
         });
 
         return (
-            <select value={this.state.Grupa} onChange={this.handleChange} onClick={this.ZwrocenieTabeliGrupa}>
+            <Input type="select" style={{ maxWidth: 600 }} value={this.state.Grupa} onChange={this.handleChange} onClick={this.ZwrocenieTabeliGrupa}>
                 <option>-</option>
                 {grupy}
-            </select>
+            </Input>
         );
     }
 }
