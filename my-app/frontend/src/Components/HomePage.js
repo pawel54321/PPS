@@ -20,11 +20,11 @@ class HomePage extends Component {
             grupa: '',
             file: null
         }
-        
+
         this.onChange = this.onChange.bind(this)
-      
+
     }
- 
+
     onChange(e) {
         this.setState({ file: e.target.files[0] })
     }
@@ -63,7 +63,7 @@ class HomePage extends Component {
      //       console.log(response.data);
      //   })
 
-       
+
         if (this.state.grupa === "") {
             Alert.info('Proszę wybrać grupę!', { position: 'bottom' });
             return;
@@ -97,7 +97,7 @@ class HomePage extends Component {
 
             //const fd = new FormData();
             //fd.append('image', this.state.plik, this.state.plik.name);
-          
+
 
            // await axios.post('http://localhost:5000/Uzytkownik/Wyslij_Plik', {
          //       fd: fd
@@ -109,7 +109,7 @@ class HomePage extends Component {
 
         if (this.state.file !== null) {
 
-            
+
         //    const formData2 = new FormData();
          //   formData2.append('file', this.state.file);
 
@@ -122,9 +122,9 @@ class HomePage extends Component {
                 nazwa = null;
             }
         }
-       
 
-        
+
+
         const OdpowiedzSerwera2 = await axios.post('http://localhost:5000/Post/Stworz', {
             id_uzytkownik: this.state.token.data.user.id,
             grupa: this.state.grupa,
@@ -149,7 +149,7 @@ class HomePage extends Component {
             Alert.error('Wystąpił błąd podczas wysyłania wiadomości!', { position: 'bottom' });
         }
 
- 
+
         //this.refs.input.clear();
     }
 
@@ -207,14 +207,18 @@ class HomePage extends Component {
                                 <Row style={{ paddingLeft: "16px" }}>
                                     <Col md={11} style={{ padding: "0px" }}>
                                         <Input type="text" name="zawartosc" placeholder="Skomentuj..." />
-                                        <b>Jeśli chcesz możesz dodać załącznik: </b><Input type="file" className="inputfile" name="plik" onChange={this.onChange} accept="image/gif,image/jpeg" /> {/*image/x-png,*/}
+                                        <b>Jeśli chcesz możesz dodać załącznik: </b>
+                                        <div class="file-input-wrapper">
+                                            <Button color="primary">Przeglądaj</Button>
+                                            <Input type="file" className="inputfile" name="plik" onChange={this.onChange} accept="image/gif,image/jpeg" /> {/*image/x-png,*/}
+                                        </div>
                                     </Col>
                                     <Col md={1} style={{ padding: "0px" }}>
                                         <Button color="primary">Wyślij!</Button>
                                     </Col>
-                                 </Row>  
+                                 </Row>
                             </form>
-                            
+
 
                             {/* emitonki*/}
                         </Col>
@@ -222,7 +226,7 @@ class HomePage extends Component {
                     {/*
                  jesli zalogowany to po lewej lista grup (panel) ktore 'ma' i moze w nie klikac i sie pojawia mozliwosc po prawej stronie dodania postu/komentarza do tej grupy
                  */}
-                   
+
                 </div>
             );
         }
